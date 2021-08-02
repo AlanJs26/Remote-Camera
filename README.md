@@ -10,3 +10,4 @@ O apresentador pode fornecer acesso total a câmera ou utilizar um sistema de vo
 
 [insira foto comparando os dois métodos de controle da câmera] 
 
+Link para acessar a versão de navegador: https://remotecamera-6f583.web.app/
