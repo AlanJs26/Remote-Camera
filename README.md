@@ -1,23 +1,12 @@
-# Electron Forge + Svelte  Starter
+# Remote Camera - Controle a sua câmera a distância!
 
-Get up and running with 💪 Svelte & ⚡ Electron. 
+> Este programa faz parte do meu projeto de TCC de técnico em eletrônica, por isso foi pensado para ser utilizado em conjunto com a parte física. Sem ela isso é apenas um programa de vídeo chamadas.
+>
+> [insira foto da parte física aqui]
 
-## Usage
+O Remote Camera permite que outras pessoas controlem a sua câmera afim de facilitar a interação apresentador-expectador no cenário de reuniões online.
 
-```
-git clone https://github.com/codediodeio/electron-forge-svelte.git my-app
-cd my-app
+O apresentador pode fornecer acesso total a câmera ou utilizar um sistema de votação com base em pontos chave para a câmera
 
-npm install
-npm start
-```
+[insira foto comparando os dois métodos de controle da câmera] 
 
-![svelte electron](https://firebasestorage.googleapis.com/v0/b/fireship-app.appspot.com/o/assets%2Felectron-svelte-hello.png?alt=media&token=0d3ecb24-3024-4358-ac26-7676b3e60fa1)
-
-## Notes
-
-- src/index.js - Main electron process. 
-- src/svelte.js - Svelte app entrypoint. 
-
-Setup [Electron with Svelte](https://fireship.io/snippets/svelte-electron-setup) from scratch. 
-Build cool projects with [Electron](https://fireship.io/tags/electron). 
