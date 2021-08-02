@@ -1,28 +1,81 @@
 <script>
-	export let name;
+
+  import "./css/stylesButton.css";
+  import "./css/style.css";
+  import {currentScreen, loggedState, uid} from './stores/app.js'
+  import {buttonsState} from './stores/cubes'
+  import { database, auth } from './firebase';
+
+  import Header from "./components/Header.svelte";
+  import Cubes, {setCubesState} from "./components/Cubes.svelte";
+
+  import Login from "./screens/Login.svelte";
+  import CameraOwner from "./screens/CameraOwner.svelte";
+  import SelectCameraToConnect from "./screens/SelectCameraToConnect.svelte";
+  import { onMount } from "svelte";
+  import { writable } from 'svelte/store';
+
+
+
+  setCubesState('floatOpening')
+
+  // function screensConfigDisabled(screen){
+  //   let screens = ['login', 'cameraOwner', 'selectCameraToConnect']
+
+  //   let found = screens.reduce((prev, value) => screen == value||prev, false)
+  //   console.log(found)
+
+  //   return found
+  // }
+
+  
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      loggedState.set(true)
+      uid.set(user.uid)
+
+      // setCubesState('btnMode')
+      currentScreen.set('cameraOwner')
+
+      console.log($uid)
+
+      
+
+    } else {
+      loggedState.set(false)
+      uid.set(null)
+      
+      setCubesState('floatOpening')
+      currentScreen.set('login')
+
+    }
+})
+  
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+<div class="shapes">
+  <div class="circle" style="--size: 500px; --left: 5; --order: 5;" />
+  <div class="circle" style="--size: 400px; --left: 2; --order: 4;" />
+  <div class="circle" style="--size: 300px; --left: 3; --order: 3;" />
+  <div class="" style="--size: 200px; --left: 1; --order: 2;" />
+  <div class="circle" style="--size: 100px; --left: 4; --order: 2.5;" />
+  <div style="--size: 100px; --left: 4; --order: 2.5;" />
+</div>
+
+<Header/>
+
+<div class="midContent">
+  {#if $currentScreen == "login"}
+    <Login />
+  {:else if $currentScreen == "cameraOwner"}
+    <CameraOwner />
+  {:else if $currentScreen == "selectCameraToConnect"}
+    <SelectCameraToConnect />
+  {/if}
+
+  <Cubes buttonsState={$buttonsState} />
+</div>
+
+

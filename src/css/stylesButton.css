@@ -1,0 +1,195 @@
+
+#controlsContainer {
+    position: absolute;
+    /* transition: all 1s; */
+    top: 0;
+    left: 0;
+    transition: left 1.5s, top 1.5s;
+}
+
+/* #controlsContainer.btnMode {
+  display: flex;
+  flex-wrap: wrap;
+  width: 215px;
+  height: 50px;
+  margin-left: -293px;
+  position: relative
+} */
+
+.scene--box {
+  width: 107px;
+  height: 88px;
+  --a: 150px;
+  --b: 50px;
+  --c: 150px;
+  cursor: pointer;
+  position: absolute;
+}
+
+/* .btnMode .scene--box {
+  width: 107px;
+  height: 88px;
+  --a: 150px;
+  --b: 50px;
+  --c: 150px;
+  cursor: pointer;
+  position: relative;
+} */
+
+.btnMode .active .scene--box {
+  --b: 25px !important;
+}
+
+.btnMode .scene--box:hover {
+  --b: 55px;
+}
+
+.box {
+  width: var(--c);
+  height: var(--b);
+  position: absolute;
+  transform-style: preserve-3d;
+  /* transform: translateY(calc(var(--a)/-2)); */
+  transform-origin: 0% 0%;
+  transition: transform 0.15s cubic-bezier(0.23, -0.3, 0.75, 1.3), height 0.15s cubic-bezier(0.23, -0.3, 0.75, 1.3);
+}
+
+.box__face {
+  color: transparent;
+  position: absolute;
+  border: 2px solid #6a1b98;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  transition: inherit;
+}
+
+.box__face--front,
+.box__face--back {
+  width: var(--c);
+  height: var(--b);
+  line-height: var(--b);
+}
+
+.box__face--right,
+.box__face--left {
+  width: var(--a);
+  height: var(--b);
+  left: calc(-0.5*var(--a) + 150px + (0.5*var(--c) - 150px) );
+  line-height: var(--b);
+}
+
+.box__face--top,
+.box__face--bottom {
+  width: var(--c);
+  height: var(--a);
+  top: calc(var(--a)/2);
+  line-height: var(--a);
+}
+
+.box__face--front  { background: hsla(278deg, 57%, 42%, 1); }
+.box__face--right  { background: hsla(278deg, 57%, 42%, 1); }
+.box__face--back   { background: hsla(278deg, 70%, 35%, 1); }
+.box__face--left   {
+background: hsla(278deg, 70%, 35%, 1);
+position: relative;
+}
+.box__face--top    { background: hsla(278deg, 57%, 42%, 1); }
+.box__face--bottom { 
+background: hsl(278deg 57% 49%);
+position: relative;
+top: calc(var(--a)/2 - var(--a) - 2px);
+}
+
+.box__face--front  { transform: rotateY(  0deg) translateZ( calc(var(--a)/2)); }
+.box__face--back   { transform: rotateY(180deg) translateZ( calc(var(--a)/2)); }
+
+.box__face--right  { transform: rotateY( 90deg) translateZ(calc(var(--c)/2)); }
+.box__face--left   { transform: rotateY(-90deg) translateZ(calc(var(--c)/2)); }
+
+.box__face--top    { transform: rotateX( 90deg) translateZ(var(--a)); }
+.box__face--bottom {
+/*transform: rotateX(-90deg) translateZ(calc(var(--b) - 200px + (-1*var(--a) + 200px)));*/
+transform: rotateX(-90deg);
+}
+
+/* .box.show-front  { transform: translateZ( calc(var(--a)/-2)) rotateY(   0deg); }
+.box.show-back   { transform: translateZ( calc(var(--a)/-2)) rotateY(-180deg); }
+.box.show-right  { transform: translateZ(calc(var(--c)/-1)) rotateY( -90deg); }
+.box.show-left   { transform: translateZ(calc(var(--c)/-2)) rotateY(  90deg); }
+.box.show-top    { transform: translateZ(calc(var(--a)*-1)) rotateX( -90deg); }
+.box.show-bottom { transform: translateZ(calc(var(--a)*-1)) rotateX(  90deg); } */
+
+@keyframes anim {
+  from {
+    transform: rotateX(-20deg) rotateY(45deg);
+  }
+  to {
+    transform: rotateX(-20deg) rotateY(45deg);
+  }
+}
+
+/*.box--rotate { transition: transform 1s; }*/
+.box--rotate {
+    /*animation: anim infinite 2s linear;*/
+    /*transform: rotateX(-20deg) rotateY(45deg);*/
+    /* transform: rotateX(-200deg) rotateY(45deg) translate3d(0,0,0); */
+    transform: rotateX(-200deg) rotateY(45deg) translate3d(0,0,0);
+    transform-origin: center;
+    /* transition: all 1s */
+}
+
+.btnMode .box--rotate {
+    transform-origin: top left;
+}
+
+
+.btnMode .btn1 .box--rotate {
+  transform: rotateX(-200deg) rotateY(45deg) translate3d(0,0,0);
+  z-index: 0;
+}
+.btnMode .btn2 .box--rotate {
+  transform: rotateX(-200deg) rotateY(45deg) translate3d(var(--c), 0px, 0px);
+  z-index: 1;
+}
+.btnMode .btn3 .box--rotate {
+  transform: rotateX(-200deg) rotateY(45deg) translate3d(0px, 0px, calc(-1*var(--a)));
+  z-index: 2;
+}
+.btnMode .btn4 .box--rotate {
+  transform: rotateX(-200deg) rotateY(45deg) translate3d(var(--c), 0px, calc(-1*var(--a)));
+  z-index: 3;
+}
+
+.btnMode .btn1, .btnMode .btn2, .btnMode .btn3, .btnMode .btn4 {
+  /* animation-play-state: paused; */
+  transform: translate(17px, max(30px, min(90px, calc(-200px*var(--scale) + 180px)))) scale(min(0.7,var(--scale)));
+  /* transform: translate(-56px, 0px); */
+  /* margin-left: -56px; */
+  transition: transform 1.2s ease-in-out;
+}
+
+.btn1, .btn2, .btn3, .btn4 {
+  /* transition: transform 1.2s ease-in-out; */
+  margin-left: -70px;
+  transform: translate(var(--x), var(--y));
+}
+
+
+/* .outerBtn1, .outerBtn2, .outerBtn3, .outerBtn4 {
+  transition: transform 1s;
+}  */
+
+.spining .box--rotate{
+  animation: spining 15s infinite linear forwards;
+}
+
+@keyframes spining {
+  from {
+    transform: rotateX(-200deg) rotateY(45deg) translate3d(0,0,0);
+  }
+  to {
+    transform: rotateX(-200deg) rotateY(400deg) translate3d(0,0,0);
+  }
+}
