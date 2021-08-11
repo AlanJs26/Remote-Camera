@@ -17,14 +17,6 @@
 
     
     let videoEl = null
-    
-    window.addEventListener('resize', () => {
-        let w = window.outerWidth;
-    
-        cubeProperties.set({
-            scale: (w/880),
-        })
-    })
 
     async function changeAndBroadcastControlState(n){
         let twin = {
@@ -262,9 +254,6 @@
     
     let isCopyPanelActive = false
 
-    // let isPositionBarActive = false
-    // let positionBarTimeout = 
-
     let markers = [
         {name: 'inicio', percentage: 20, tooltip: {isVisible: false, timeout: null}},
         {name: 'meio', percentage: 50  , tooltip: {isVisible: false, timeout: null}},
@@ -292,8 +281,8 @@
     
     </div>
     <div class="floatingIcons">
-        <div on:click={() => isCopyPanelActive=true} ><i class="fas fa-share fa-2x"></i></div>
-        <div on:click={() => isSlidePanelOpen=true} ><i class="fas fa-user-friends fa-2x"></i></div>
+        <div on:click={() => isCopyPanelActive=!isCopyPanelActive} ><i class="fas fa-share fa-2x"></i></div>
+        <div on:click={() => isSlidePanelOpen=!isSlidePanelOpen} ><i class="fas fa-user-friends fa-2x"></i></div>
     </div>
     
     <div class="slideFromRightContainer" class:open={isSlidePanelOpen} on:mouseleave={() => {slidePanelTimeout = setTimeout(() => {isSlidePanelOpen=false}, 300)}} on:mouseenter={() => clearTimeout(slidePanelTimeout)} >
@@ -337,7 +326,7 @@
             width: 100%;
             /* height: var(--size); */
             /* margin-bottom: 1.5rem; */
-            max-width: 60vh;
+            max-width: 80vh;
             background: #2c3e50;
         }
     
@@ -452,13 +441,13 @@
         }
     
         .copyPanel {
-            width: 400px;
+            width: clamp(200px, 70vw, 400px);
             padding: 10px;
             position: fixed;
             background-color: #782299;
             box-shadow: 0px 0px 20px 5px #4f194fb3;
             top: 60px;
-            right: 90px;
+            right: clamp(20px, calc(100vw - 400px), 90px);
             text-align: center;
             border-radius: 3px;
         }
@@ -488,6 +477,7 @@
             margin: 0;
             cursor: pointer;
             position: relative;
+            font-size: clamp(0.7rem, 4vw, 1rem);
         }
     
         .copyPanel div p::before {

@@ -7,6 +7,7 @@
 html {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 
@@ -115,8 +116,8 @@ div.header h1 {
 }
 
 .transparentBtn{
-    width: 200px;
-    height: 50px;
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
     margin: 0;
@@ -635,7 +636,7 @@ transform: rotateX(-90deg);
 .btn1, .btn2, .btn3, .btn4 {
   /* transition: transform 1.2s ease-in-out; */
   margin-left: -70px;
-  transform: translate(var(--x), var(--y));
+  transform: translate(var(--x), var(--y)) scale(clamp(0.3, var(--scale), 0.7));
 }
 
 

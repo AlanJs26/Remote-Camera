@@ -173,7 +173,7 @@ transform: rotateX(-90deg);
 .btn1, .btn2, .btn3, .btn4 {
   /* transition: transform 1.2s ease-in-out; */
   margin-left: -70px;
-  transform: translate(var(--x), var(--y));
+  transform: translate(var(--x), var(--y)) scale(clamp(0.3, var(--scale), 0.7));
 }
 
 

@@ -79,5 +79,8 @@ let warningText = ''
 
   .flexColumn {
     margin-top: 5em;
+    max-width: 500px;
+    max-height: 100px;
+    margin: 15px;
   }
 </style>
