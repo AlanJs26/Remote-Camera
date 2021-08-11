@@ -69,10 +69,17 @@ div#login-form{
     padding: 50px 20px;
     background: #561b65d1;
     box-shadow: 0px 0px 10px #5a0079b8;
+    max-width: 400px;
+    width: 80vw;
 }
 
-.flexColumn {
-  width: 400px
+/* .flexColumn {
+  max-width: 400px;
+  width: 100%;
+} */
+
+.transparentBtn {
+  max-width: 200px;
 }
 
 .transparentInput {

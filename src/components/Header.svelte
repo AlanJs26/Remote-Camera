@@ -75,7 +75,7 @@
 </script>
 
 <div class="topContent" transition:fade >
-  <div class="configContainer" class:disabled={configDisabled} class:active={isConfigActive} on:click={() => isConfigActive = true} on:mouseleave={() => {configTimeout = setTimeout(() => {isConfigActive=false}, 300)}} on:mouseenter={() => clearTimeout(configTimeout)} >
+  <div class="configContainer" class:disabled={configDisabled} class:active={isConfigActive} on:click={() => isConfigActive = !isConfigActive} on:mouseleave={() => {configTimeout = setTimeout(() => {isConfigActive=false}, 300)}} on:mouseenter={() => clearTimeout(configTimeout)} >
     <div id="configBtn"><i class="fas fa-cog fa-2x" /></div>
     <ul id="configItems">
       <li>Perfil</li>

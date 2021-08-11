@@ -3,7 +3,7 @@
   import "./css/stylesButton.css";
   import "./css/style.css";
   import {currentScreen, isPeerReady, loggedState, uid} from './stores/app.js'
-  import {buttonsState} from './stores/cubes'
+  import {buttonsState, cubeSize as cubeProperties} from './stores/cubes'
   import { auth } from './firebase';
 
   import Header from "./components/Header.svelte";
@@ -15,6 +15,14 @@
   import Loading from "./screens/Loading.svelte";
 
   setCubesState('floatOpening')
+
+  window.addEventListener('resize', () => {
+        let w = window.outerWidth;
+    
+        cubeProperties.set({
+            scale: (w/880),
+        })
+    })
 
   isPeerReady.subscribe(isReady => {
     if($uid && isReady){
