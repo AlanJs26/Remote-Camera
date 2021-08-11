@@ -37,7 +37,7 @@ let warningText = ''
 
 </script>
 
-<div class="flexColumn" style="position: absolute" >
+<div class="flexColumn" style="position: absolute; z-index: 4" >
   <div id="cameraOwner" transition:fade class="container">
     <div class="transparentBtn" class:disabledBtn={warningText} on:click={() => {if(!warningText) currentScreen.set('main')}} >
       <p>Utilizar a própria câmera</p>
@@ -79,5 +79,8 @@ let warningText = ''
 
   .flexColumn {
     margin-top: 5em;
+    max-width: 500px;
+    max-height: 100px;
+    margin: 15px;
   }
 </style>

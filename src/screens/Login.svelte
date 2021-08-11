@@ -11,7 +11,14 @@
   let wrongCredentials = false
 
 
-  function loginUser(){
+  function loginUser(e){
+    if(e){
+      console.log(e instanceof KeyboardEvent)
+      console.log(e)
+      if(e.keyCode != 13)
+        return
+    }
+
     auth.signInAnonymously()
     .then(() => {
       const user = auth.currentUser;
@@ -42,7 +49,7 @@
     
 
     <div class="inputWrapper" class:wrongCredentials >
-        <input type="text" placeholder="Nome de Usuário" bind:value={username} class="transparentInput" >
+        <input type="text" placeholder="Nome de Usuário" bind:value={username} class="transparentInput" on:keypress={loginUser}>
         <!-- <input type="text" placeholder="Senha" bind:value={passwordText} class="transparentInput" > -->
     </div>
 
@@ -62,10 +69,17 @@ div#login-form{
     padding: 50px 20px;
     background: #561b65d1;
     box-shadow: 0px 0px 10px #5a0079b8;
+    max-width: 400px;
+    width: 80vw;
 }
 
-.flexColumn {
-  width: 400px
+/* .flexColumn {
+  max-width: 400px;
+  width: 100%;
+} */
+
+.transparentBtn {
+  max-width: 200px;
 }
 
 .transparentInput {
@@ -80,18 +94,18 @@ div#login-form{
   margin-bottom: 40px;
 }
 
-.createAccountText {
+/* .createAccountText {
   color:rgba(255, 255, 255, 0.5);
   font-size: 0.7em;
   margin-top: 5px;
-}
+} */
 
-span {
-  /* text-decoration: underline; */
+/* span {
+  //text-decoration: underline;
   color: white;
   cursor: pointer;
   font-weight: bold;
-}
+} */
 
 .warning {
   position: absolute;

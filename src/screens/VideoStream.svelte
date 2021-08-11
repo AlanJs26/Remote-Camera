@@ -17,20 +17,38 @@
 
     
     let videoEl = null
-    
-    window.addEventListener('resize', () => {
-        let w = window.outerWidth;
-        // let h = window.outerHeight;
-        // console.log(`window width: ${w/880}\nwindow height: ${h/600}`)
-    
-        cubeProperties.set({
-            scale: (w/880),
-        })
-    })
+
+    async function changeAndBroadcastControlState(n){
+        let twin = {
+            0: 3,
+            1: 2,
+            2: 1,
+            3: 0
+        }
+
+        let directionRef = database.ref(`users/${$uid}/direction`);
+
+        let directions = await directionRef.get()
+        directions = directions.val()||[0,0,0,0]
+        directions[n] = directions[n] == 1 ? 0 : 1
+        if(directions[twin[n]]==1)
+            directions[twin[n]] = directions[n] == 1 ? 0 : 1
+
+        directionRef.set(directions);
+
+        const message = {
+            type: 'controlsState',
+            from: connectionsHandler.peer.id,
+            content: directions,
+            displayName: $username
+        }
+        connectionsHandler.broadcast(JSON.stringify(message))
+    }
 
 
-    
+    // if there's a 'username' that means the user choose to connect to someone else camera
     if($username.length != 0){
+        // setup the peer connection as watcher
         connectToHost($username, (remoteStream) => {
             videoEl.srcObject = remoteStream
         },(data) => {
@@ -38,11 +56,9 @@
                 return
             
             if(data.type == 'users'){
-                // console.log(data)
                 watchers = data.content
 
                 let me = watchers.filter(item => item.id == $uid)
-                // console.log(me)
 
                 if(me.length){
                     if(me[0].controlLevel > 0){
@@ -54,10 +70,10 @@
                     connectionsHandler.peer.disconnect()
                 }
 
-                // watchers = data.watchers
             }
         })
 
+        // send to host the camera buttons I have pressed
         controlsBtn.assignFunction('main', n => {
             if(typeof n != 'number') return
 
@@ -71,6 +87,7 @@
             connectionsHandler.broadcast(JSON.stringify(message))
         })
 
+        // change my buttons state when the host send a message of type 'controlsState'
         connectionsHandler.subscribeToAll('data', async rawData => {
             try{
                 let data = JSON.parse(rawData)
@@ -92,78 +109,8 @@
     }else{        
         setCubesState('btnMode')
 
-        controlsBtn.assignFunction('main', async n => {
-
-            let twin = {
-                0: 3,
-                1: 2,
-                2: 1,
-                3: 0
-            }
-
-            let directionRef = database.ref(`users/${$uid}/direction`);
-
-            let directions = await directionRef.get()
-            directions = directions.val()||[0,0,0,0]
-            directions[n] = directions[n] == 1 ? 0 : 1
-            if(directions[twin[n]]==1)
-                directions[twin[n]] = directions[n] == 1 ? 0 : 1
-
-            directionRef.set(directions);
-
-            const message = {
-                type: 'controlsState',
-                from: connectionsHandler.peer.id,
-                content: directions,
-                displayName: $username
-            }
-            connectionsHandler.broadcast(JSON.stringify(message))
-        })
-
-        connectionsHandler.subscribeToAll('data', async (rawData) => {
-            try{
-                let data = JSON.parse(rawData)
-
-                if(data.type == 'controls'){
-                    let isFromTrustedWatcher = watchers.filter(item => item.id==data.from&&item.controlLevel>0).length==1?true:false
-                    if(!isFromTrustedWatcher)
-                        return
-
-                    let n = data.content
-
-                    let twin = {
-                        0: 3,
-                        1: 2,
-                        2: 1,
-                        3: 0
-                    }
-
-                    let directionRef = database.ref(`users/${$uid}/direction`);
-
-                    let directions = await directionRef.get()
-                    directions = directions.val()||[0,0,0,0]
-                    directions[n] = directions[n] == 1 ? 0 : 1
-                    if(directions[twin[n]]==1)
-                        directions[twin[n]] = directions[n] == 1 ? 0 : 1
-                    
-
-                    directionRef.set(directions);
-
-                    const message = {
-                        type: 'controlsState',
-                        from: connectionsHandler.peer.id,
-                        content: directions,
-                        displayName: $username
-                    }
-                    connectionsHandler.broadcast(JSON.stringify(message))
-                }
-            }catch(err){
-
-            }
-        })
-
+        // update the buttonsState when the server data changes
         let directionRef = database.ref(`users/${$uid}/direction`);
-
 
         directionRef.on('value', (snapshot) => {
             const data = snapshot.val();
@@ -179,13 +126,39 @@
             // console.log(data)
         });
 
+        controlsBtn.assignFunction('main', async n => {
+            changeAndBroadcastControlState(n)
+        })
+
+        // when receive a command to change the buttonsState from user with enough control acess, change and broadcast that command
+        connectionsHandler.subscribeToAll('data', (rawData) => {
+            try{
+                let data = JSON.parse(rawData)
+
+                if(data.type == 'controls'){
+                    let isFromTrustedWatcher = watchers.filter(item => item.id==data.from&&item.controlLevel>0).length==1?true:false
+                    if(!isFromTrustedWatcher)
+                        return
+
+                    let n = data.content
+
+                    changeAndBroadcastControlState(n)
+                }
+            }catch(err){
+
+            }
+        })
+
+        // Setup the peer connection as host
         setupAsHost(localStream => {
             videoEl.srcObject = localStream
         },
         (data) => {
+            // make sure that I'm the host, if not, do nothing
             if(!connectionsHandler.isHost)
                 return
 
+            // when the handshake message is received, send the current controlsState
             if(data&&data.type == 'handshake'){
                 const message = {
                     type: 'controlsState',
@@ -195,15 +168,16 @@
                 }
                 connectionsHandler.broadcast(JSON.stringify(message))
             }
-    
+            
+            // update online watchers
             let sameItems = []
             let newItems = []
             let extraItems = Array.from(watchers)
+
             for(let connection of connectionsHandler.connections){
                 extraItems = extraItems.filter(item => item.id!=connection.id)
                 let found = false;
                 for(let watcher of watchers){
-                // if(Object.values(watchers).includes(connection.id)){
                     if(watcher.id==connection.id){
                         found = true
                         sameItems.push(Object.assign({controlLevel: watcher.controlLevel}, connection))
@@ -227,46 +201,48 @@
                 }]
             }
 
+            // if there someone new, send this information to all other watchers
             if(newItems.length || extraItems.length){
                 broadcastOnlineWatchers()
             }
         })
     }
 
+    // broadcast the cached watchers list to everyone
     function broadcastOnlineWatchers() {
         if(!connectionsHandler.isHost)
             return
         
         if(this){
-            // console.log(this.getAttribute('watcher'))
             watchers = watchers.map(item => {
                 if(item.name == this.getAttribute('watcher')){
                     item.controlLevel = parseInt(this.value)
-                    // console.log('found')
                     return item
                 }
                 return item
             })
         }
-        // console.log(watchers)
+
         const message = {
             type: 'users',
             from: $uid,
             content: watchers,
         }
-        // console.log(message)
+
         connectionsHandler.broadcast(JSON.stringify(message))
     }
     
     let watchers = []
     let isSlidePanelOpen = false
     let isCopyAnimActive = false
+
+    let copyPanelTimeout = null
+    let slidePanelTimeout = null
     
     function copyText(){
         isCopyAnimActive = true
     
         navigator.clipboard.writeText(this.innerText).then(function() {
-            // console.log('Async: Copying to clipboard was successful!');
         }, function(err) {
             console.error('Async: Could not copy text: ', err);
         });
@@ -277,20 +253,39 @@
     }
     
     let isCopyPanelActive = false
+
+    let markers = [
+        {name: 'inicio', percentage: 20, tooltip: {isVisible: false, timeout: null}},
+        {name: 'meio', percentage: 50  , tooltip: {isVisible: false, timeout: null}},
+        {name: 'fim', percentage: 80   , tooltip: {isVisible: false, timeout: null}},
+    ]
+
+    let currentPercentage = 35
+
     </script>
     
     
     <div class="flexColumn">
         
         <video id="webcamVideo" autoplay playsinline bind:this={videoEl} ></video>
+        <div class="positionBarContainer">
+            <div class="currentPosition" style="--percentage: {currentPercentage}" ></div>
+
+            {#each markers as {percentage, name, tooltip}}
+                <div class="marker" style="--percentage: {percentage}" on:mouseenter={() => {clearTimeout(tooltip.timeout); tooltip.isVisible=true}} on:mouseleave={() => {tooltip.timeout = setTimeout(() => {tooltip.isVisible = false},500)}}>
+                    <div class="marker-tooltip" class:active={tooltip.isVisible} >{name}</div>
+                </div>
+            {/each}
+
+        </div>
     
     </div>
     <div class="floatingIcons">
-        <div on:click={() => isCopyPanelActive=true} ><i class="fas fa-share fa-2x"></i></div>
-        <div on:click={() => isSlidePanelOpen=true} ><i class="fas fa-user-friends fa-2x"></i></div>
+        <div on:click={() => isCopyPanelActive=!isCopyPanelActive} ><i class="fas fa-share fa-2x"></i></div>
+        <div on:click={() => isSlidePanelOpen=!isSlidePanelOpen} ><i class="fas fa-user-friends fa-2x"></i></div>
     </div>
     
-    <div class="slideFromRightContainer" class:open={isSlidePanelOpen} on:mouseleave={() => isSlidePanelOpen=false} >
+    <div class="slideFromRightContainer" class:open={isSlidePanelOpen} on:mouseleave={() => {slidePanelTimeout = setTimeout(() => {isSlidePanelOpen=false}, 300)}} on:mouseenter={() => clearTimeout(slidePanelTimeout)} >
         <h2>Participantes</h2>
         <div class="listHeader" >
             <span>Nome</span>
@@ -312,7 +307,7 @@
     </div>
     
     {#if isCopyPanelActive}
-        <div class="copyPanel" transition:fade on:mouseleave={() => isCopyPanelActive=false} >
+        <div class="copyPanel" transition:fade on:mouseleave={() => {copyPanelTimeout = setTimeout(() => {isCopyPanelActive=false}, 300)}} on:mouseenter={() => clearTimeout(copyPanelTimeout)} >
             <h2>compartilhe o código abaixo para outras pessoas entrarem na sua chamada</h2>
             <div>
                 <span>clique para copiar</span>
@@ -326,11 +321,12 @@
     
     <style>
         video#webcamVideo {
-            --size: 90%;
-            width: var(--size);
+            /* --size: 90%;
+            width: var(--size); */
+            width: 100%;
             /* height: var(--size); */
-            margin-bottom: 1.5rem;
-            max-width: 60vh;
+            /* margin-bottom: 1.5rem; */
+            max-width: 80vh;
             background: #2c3e50;
         }
     
@@ -367,6 +363,7 @@
             right: calc(-1*var(--width));
             transition: right 0.5s;
             top: 0;
+            z-index: 4;
         }
     
         .slideFromRightContainer.open{
@@ -444,13 +441,13 @@
         }
     
         .copyPanel {
-            width: 400px;
+            width: clamp(200px, 70vw, 400px);
             padding: 10px;
             position: fixed;
             background-color: #782299;
             box-shadow: 0px 0px 20px 5px #4f194fb3;
             top: 60px;
-            right: 90px;
+            right: clamp(20px, calc(100vw - 400px), 90px);
             text-align: center;
             border-radius: 3px;
         }
@@ -480,6 +477,7 @@
             margin: 0;
             cursor: pointer;
             position: relative;
+            font-size: clamp(0.7rem, 4vw, 1rem);
         }
     
         .copyPanel div p::before {
@@ -510,6 +508,82 @@
             100% {
                 opacity: 0;
             }
+        }
+    
+        .positionBarContainer {
+            width: 100%;
+            height: 15px;
+            background-color: #a32ad0cf;
+            position: relative;
+            border: #87249c solid 1px;
+            border-top: none;
+            opacity: 0.5;
+            transition: height 0.2s ease-out 1s, opacity 0.2s ease-out 1s;
+            --percentage: 0;
+        }
+
+        .positionBarContainer:hover {
+            height: 20px;
+            opacity: 1;
+            transition: height 0.2s ease-in 0s, opacity 0.2s ease-in 0s;
+        }
+        
+        .currentPosition {
+            background-color: #5b1a6d;
+        }
+
+        .currentPosition, .marker {
+            transition: left 0.1s, background-color 0.1s;
+            height: inherit;
+            position: absolute;
+            width: 15px;
+            left: calc(var(--percentage)/100 * (100% - 15px))
+        }
+
+        .marker {
+            background-color: transparent;
+            border: #80149e solid var(--border);
+            height: calc(100% - var(--border)*2 + 1px);
+            --border: 2px;
+            cursor: pointer;
+        }
+
+        .marker:hover {
+            background-color: #80149e;
+        }
+
+        .marker-tooltip.active, .marker-tooltip.active::after {
+            pointer-events: auto;
+            opacity: 1;
+        }
+
+        .marker-tooltip {
+            max-width: 120px;
+            padding: 10px;
+            color: white;
+            background-color: #2c3e50;
+            position: absolute;
+            bottom: calc(100% + 5px);
+            text-align: center;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+
+            pointer-events: none;
+            opacity: 0;
+            cursor: default;
+        }
+
+        .marker-tooltip::after {
+            content: " ";
+            position: absolute;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #2c3e50 transparent #f9080800 #2c3e50;
+            transition: opacity 0.2s;
+            bottom: -5px;
+            left: 0;
+            pointer-events: none;
+            opacity: 0;
         }
     
     </style>
