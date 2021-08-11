@@ -2,7 +2,7 @@
 
   import "./css/stylesButton.css";
   import "./css/style.css";
-  import {currentScreen, loggedState, uid} from './stores/app.js'
+  import {currentScreen, isPeerReady, loggedState, uid} from './stores/app.js'
   import {buttonsState} from './stores/cubes'
   import { auth } from './firebase';
 
@@ -12,16 +12,22 @@
   import Login from "./screens/Login.svelte";
   import CameraOwner from "./screens/CameraOwner.svelte";
   import SelectCameraToConnect from "./screens/SelectCameraToConnect.svelte";
+  import Loading from "./screens/Loading.svelte";
 
   setCubesState('floatOpening')
+
+  isPeerReady.subscribe(isReady => {
+    if($uid && isReady){
+      currentScreen.set('cameraOwner')
+    }
+  })
 
   auth.onAuthStateChanged(user => {
     if (user) {
       loggedState.set(true)
       uid.set(user.uid)
-
-      currentScreen.set('cameraOwner')
-
+      
+      currentScreen.set('loading')
     } else {
       loggedState.set(false)
       uid.set(null)
@@ -53,6 +59,8 @@
     <CameraOwner />
   {:else if $currentScreen == "selectCameraToConnect"}
     <SelectCameraToConnect />
+  {:else if $currentScreen == "loading"}
+    <Loading />
   {/if}
 
   <Cubes buttonsState={$buttonsState} />

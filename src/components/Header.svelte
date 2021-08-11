@@ -6,12 +6,11 @@
   import {setCubesState} from "./Cubes.svelte";
   import {currentScreen} from '../stores/app.js'
   import {backCallbacks, configBtn} from '../stores/header.js'
-import { getContext, setContext } from 'svelte';
 
   let configDisabled = true 
   let backEnabled = false 
   let videoEnabled = false
-  let screensWhereDisableConfig = ['login', 'cameraOwner', 'selectCameraToConnect']
+  let screensWhereDisableConfig = ['login', 'cameraOwner', 'selectCameraToConnect', 'loading']
   let screensWhereEnableBack = ['cameraOwner', 'selectCameraToConnect']
   
   // $: screensWhereEnableBack = $backCallbacks.map(item => item[0])
@@ -47,6 +46,9 @@ import { getContext, setContext } from 'svelte';
     }
   }
 
+  let isConfigActive = false
+  let configTimeout = null
+
 </script>
 
 <script context="module">
@@ -73,7 +75,7 @@ import { getContext, setContext } from 'svelte';
 </script>
 
 <div class="topContent" transition:fade >
-  <div class="configContainer" class:disabled={configDisabled}>
+  <div class="configContainer" class:disabled={configDisabled} class:active={isConfigActive} on:click={() => isConfigActive = true} on:mouseleave={() => {configTimeout = setTimeout(() => {isConfigActive=false}, 300)}} on:mouseenter={() => clearTimeout(configTimeout)} >
     <div id="configBtn"><i class="fas fa-cog fa-2x" /></div>
     <ul id="configItems">
       <li>Perfil</li>

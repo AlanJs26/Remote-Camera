@@ -1,6 +1,6 @@
 // @ts-check
 
-import {uid} from '../stores/app.js'
+import {uid, isPeerReady} from '../stores/app.js'
 import { getContext, setContext } from 'svelte'
 import {auth} from '../firebase'
 
@@ -140,6 +140,7 @@ uid.subscribe((val) => {
             console.log('peer id: '+id)
 
             connectionsHandler = new ConnectionsHandler(peer)
+            isPeerReady.set(true)
         })
 
         // peer.on('close')
@@ -147,8 +148,10 @@ uid.subscribe((val) => {
 
         peer.on('disconnected', () => {
             console.log('%cdisconnected from peer!', 'color: crimson')
+            isPeerReady.set(false)
         })
     }else if(val == null && peer instanceof Peer){
+        isPeerReady.set(false)
         peer.disconnect()
         peer.destroy()
         console.log('%cDestroying the WebRTC Connection', 'color: red; font-size: 21px')

@@ -461,11 +461,11 @@ div.header h1 {
     pointer-events: none;  
 }
 
-.configContainer:hover *{
+.configContainer.active *{
     pointer-events: auto;  
 }
 
-.configContainer:hover {
+.configContainer.active {
     width: auto
 }
 
@@ -484,7 +484,7 @@ div.header h1 {
 }
 
 
-.configContainer:hover #configBtn i {
+.configContainer.active #configBtn i {
     transform: rotate(50deg);
 }
 
@@ -511,12 +511,12 @@ div.header h1 {
 #configItems *:nth-child(3){transform: translateY(calc(-200% - 25px)); transition-delay: 0.1s;}
 #configItems *:nth-child(4){transform: translateY(calc(-300% - 25px)); transition-delay: 0.15s;}
 
-.configContainer:hover #configItems * {
+.configContainer.active #configItems * {
     transform: translateY(0);
     opacity: 1;
 }
 
-.configContainer:hover #configItems{
+.configContainer.active #configItems{
     height: inherit;
 }
 
