@@ -9,14 +9,49 @@
     import {uid} from '../stores/app.js'
     import { fade } from 'svelte/transition';
     import { database, auth } from '../firebase';
-    // import {cubicInOut} from 'svelte/easing';
 
     configBtn.assignFunction('main', () => {
         console.log('%cPARECE QUE FOI!', 'color: purple;font-size: 20px')
     })
 
-    
     let videoEl = null
+
+    function copyText(){
+        isCopyAnimActive = true
+    
+        navigator.clipboard.writeText(this.innerText).then(function() {
+        }, function(err) {
+            console.error('Async: Could not copy text: ', err);
+        });
+    
+        setTimeout(() => {
+            isCopyAnimActive = false
+        }, 800)
+    }
+
+    // broadcast the cached watchers list to everyone
+    function broadcastOnlineWatchers() {
+        if(!connectionsHandler.isHost)
+            return
+        
+        if(this){
+            watchers = watchers.map(item => {
+                if(item.name == this.getAttribute('watcher')){
+                    item.controlLevel = parseInt(this.value)
+                    return item
+                }
+                return item
+            })
+        }
+
+        const message = {
+            type: 'users',
+            from: $uid,
+            content: watchers,
+        }
+
+        connectionsHandler.broadcast(JSON.stringify(message))
+    }
 
     async function changeAndBroadcastControlState(n){
         let twin = {
@@ -44,7 +79,6 @@
         }
         connectionsHandler.broadcast(JSON.stringify(message))
     }
-
 
     // if there's a 'username' that means the user choose to connect to someone else camera
     if($username.length != 0){
@@ -207,52 +241,14 @@
             }
         })
     }
-
-    // broadcast the cached watchers list to everyone
-    function broadcastOnlineWatchers() {
-        if(!connectionsHandler.isHost)
-            return
-        
-        if(this){
-            watchers = watchers.map(item => {
-                if(item.name == this.getAttribute('watcher')){
-                    item.controlLevel = parseInt(this.value)
-                    return item
-                }
-                return item
-            })
-        }
-
-        const message = {
-            type: 'users',
-            from: $uid,
-            content: watchers,
-        }
-
-        connectionsHandler.broadcast(JSON.stringify(message))
-    }
     
     let watchers = []
     let isSlidePanelOpen = false
     let isCopyAnimActive = false
 
+    let isCopyPanelActive = false
     let copyPanelTimeout = null
     let slidePanelTimeout = null
-    
-    function copyText(){
-        isCopyAnimActive = true
-    
-        navigator.clipboard.writeText(this.innerText).then(function() {
-        }, function(err) {
-            console.error('Async: Could not copy text: ', err);
-        });
-    
-        setTimeout(() => {
-            isCopyAnimActive = false
-        }, 800)
-    }
-    
-    let isCopyPanelActive = false
 
     let markers = [
         {name: 'inicio', percentage: 20, tooltip: {isVisible: false, timeout: null}},
@@ -262,10 +258,60 @@
 
     let currentPercentage = 35
 
+    let directionRef = database.ref(`users/${$uid}/fixedPositions`);
+
+    directionRef.on('value', (snapshot) => {
+        const positions = snapshot.val();
+        if(!positions) return
+
+        markers=[]
+        for(let positionName in positions){
+            let positionValue = positions[positionName]
+            markers.push({
+                name: positionName,
+                percentage: positionValue,
+                tooltip: {isVisible: false, timeout: null}
+            })
+        }
+
+        // console.log(data)
+    });
+
+    window.addFixedPosition = async (name) => {
+        let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
+        // let value = await fixedPositionsRef.get()
+        // value = value.val()
+        // console.log(value)
+        // if(!value){
+        //     database.ref(`users/${$uid}`).update({fixedPositions: {}})
+        //     fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
+        // }
+        
+
+        let myobject = {}
+        let letters = 'abcdefghijklmnopqrstuvwxyz'
+        let randomLetter = (n) => {
+            let output = ''
+            for(let i = 0; i<n; i++){
+                output = output.concat(letters[Math.floor(Math.random()*25)])
+            }
+            console.log(output)
+            return output
+        }
+
+        myobject[randomLetter(5)] = Math.floor(Math.random()*100)
+
+        fixedPositionsRef.update(myobject)
+
+    }
+
+    let editActive = false
+    let editRemoveName = ''
+
     </script>
     
     
-    <div class="flexColumn">
+    <div class="flexColumn" style="align-items: baseline">
         
         <video id="webcamVideo" autoplay playsinline bind:this={videoEl} ></video>
         <div class="positionBarContainer">
@@ -277,6 +323,12 @@
                 </div>
             {/each}
 
+        </div>
+        <div class="editionBar">
+            <span class="editItem" >Editar</span>
+            <div>
+                <span class="removeItem">Remover {editRemoveName}</span>
+            </div>
         </div>
     
     </div>
@@ -319,7 +371,7 @@
     {/if}
     
     
-    <style>
+<style>
         video#webcamVideo {
             /* --size: 90%;
             width: var(--size); */
@@ -585,5 +637,14 @@
             pointer-events: none;
             opacity: 0;
         }
-    
-    </style>
+
+.editionBar .editItem {
+color: #fff;
+cursor: pointer;
+} 
+
+.editionBar .removeItem {
+color: red;
+cursor: pointer
+}
+</style>

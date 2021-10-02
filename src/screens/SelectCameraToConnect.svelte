@@ -1,30 +1,33 @@
 <script>
+    import { fade } from "svelte/transition";
 
-import { fade } from "svelte/transition";
+    import { subscribeToBackBtn } from "../components/Header.svelte";
+    import { currentScreen } from "../stores/app.js";
+    import { username } from "../stores/main.js";
 
-import {subscribeToBackBtn} from "../components/Header.svelte";
-import {currentScreen} from '../stores/app.js'
-import {username} from '../stores/main.js'
+    let inputValue = "";
 
-let inputValue = ''
+    subscribeToBackBtn("selectCameraToConnect", () => {
+        currentScreen.set("cameraOwner");
 
-subscribeToBackBtn('selectCameraToConnect', () => {
-    currentScreen.set('cameraOwner')
-    
-    console.log('changing to cameraOwner')
-})
+        console.log("changing to cameraOwner");
+    });
 
-function btnOnClick(){
-    username.set(inputValue)
-    currentScreen.set('main')
-}
-
+    function btnOnClick() {
+        username.set(inputValue);
+        currentScreen.set("main");
+    }
 </script>
 
-<div style="position: absolute;" class='container' transition:fade>
+<div style="position: absolute;" class="container" transition:fade>
     <h3>A quem você deseja se conectar?</h3>
-    <input type="text" class="transparentInput" placeholder="Digite Aqui" bind:value={inputValue} >
-    <div class="transparentBtn" on:click={btnOnClick} >
+    <input
+        type="text"
+        class="transparentInput"
+        placeholder="Digite Aqui"
+        bind:value={inputValue}
+    />
+    <div class="transparentBtn" on:click={btnOnClick}>
         <p>Próximo</p>
     </div>
 </div>
@@ -35,7 +38,7 @@ function btnOnClick(){
         flex-direction: column;
         align-items: center;
     }
-    .transparentInput{
+    .transparentInput {
         height: 30px;
         border: solid #fff3 2px;
         /* padding-bottom: 8px */
