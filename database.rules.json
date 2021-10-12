@@ -1,14 +1,20 @@
 {
   "rules": {
-    ".read": "now < 1629946800000",  // 2021-5-4
-    ".write": "now < 1629946800000",  // 2021-5-4
+    "cameras": {
+      "codes": {
+        ".read": true,
+        "$code": {
+          ".read": true,
+          ".write": true,
+          ".validate": "newData.val() === auth.uid && $code.length == 4",
+        }
+      }
+    },
     "users": {
       "$uid": {
-        ".read": "$uid === auth.uid",
-        ".write": "$uid === auth.uid",
         "direction": {
-          ".read": "$uid === auth.uid",
-        	".write": "$uid === auth.uid",
+          ".read": true,
+          ".write": "$uid === auth.uid",
           "0": {".validate": "newData.val() === 0 || newData.val() === 1"},
           "1": {".validate": "newData.val() === 0 || newData.val() === 1"},
           "2": {".validate": "newData.val() === 0 || newData.val() === 1"},
@@ -18,10 +24,46 @@
           ".read": true,
           ".write": true,
           "$index": {
-          	".validate": "$index.matches(/[0-9]/) && newData.val() === auth.uid && now < root.child('/users/'+$uid+'/callExpirationDate').val()" 
+          	".validate": "newData.val() === auth.uid && now < root.child('/users/'+$uid+'/callExpirationDate').val()" 
           },
         },
         "callExpirationDate": {".validate": "newData.val() > now && newData.isNumber()"},
+
+        "ready": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+        },
+        "connectedWith": {
+          ".read": true,
+          ".write": true,
+          ".validate": "newData.val() == auth.uid"
+        },
+        "name": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+        },
+        "lastCamera": {
+          ".read": "$uid === auth.uid",
+          ".write": "$uid === auth.uid",
+          ".validate": "root.child('/users/'+newData.val()).exists()"
+        },
+        "fixedPositions": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+        },
+        "reconnectValidUntil": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+          // valid for 1 hour
+          ".validate": "newData.isNumber() && newData.val() <= now+60*60*1000"
+        },
+        "testAlive": {
+          ".read": true,
+          ".write": true,
+          // valid for 1 hour
+          ".validate": "newData.isNumber() && newData.val() <= 1000"
+        },
+        
         "$other": {
           ".validate": false
         }

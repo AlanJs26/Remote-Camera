@@ -42414,21 +42414,21 @@ var app = (function () {
     			div0 = element("div");
     			p = element("p");
     			p.textContent = "Conectar";
-    			add_location(h3, file$6, 58, 2, 1601);
+    			add_location(h3, file$6, 89, 2, 2649);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "transparentInput svelte-1j4igm5");
     			attr_dev(input, "placeholder", "Digite Aqui");
-    			add_location(input, file$6, 60, 4, 1692);
-    			add_location(p, file$6, 71, 6, 2009);
+    			add_location(input, file$6, 91, 4, 2740);
+    			add_location(p, file$6, 102, 6, 3057);
     			attr_dev(div0, "class", "transparentBtn svelte-1j4igm5");
-    			add_location(div0, file$6, 70, 4, 1928);
+    			add_location(div0, file$6, 101, 4, 2976);
     			attr_dev(div1, "id", "cameraOwner");
     			attr_dev(div1, "class", "container svelte-1j4igm5");
-    			add_location(div1, file$6, 59, 2, 1630);
+    			add_location(div1, file$6, 90, 2, 2678);
     			attr_dev(div2, "class", "flexColumn svelte-1j4igm5");
     			set_style(div2, "position", "absolute");
     			set_style(div2, "z-index", "4");
-    			add_location(div2, file$6, 57, 0, 1534);
+    			add_location(div2, file$6, 88, 0, 2582);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -42489,6 +42489,20 @@ var app = (function () {
     	return block;
     }
 
+    function* notFirstGen() {
+    	console.log("first");
+    	yield false;
+    	let dotString = "";
+
+    	for (let i = 0; i < 3; i++) {
+    		console.log("second" + dotString);
+    		yield true;
+    	}
+
+    	console.log("last");
+    	yield;
+    }
+
     function instance$6($$self, $$props, $$invalidate) {
     	let $uid;
     	validate_store(uid, "uid");
@@ -42503,6 +42517,8 @@ var app = (function () {
 
     	async function connectFromCode(code) {
     		const lastCameraRef = database.ref("/users/" + $uid + "/lastCamera");
+    		let lastCamera = await lastCameraRef.get();
+    		let reconnectValidUntilRef = database.ref("/users/" + lastCamera.val() + "/reconnectValidUntil");
 
     		if (code.length == 4) {
     			const codeRef = database.ref("/cameras/codes/" + code);
@@ -42518,28 +42534,38 @@ var app = (function () {
     			const connectedWithRef = database.ref("/users/" + cameraUid + "/connectedWith");
     			connectedWithRef.set($uid);
     		} else {
-    			const lastCamera = await lastCameraRef.get();
-    			console.log(lastCamera.val());
+    			let lastCamera = await lastCameraRef.get();
+    			let reconnectValidUntil = await reconnectValidUntilRef.get();
+    			reconnectValidUntil = reconnectValidUntil.val();
 
-    			if (lastCamera.exists) {
+    			if (lastCamera.exists && reconnectValidUntil > Date.now()) {
+    				console.log("using last camera uid as default");
     				cameraUid = lastCamera.val();
     			} else {
     				return;
     			}
     		}
 
+    		const notFirst = notFirstGen();
     		lastCameraRef.set(cameraUid);
-    		const readyRef = database.ref("/users/" + cameraUid + "/ready");
+    		reconnectValidUntilRef = database.ref("/users/" + cameraUid + "/reconnectValidUntil");
 
-    		readyRef.on("value", snapshot => {
+    		reconnectValidUntilRef.on("value", snapshot => {
+    			console.log("reconnectValidUntil - " + snapshot.val());
+    			if (notFirst.next().value == false) return;
+    			console.log("passed wowow");
     			const data = snapshot.val();
 
-    			if (snapshot.exists() && data) {
-    				console.log("READY!!!!!");
+    			if (data > Date.now()) {
     				currentScreen.set("main");
-    				readyRef.off();
+    				reconnectValidUntilRef.off();
     			}
     		});
+
+    		const testAliveRef = database.ref("/users/" + cameraUid + "/testAlive");
+    		let randnum = Math.floor(Math.random() * 1000);
+    		console.log(randnum);
+    		setTimeout(() => testAliveRef.set(randnum), 500);
     	}
 
     	function input_input_handler() {
@@ -42561,9 +42587,13 @@ var app = (function () {
     		database,
     		subscribeToBackBtn,
     		inputValue,
+    		notFirstGen,
     		connectFromCode,
+    		console,
     		$uid,
-    		console
+    		Date,
+    		Math,
+    		setTimeout
     	});
 
     	$$self.$inject_state = $$props => {

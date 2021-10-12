@@ -10,9 +10,26 @@
 
   let inputValue = "";
 
+  function* notFirstGen() {
+    console.log("first");
+    yield false;
+    let dotString = "";
+    for (let i = 0; i < 3; i++) {
+      console.log("second" + dotString);
+      yield true;
+      dotString.concat(".");
+    }
+    console.log("last");
+    yield;
+  }
+
   connectFromCode("");
   async function connectFromCode(code) {
     const lastCameraRef = database.ref("/users/" + $uid + "/lastCamera");
+    let lastCamera = await lastCameraRef.get();
+    let reconnectValidUntilRef = database.ref(
+      "/users/" + lastCamera.val() + "/reconnectValidUntil"
+    );
     if (code.length == 4) {
       const codeRef = database.ref("/cameras/codes/" + code);
       const snapshot = await codeRef.get();
@@ -30,28 +47,42 @@
       );
       connectedWithRef.set($uid);
     } else {
-      const lastCamera = await lastCameraRef.get();
-      console.log(lastCamera.val());
+      let lastCamera = await lastCameraRef.get();
 
-      if (lastCamera.exists) {
+      let reconnectValidUntil = await reconnectValidUntilRef.get();
+      reconnectValidUntil = reconnectValidUntil.val();
+
+      if (lastCamera.exists && reconnectValidUntil > Date.now()) {
+        console.log("using last camera uid as default");
         cameraUid = lastCamera.val();
       } else {
         return;
       }
     }
 
+    const notFirst = notFirstGen();
     lastCameraRef.set(cameraUid);
 
-    const readyRef = database.ref("/users/" + cameraUid + "/ready");
-    readyRef.on("value", (snapshot) => {
+    reconnectValidUntilRef = database.ref(
+      "/users/" + cameraUid + "/reconnectValidUntil"
+    );
+    reconnectValidUntilRef.on("value", (snapshot) => {
+      console.log("reconnectValidUntil - " + snapshot.val());
+
+      if (notFirst.next().value == false) return;
+      console.log("passed wowow");
+
       const data = snapshot.val();
-      if (snapshot.exists() && data) {
-        console.log("READY!!!!!");
+      if (data > Date.now()) {
         currentScreen.set("main");
 
-        readyRef.off();
+        reconnectValidUntilRef.off();
       }
     });
+    const testAliveRef = database.ref("/users/" + cameraUid + "/testAlive");
+    let randnum = Math.floor(Math.random() * 1000);
+    console.log(randnum);
+    setTimeout(() => testAliveRef.set(randnum), 500);
   }
 </script>
 
