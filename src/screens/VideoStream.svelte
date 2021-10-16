@@ -118,6 +118,10 @@
                 if (data.type == "currentPercentage") {
                     currentPercentage = data.content;
                 }
+
+                if (data.type == "fixedPositions") {
+                    markers = data.content;
+                }
             }
         );
 
@@ -154,21 +158,58 @@
         setCubesState("btnMode");
 
         // Broadcast through WebRTC any currentPercent changes on the server
-        let currentPercentageRef = database.ref(`users/${$uid}/currentPercentage`);
+        // and synchronize the currentPercent with the server
+        let currentPercentageRef = database.ref(
+            `users/${$uid}/currentPercentage`
+        );
 
-        currentPercentageRef.on("value", () => {
-        const message = {
-            type: "currentPercentage",
-            from: connectionsHandler.peer.id,
-            content: currentPercentage,
-            displayName: $username,
-        };
-        connectionsHandler.broadcast(JSON.stringify(message))
+        currentPercentageRef.on("value", (snapshot) => {
+            if (!snapshot.val()) return;
+            const message = {
+                type: "currentPercentage",
+                from: connectionsHandler.peer.id,
+                content: snapshot.val(),
+                displayName: $username,
+            };
+            connectionsHandler.broadcast(JSON.stringify(message));
+            currentPercentage = snapshot.val();
+        });
+
+        // Listen the fixedPositions in the server and update the local ones
+        let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
+        fixedPositionsRef.on("value", (snapshot) => {
+            const positions = snapshot.val();
+            if (!positions) return;
+            console.log(positions);
+
+            let currentMarkerNames = positions.map((marker) => marker.name);
+            let markerNames = markers.map((marker) => marker.name);
+            if (
+                markerNames.sort().join("") !==
+                currentMarkerNames.sort().join("")
+            ) {
+                markers = [];
+                for (let { name, percentage } of positions) {
+                    markers.push({
+                        name,
+                        percentage,
+                        tooltip: { isVisible: false, timeout: null },
+                    });
+                }
+            }
+
+            // Broadcast the fixedPositions through WebRTC
+            const message = {
+                type: "fixedPositions",
+                from: connectionsHandler.peer.id,
+                content: markers,
+                displayName: $username,
+            };
+            connectionsHandler.broadcast(JSON.stringify(message));
         });
 
         // update the buttonsState when the server data changes
         let directionRef = database.ref(`users/${$uid}/direction`);
-
         directionRef.on("value", (snapshot) => {
             const data = snapshot.val();
             if (!data) return;
@@ -179,8 +220,6 @@
                 }
                 return prevState;
             });
-
-            // console.log(data)
         });
 
         controlsBtn.assignFunction("main", async (n) => {
@@ -218,12 +257,30 @@
                 // make sure that I'm the host, if not, do nothing
                 if (!connectionsHandler.isHost) return;
 
-                // when the handshake message is received, send the current controlsState
+                // when the handshake message is received, send the current controlsState, fixedPositions and currentPercentage
                 if (data && data.type == "handshake") {
-                    const message = {
+                    let message = {
                         type: "controlsState",
                         from: connectionsHandler.peer.id,
                         content: $buttonsState.map((item) => (item ? 1 : 0)),
+                        displayName: $username,
+                    };
+                    connectionsHandler.broadcast(JSON.stringify(message));
+
+                    // send fixedPositions through WebRTC
+                    message = {
+                        type: "fixedPositions",
+                        from: connectionsHandler.peer.id,
+                        content: markers,
+                        displayName: $username,
+                    };
+                    connectionsHandler.broadcast(JSON.stringify(message));
+
+                    // send currentPercentage through WebRTC
+                    message = {
+                        type: "currentPercentage",
+                        from: connectionsHandler.peer.id,
+                        content: currentPercentage,
                         displayName: $username,
                     };
                     connectionsHandler.broadcast(JSON.stringify(message));
@@ -313,57 +370,9 @@
         currentPercentage = num;
     };
 
-    let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
-
-    fixedPositionsRef.on("value", (snapshot) => {
-        const positions = snapshot.val();
-        if (!positions) return;
-        console.log(positions);
-
-        let currentMarkerNames = positions.map((marker) => marker.name);
-        let markerNames = markers.map((marker) => marker.name);
-        if (markerNames.sort().join("") === currentMarkerNames.sort().join(""))
-            return;
-
-        markers = [];
-        for (let { name, percentage } of positions) {
-            markers.push({
-                name,
-                percentage,
-                tooltip: { isVisible: false, timeout: null },
-            });
-        }
-
-        // console.log(data)
-    });
-
-    let currentPercentageRef = database.ref(`users/${$uid}/currentPercentage`);
-    currentPercentageRef.on("value", (snapshot) => {
-        if (!snapshot.val()) return;
-
-        currentPercentage = snapshot.val();
-    });
-
     const addFixedPosition = async (markerName, markerPercentage) => {
         let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
-        // let value = await fixedPositionsRef.get()
-        // value = value.val()
-        // console.log(value)
-        // if(!value){
-        //     database.ref(`users/${$uid}`).update({fixedPositions: {}})
-        //     fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
-        // }
 
-        /*let myobject = {}*/
-        /*let letters = 'abcdefghijklmnopqrstuvwxyz'*/
-        /*let randomLetter = (n) => {*/
-        /*let output = ''*/
-        /*for(let i = 0; i<n; i++){*/
-        /*output = output.concat(letters[Math.floor(Math.random()*25)])*/
-        /*}*/
-        /*console.log(output)*/
-        /*return output*/
-        /*}*/
         markers = [
             ...markers,
             {
@@ -418,6 +427,8 @@
     let newMarkerName = "";
     let editRemoveName = "";
 
+    $: meWatcher = watchers.filter((item) => item.id == $uid)
+
     let i;
     $: if (
         (i = markers.filter(
@@ -466,43 +477,47 @@
             {/each}
         </div>
     </div>
-    <div class="editionBar" style="width: 100%">
-        <div class="flexRow" style="height: 20px; margin: 5px 0;">
-            <input
-                type="text"
-                class="transparentInput"
-                style="flex: 1; "
-                placeholder="Digite Aqui"
-                bind:value={newMarkerName}
-                on:keypress={(e) => {
-                    if (e.key == "Enter")
+    {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
+        <div class="editionBar" style="width: 100%">
+            <div class="flexRow" style="height: 20px; margin: 5px 0;">
+                <input
+                    type="text"
+                    class="transparentInput"
+                    style="flex: 1; "
+                    placeholder="Digite Aqui"
+                    bind:value={newMarkerName}
+                    on:keypress={(e) => {
+                        if (e.key == "Enter")
+                            addFixedPosition(
+                                newMarkerName,
+                                currentPercentage
+                                /* Math.floor(Math.random() * 100) */
+                            );
+                    }}
+                />
+                <button
+                    class="transparentBtn editItem"
+                    on:click={() => {
                         addFixedPosition(
                             newMarkerName,
-                            Math.floor(Math.random() * 100)
+                            currentPercentage
+                            /* Math.floor(Math.random() * 100) */
                         );
-                }}
-            />
-            <button
-                class="transparentBtn editItem"
-                on:click={() => {
-                    addFixedPosition(
-                        newMarkerName,
-                        Math.floor(Math.random() * 100)
-                    );
-                }}>Adicionar Marcador</button
-            >
-        </div>
-        <div>
-            {#if editRemoveName}
-                <button
-                    class="transparentBtn removeItem"
-                    on:click={removeCurrentFixedPosition}
+                    }}>Adicionar Marcador</button
                 >
-                    <p>Remover {editRemoveName}</p>
-                </button>
-            {/if}
+            </div>
+            <div>
+                {#if editRemoveName}
+                    <button
+                        class="transparentBtn removeItem"
+                        on:click={removeCurrentFixedPosition}
+                    >
+                        <p>Remover {editRemoveName}</p>
+                    </button>
+                {/if}
+            </div>
         </div>
-    </div>
+    {/if}
 </div>
 <div class="floatingIcons">
     <div on:click={() => (isCopyPanelActive = !isCopyPanelActive)}>
@@ -531,7 +546,7 @@
     <ul>
         {#each watchers as watcher}
             <li>
-                <span>{watcher.name}</span>
+                <span class:me={watcher.id == $uid}>{watcher.name}</span>
                 <div
                     style={`pointer-events: ${
                         connectionsHandler.isHost ? "auto" : "none"
@@ -583,7 +598,7 @@
             <span>clique para copiar</span>
             <div>
                 <p on:click={copyText} class:active={isCopyAnimActive}>
-                    {$uid}
+                    {$username.length ? $username : $uid}
                 </p>
             </div>
         </div>
@@ -892,6 +907,10 @@
     .editionBar {
         opacity: 0;
         transition: height 0.2s ease-out 1s, opacity 0.2s ease-out 1s;
+    }
+
+    span.me {
+        font-weight: bold;
     }
 
     .editionBar:hover,

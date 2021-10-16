@@ -40096,35 +40096,35 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[39] = list[i];
-    	child_ctx[40] = list;
-    	child_ctx[41] = i;
+    	child_ctx[38] = list[i];
+    	child_ctx[39] = list;
+    	child_ctx[40] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[42] = list[i].percentage;
-    	child_ctx[43] = list[i].name;
-    	child_ctx[44] = list[i].tooltip;
+    	child_ctx[41] = list[i].percentage;
+    	child_ctx[42] = list[i].name;
+    	child_ctx[43] = list[i].tooltip;
     	return child_ctx;
     }
 
-    // (445:12) {#each markers as { percentage, name, tooltip }}
+    // (456:12) {#each markers as { percentage, name, tooltip }}
     function create_each_block_1(ctx) {
     	let div1;
     	let div0;
-    	let t0_value = /*name*/ ctx[43] + "";
+    	let t0_value = /*name*/ ctx[42] + "";
     	let t0;
     	let t1;
     	let dispose;
 
     	function mouseenter_handler(...args) {
-    		return /*mouseenter_handler*/ ctx[24](/*tooltip*/ ctx[44], ...args);
+    		return /*mouseenter_handler*/ ctx[23](/*tooltip*/ ctx[43], ...args);
     	}
 
     	function mouseleave_handler(...args) {
-    		return /*mouseleave_handler*/ ctx[25](/*tooltip*/ ctx[44], ...args);
+    		return /*mouseleave_handler*/ ctx[24](/*tooltip*/ ctx[43], ...args);
     	}
 
     	const block = {
@@ -40133,12 +40133,12 @@ var app = (function () {
     			div0 = element("div");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr_dev(div0, "class", "marker-tooltip svelte-1ymobr2");
-    			toggle_class(div0, "active", /*tooltip*/ ctx[44].isVisible);
-    			add_location(div0, file$1, 458, 20, 15435);
-    			attr_dev(div1, "class", "marker svelte-1ymobr2");
-    			set_style(div1, "--percentage", /*percentage*/ ctx[42]);
-    			add_location(div1, file$1, 445, 16, 14903);
+    			attr_dev(div0, "class", "marker-tooltip svelte-qtyqkc");
+    			toggle_class(div0, "active", /*tooltip*/ ctx[43].isVisible);
+    			add_location(div0, file$1, 469, 20, 16262);
+    			attr_dev(div1, "class", "marker svelte-qtyqkc");
+    			set_style(div1, "--percentage", /*percentage*/ ctx[41]);
+    			add_location(div1, file$1, 456, 16, 15730);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -40153,14 +40153,14 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*markers*/ 128 && t0_value !== (t0_value = /*name*/ ctx[43] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*markers*/ 128 && t0_value !== (t0_value = /*name*/ ctx[42] + "")) set_data_dev(t0, t0_value);
 
     			if (dirty[0] & /*markers*/ 128) {
-    				toggle_class(div0, "active", /*tooltip*/ ctx[44].isVisible);
+    				toggle_class(div0, "active", /*tooltip*/ ctx[43].isVisible);
     			}
 
     			if (dirty[0] & /*markers*/ 128) {
-    				set_style(div1, "--percentage", /*percentage*/ ctx[42]);
+    				set_style(div1, "--percentage", /*percentage*/ ctx[41]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -40173,15 +40173,108 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(445:12) {#each markers as { percentage, name, tooltip }}",
+    		source: "(456:12) {#each markers as { percentage, name, tooltip }}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (496:12) {#if editRemoveName}
+    // (480:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
     function create_if_block_1(ctx) {
+    	let div2;
+    	let div0;
+    	let input;
+    	let t0;
+    	let button;
+    	let t2;
+    	let div1;
+    	let dispose;
+    	let if_block = /*editRemoveName*/ ctx[10] && create_if_block_2(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			div0 = element("div");
+    			input = element("input");
+    			t0 = space();
+    			button = element("button");
+    			button.textContent = "Adicionar Marcador";
+    			t2 = space();
+    			div1 = element("div");
+    			if (if_block) if_block.c();
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "class", "transparentInput svelte-qtyqkc");
+    			set_style(input, "flex", "1");
+    			attr_dev(input, "placeholder", "Digite Aqui");
+    			add_location(input, file$1, 482, 16, 16765);
+    			attr_dev(button, "class", "transparentBtn editItem svelte-qtyqkc");
+    			add_location(button, file$1, 497, 16, 17385);
+    			attr_dev(div0, "class", "flexRow svelte-qtyqkc");
+    			set_style(div0, "height", "20px");
+    			set_style(div0, "margin", "5px 0");
+    			add_location(div0, file$1, 481, 12, 16689);
+    			attr_dev(div1, "class", "svelte-qtyqkc");
+    			add_location(div1, file$1, 508, 12, 17817);
+    			attr_dev(div2, "class", "editionBar svelte-qtyqkc");
+    			set_style(div2, "width", "100%");
+    			add_location(div2, file$1, 480, 8, 16631);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div0);
+    			append_dev(div0, input);
+    			set_input_value(input, /*newMarkerName*/ ctx[9]);
+    			append_dev(div0, t0);
+    			append_dev(div0, button);
+    			append_dev(div2, t2);
+    			append_dev(div2, div1);
+    			if (if_block) if_block.m(div1, null);
+
+    			dispose = [
+    				listen_dev(input, "input", /*input_input_handler*/ ctx[25]),
+    				listen_dev(input, "keypress", /*keypress_handler*/ ctx[26], false, false, false),
+    				listen_dev(button, "click", /*click_handler*/ ctx[27], false, false, false)
+    			];
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*newMarkerName*/ 512 && input.value !== /*newMarkerName*/ ctx[9]) {
+    				set_input_value(input, /*newMarkerName*/ ctx[9]);
+    			}
+
+    			if (/*editRemoveName*/ ctx[10]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block_2(ctx);
+    					if_block.c();
+    					if_block.m(div1, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			if (if_block) if_block.d();
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(480:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (510:16) {#if editRemoveName}
+    function create_if_block_2(ctx) {
     	let button;
     	let p;
     	let t0;
@@ -40194,17 +40287,17 @@ var app = (function () {
     			p = element("p");
     			t0 = text("Remover ");
     			t1 = text(/*editRemoveName*/ ctx[10]);
-    			attr_dev(p, "class", "svelte-1ymobr2");
-    			add_location(p, file$1, 500, 20, 16898);
-    			attr_dev(button, "class", "transparentBtn removeItem svelte-1ymobr2");
-    			add_location(button, file$1, 496, 16, 16736);
+    			attr_dev(p, "class", "svelte-qtyqkc");
+    			add_location(p, file$1, 514, 24, 18060);
+    			attr_dev(button, "class", "transparentBtn removeItem svelte-qtyqkc");
+    			add_location(button, file$1, 510, 20, 17882);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
     			append_dev(button, p);
     			append_dev(p, t0);
     			append_dev(p, t1);
-    			dispose = listen_dev(button, "click", /*removeCurrentFixedPosition*/ ctx[15], false, false, false);
+    			dispose = listen_dev(button, "click", /*removeCurrentFixedPosition*/ ctx[17], false, false, false);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty[0] & /*editRemoveName*/ 1024) set_data_dev(t1, /*editRemoveName*/ ctx[10]);
@@ -40217,20 +40310,20 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1.name,
+    		id: create_if_block_2.name,
     		type: "if",
-    		source: "(496:12) {#if editRemoveName}",
+    		source: "(510:16) {#if editRemoveName}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (532:8) {#each watchers as watcher}
+    // (547:8) {#each watchers as watcher}
     function create_each_block(ctx) {
     	let li;
     	let span;
-    	let t0_value = /*watcher*/ ctx[39].name + "";
+    	let t0_value = /*watcher*/ ctx[38].name + "";
     	let t0;
     	let t1;
     	let div;
@@ -40250,15 +40343,15 @@ var app = (function () {
     	let dispose;
 
     	function input0_change_handler() {
-    		/*input0_change_handler*/ ctx[31].call(input0, /*watcher*/ ctx[39]);
+    		/*input0_change_handler*/ ctx[30].call(input0, /*watcher*/ ctx[38]);
     	}
 
     	function input1_change_handler() {
-    		/*input1_change_handler*/ ctx[33].call(input1, /*watcher*/ ctx[39]);
+    		/*input1_change_handler*/ ctx[32].call(input1, /*watcher*/ ctx[38]);
     	}
 
     	function input2_change_handler() {
-    		/*input2_change_handler*/ ctx[34].call(input2, /*watcher*/ ctx[39]);
+    		/*input2_change_handler*/ ctx[33].call(input2, /*watcher*/ ctx[38]);
     	}
 
     	const block = {
@@ -40274,33 +40367,34 @@ var app = (function () {
     			t3 = space();
     			input2 = element("input");
     			t4 = space();
-    			attr_dev(span, "class", "svelte-1ymobr2");
-    			add_location(span, file$1, 533, 16, 17802);
-    			attr_dev(input0, "watcher", input0_watcher_value = /*watcher*/ ctx[39].name);
+    			attr_dev(span, "class", "svelte-qtyqkc");
+    			toggle_class(span, "me", /*watcher*/ ctx[38].id == /*$uid*/ ctx[11]);
+    			add_location(span, file$1, 548, 16, 18991);
+    			attr_dev(input0, "watcher", input0_watcher_value = /*watcher*/ ctx[38].name);
     			attr_dev(input0, "type", "radio");
     			input0.__value = input0_value_value = 0;
     			input0.value = input0.__value;
-    			attr_dev(input0, "class", "svelte-1ymobr2");
-    			/*$$binding_groups*/ ctx[32][0].push(input0);
-    			add_location(input0, file$1, 539, 20, 18034);
-    			attr_dev(input1, "watcher", input1_watcher_value = /*watcher*/ ctx[39].name);
+    			attr_dev(input0, "class", "svelte-qtyqkc");
+    			/*$$binding_groups*/ ctx[31][0].push(input0);
+    			add_location(input0, file$1, 554, 20, 19253);
+    			attr_dev(input1, "watcher", input1_watcher_value = /*watcher*/ ctx[38].name);
     			attr_dev(input1, "type", "radio");
     			input1.__value = input1_value_value = 1;
     			input1.value = input1.__value;
-    			attr_dev(input1, "class", "svelte-1ymobr2");
-    			/*$$binding_groups*/ ctx[32][0].push(input1);
-    			add_location(input1, file$1, 546, 20, 18327);
-    			attr_dev(input2, "watcher", input2_watcher_value = /*watcher*/ ctx[39].name);
+    			attr_dev(input1, "class", "svelte-qtyqkc");
+    			/*$$binding_groups*/ ctx[31][0].push(input1);
+    			add_location(input1, file$1, 561, 20, 19546);
+    			attr_dev(input2, "watcher", input2_watcher_value = /*watcher*/ ctx[38].name);
     			attr_dev(input2, "type", "radio");
     			input2.__value = input2_value_value = 2;
     			input2.value = input2.__value;
-    			attr_dev(input2, "class", "svelte-1ymobr2");
-    			/*$$binding_groups*/ ctx[32][0].push(input2);
-    			add_location(input2, file$1, 553, 20, 18620);
+    			attr_dev(input2, "class", "svelte-qtyqkc");
+    			/*$$binding_groups*/ ctx[31][0].push(input2);
+    			add_location(input2, file$1, 568, 20, 19839);
     			attr_dev(div, "style", div_style_value = `pointer-events: ${connectionsHandler.isHost ? "auto" : "none"}`);
-    			add_location(div, file$1, 534, 16, 17847);
-    			attr_dev(li, "class", "svelte-1ymobr2");
-    			add_location(li, file$1, 532, 12, 17780);
+    			add_location(div, file$1, 549, 16, 19066);
+    			attr_dev(li, "class", "svelte-qtyqkc");
+    			add_location(li, file$1, 547, 12, 18969);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40309,57 +40403,61 @@ var app = (function () {
     			append_dev(li, t1);
     			append_dev(li, div);
     			append_dev(div, input0);
-    			input0.checked = input0.__value === /*watcher*/ ctx[39].controlLevel;
+    			input0.checked = input0.__value === /*watcher*/ ctx[38].controlLevel;
     			append_dev(div, t2);
     			append_dev(div, input1);
-    			input1.checked = input1.__value === /*watcher*/ ctx[39].controlLevel;
+    			input1.checked = input1.__value === /*watcher*/ ctx[38].controlLevel;
     			append_dev(div, t3);
     			append_dev(div, input2);
-    			input2.checked = input2.__value === /*watcher*/ ctx[39].controlLevel;
+    			input2.checked = input2.__value === /*watcher*/ ctx[38].controlLevel;
     			append_dev(li, t4);
 
     			dispose = [
-    				listen_dev(input0, "change", /*broadcastOnlineWatchers*/ ctx[13], false, false, false),
+    				listen_dev(input0, "change", /*broadcastOnlineWatchers*/ ctx[15], false, false, false),
     				listen_dev(input0, "change", input0_change_handler),
-    				listen_dev(input1, "change", /*broadcastOnlineWatchers*/ ctx[13], false, false, false),
+    				listen_dev(input1, "change", /*broadcastOnlineWatchers*/ ctx[15], false, false, false),
     				listen_dev(input1, "change", input1_change_handler),
-    				listen_dev(input2, "change", /*broadcastOnlineWatchers*/ ctx[13], false, false, false),
+    				listen_dev(input2, "change", /*broadcastOnlineWatchers*/ ctx[15], false, false, false),
     				listen_dev(input2, "change", input2_change_handler)
     			];
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*watchers*/ 2 && t0_value !== (t0_value = /*watcher*/ ctx[39].name + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*watchers*/ 2 && t0_value !== (t0_value = /*watcher*/ ctx[38].name + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*watchers*/ 2 && input0_watcher_value !== (input0_watcher_value = /*watcher*/ ctx[39].name)) {
+    			if (dirty[0] & /*watchers, $uid*/ 2050) {
+    				toggle_class(span, "me", /*watcher*/ ctx[38].id == /*$uid*/ ctx[11]);
+    			}
+
+    			if (dirty[0] & /*watchers*/ 2 && input0_watcher_value !== (input0_watcher_value = /*watcher*/ ctx[38].name)) {
     				attr_dev(input0, "watcher", input0_watcher_value);
     			}
 
     			if (dirty[0] & /*watchers*/ 2) {
-    				input0.checked = input0.__value === /*watcher*/ ctx[39].controlLevel;
+    				input0.checked = input0.__value === /*watcher*/ ctx[38].controlLevel;
     			}
 
-    			if (dirty[0] & /*watchers*/ 2 && input1_watcher_value !== (input1_watcher_value = /*watcher*/ ctx[39].name)) {
+    			if (dirty[0] & /*watchers*/ 2 && input1_watcher_value !== (input1_watcher_value = /*watcher*/ ctx[38].name)) {
     				attr_dev(input1, "watcher", input1_watcher_value);
     			}
 
     			if (dirty[0] & /*watchers*/ 2) {
-    				input1.checked = input1.__value === /*watcher*/ ctx[39].controlLevel;
+    				input1.checked = input1.__value === /*watcher*/ ctx[38].controlLevel;
     			}
 
-    			if (dirty[0] & /*watchers*/ 2 && input2_watcher_value !== (input2_watcher_value = /*watcher*/ ctx[39].name)) {
+    			if (dirty[0] & /*watchers*/ 2 && input2_watcher_value !== (input2_watcher_value = /*watcher*/ ctx[38].name)) {
     				attr_dev(input2, "watcher", input2_watcher_value);
     			}
 
     			if (dirty[0] & /*watchers*/ 2) {
-    				input2.checked = input2.__value === /*watcher*/ ctx[39].controlLevel;
+    				input2.checked = input2.__value === /*watcher*/ ctx[38].controlLevel;
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[32][0].splice(/*$$binding_groups*/ ctx[32][0].indexOf(input0), 1);
-    			/*$$binding_groups*/ ctx[32][0].splice(/*$$binding_groups*/ ctx[32][0].indexOf(input1), 1);
-    			/*$$binding_groups*/ ctx[32][0].splice(/*$$binding_groups*/ ctx[32][0].indexOf(input2), 1);
+    			/*$$binding_groups*/ ctx[31][0].splice(/*$$binding_groups*/ ctx[31][0].indexOf(input0), 1);
+    			/*$$binding_groups*/ ctx[31][0].splice(/*$$binding_groups*/ ctx[31][0].indexOf(input1), 1);
+    			/*$$binding_groups*/ ctx[31][0].splice(/*$$binding_groups*/ ctx[31][0].indexOf(input2), 1);
     			run_all(dispose);
     		}
     	};
@@ -40368,14 +40466,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(532:8) {#each watchers as watcher}",
+    		source: "(547:8) {#each watchers as watcher}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (567:0) {#if isCopyPanelActive}
+    // (582:0) {#if isCopyPanelActive}
     function create_if_block(ctx) {
     	let div2;
     	let h2;
@@ -40385,6 +40483,11 @@ var app = (function () {
     	let t3;
     	let div0;
     	let p;
+
+    	let t4_value = (/*$username*/ ctx[12].length
+    	? /*$username*/ ctx[12]
+    	: /*$uid*/ ctx[11]) + "";
+
     	let t4;
     	let div2_transition;
     	let current;
@@ -40402,20 +40505,20 @@ var app = (function () {
     			t3 = space();
     			div0 = element("div");
     			p = element("p");
-    			t4 = text(/*$uid*/ ctx[11]);
-    			attr_dev(h2, "class", "svelte-1ymobr2");
-    			add_location(h2, file$1, 577, 8, 19299);
-    			attr_dev(span, "class", "svelte-1ymobr2");
-    			add_location(span, file$1, 582, 12, 19445);
-    			attr_dev(p, "class", "svelte-1ymobr2");
+    			t4 = text(t4_value);
+    			attr_dev(h2, "class", "svelte-qtyqkc");
+    			add_location(h2, file$1, 592, 8, 20518);
+    			attr_dev(span, "class", "svelte-qtyqkc");
+    			add_location(span, file$1, 597, 12, 20664);
+    			attr_dev(p, "class", "svelte-qtyqkc");
     			toggle_class(p, "active", /*isCopyAnimActive*/ ctx[3]);
-    			add_location(p, file$1, 584, 16, 19513);
-    			attr_dev(div0, "class", "svelte-1ymobr2");
-    			add_location(div0, file$1, 583, 12, 19490);
-    			attr_dev(div1, "class", "svelte-1ymobr2");
-    			add_location(div1, file$1, 581, 8, 19426);
-    			attr_dev(div2, "class", "copyPanel svelte-1ymobr2");
-    			add_location(div2, file$1, 567, 4, 19003);
+    			add_location(p, file$1, 599, 16, 20732);
+    			attr_dev(div0, "class", "svelte-qtyqkc");
+    			add_location(div0, file$1, 598, 12, 20709);
+    			attr_dev(div1, "class", "svelte-qtyqkc");
+    			add_location(div1, file$1, 596, 8, 20645);
+    			attr_dev(div2, "class", "copyPanel svelte-qtyqkc");
+    			add_location(div2, file$1, 582, 4, 20222);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40430,13 +40533,15 @@ var app = (function () {
     			current = true;
 
     			dispose = [
-    				listen_dev(p, "click", /*copyText*/ ctx[12], false, false, false),
-    				listen_dev(div2, "mouseleave", /*mouseleave_handler_2*/ ctx[37], false, false, false),
-    				listen_dev(div2, "mouseenter", /*mouseenter_handler_2*/ ctx[38], false, false, false)
+    				listen_dev(p, "click", /*copyText*/ ctx[14], false, false, false),
+    				listen_dev(div2, "mouseleave", /*mouseleave_handler_2*/ ctx[36], false, false, false),
+    				listen_dev(div2, "mouseenter", /*mouseenter_handler_2*/ ctx[37], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
-    			if (!current || dirty[0] & /*$uid*/ 2048) set_data_dev(t4, /*$uid*/ ctx[11]);
+    			if ((!current || dirty[0] & /*$username, $uid*/ 6144) && t4_value !== (t4_value = (/*$username*/ ctx[12].length
+    			? /*$username*/ ctx[12]
+    			: /*$uid*/ ctx[11]) + "")) set_data_dev(t4, t4_value);
 
     			if (dirty[0] & /*isCopyAnimActive*/ 8) {
     				toggle_class(p, "active", /*isCopyAnimActive*/ ctx[3]);
@@ -40468,7 +40573,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(567:0) {#if isCopyPanelActive}",
+    		source: "(582:0) {#if isCopyPanelActive}",
     		ctx
     	});
 
@@ -40476,7 +40581,7 @@ var app = (function () {
     }
 
     function create_fragment$1(ctx) {
-    	let div6;
+    	let div3;
     	let video;
     	let t0;
     	let div2;
@@ -40484,31 +40589,24 @@ var app = (function () {
     	let div0;
     	let t1;
     	let t2;
-    	let div5;
-    	let div3;
-    	let input;
     	let t3;
-    	let button;
-    	let t5;
+    	let div6;
     	let div4;
-    	let t6;
-    	let div9;
-    	let div7;
     	let i0;
-    	let t7;
-    	let div8;
+    	let t4;
+    	let div5;
     	let i1;
-    	let t8;
-    	let div11;
+    	let t5;
+    	let div8;
     	let h2;
-    	let t10;
-    	let div10;
+    	let t7;
+    	let div7;
     	let span0;
-    	let t12;
+    	let t9;
     	let span1;
-    	let t14;
+    	let t11;
     	let ul;
-    	let t15;
+    	let t12;
     	let if_block1_anchor;
     	let current;
     	let dispose;
@@ -40520,7 +40618,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
 
-    	let if_block0 = /*editRemoveName*/ ctx[10] && create_if_block_1(ctx);
+    	let if_block0 = (connectionsHandler.isHost || /*meWatcher*/ ctx[13].length && /*meWatcher*/ ctx[13][0].controlLevel == 2) && create_if_block_1(ctx);
     	let each_value = /*watchers*/ ctx[1];
     	validate_each_argument(each_value);
     	let each_blocks = [];
@@ -40533,7 +40631,7 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div6 = element("div");
+    			div3 = element("div");
     			video = element("video");
     			t0 = space();
     			div2 = element("div");
@@ -40546,108 +40644,84 @@ var app = (function () {
     			}
 
     			t2 = space();
-    			div5 = element("div");
-    			div3 = element("div");
-    			input = element("input");
-    			t3 = space();
-    			button = element("button");
-    			button.textContent = "Adicionar Marcador";
-    			t5 = space();
-    			div4 = element("div");
     			if (if_block0) if_block0.c();
-    			t6 = space();
-    			div9 = element("div");
-    			div7 = element("div");
+    			t3 = space();
+    			div6 = element("div");
+    			div4 = element("div");
     			i0 = element("i");
-    			t7 = space();
-    			div8 = element("div");
+    			t4 = space();
+    			div5 = element("div");
     			i1 = element("i");
-    			t8 = space();
-    			div11 = element("div");
+    			t5 = space();
+    			div8 = element("div");
     			h2 = element("h2");
     			h2.textContent = "Participantes";
-    			t10 = space();
-    			div10 = element("div");
+    			t7 = space();
+    			div7 = element("div");
     			span0 = element("span");
     			span0.textContent = "Nome";
-    			t12 = space();
+    			t9 = space();
     			span1 = element("span");
     			span1.textContent = "Nível de Controle";
-    			t14 = space();
+    			t11 = space();
     			ul = element("ul");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t15 = space();
+    			t12 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
     			attr_dev(video, "id", "webcamVideo");
     			video.autoplay = true;
     			video.playsInline = true;
-    			attr_dev(video, "class", "svelte-1ymobr2");
-    			add_location(video, file$1, 436, 4, 14532);
-    			attr_dev(div0, "class", "currentPosition svelte-1ymobr2");
+    			attr_dev(video, "class", "svelte-qtyqkc");
+    			add_location(video, file$1, 447, 4, 15359);
+    			attr_dev(div0, "class", "currentPosition svelte-qtyqkc");
     			set_style(div0, "--percentage", /*currentPercentage*/ ctx[8]);
-    			add_location(div0, file$1, 439, 12, 14701);
-    			attr_dev(div1, "class", "positionBarContainer svelte-1ymobr2");
-    			add_location(div1, file$1, 438, 8, 14653);
+    			add_location(div0, file$1, 450, 12, 15528);
+    			attr_dev(div1, "class", "positionBarContainer svelte-qtyqkc");
+    			add_location(div1, file$1, 449, 8, 15480);
     			set_style(div2, "width", "100%");
     			set_style(div2, "height", "20px");
-    			add_location(div2, file$1, 437, 4, 14605);
-    			attr_dev(input, "type", "text");
-    			attr_dev(input, "class", "transparentInput svelte-1ymobr2");
-    			set_style(input, "flex", "1");
-    			attr_dev(input, "placeholder", "Digite Aqui");
-    			add_location(input, file$1, 470, 12, 15833);
-    			attr_dev(button, "class", "transparentBtn editItem svelte-1ymobr2");
-    			add_location(button, file$1, 484, 12, 16340);
-    			attr_dev(div3, "class", "flexRow svelte-1ymobr2");
-    			set_style(div3, "height", "20px");
-    			set_style(div3, "margin", "5px 0");
-    			add_location(div3, file$1, 469, 8, 15761);
-    			attr_dev(div4, "class", "svelte-1ymobr2");
-    			add_location(div4, file$1, 494, 8, 16679);
-    			attr_dev(div5, "class", "editionBar svelte-1ymobr2");
-    			set_style(div5, "width", "100%");
-    			add_location(div5, file$1, 468, 4, 15707);
-    			attr_dev(div6, "class", "flexColumn svelte-1ymobr2");
-    			set_style(div6, "align-items", "baseline");
-    			add_location(div6, file$1, 435, 0, 14472);
-    			attr_dev(i0, "class", "fas fa-share fa-2x svelte-1ymobr2");
-    			add_location(i0, file$1, 508, 8, 17119);
-    			attr_dev(div7, "class", "svelte-1ymobr2");
-    			add_location(div7, file$1, 507, 4, 17046);
-    			attr_dev(i1, "class", "fas fa-user-friends fa-2x svelte-1ymobr2");
-    			add_location(i1, file$1, 511, 8, 17240);
-    			attr_dev(div8, "class", "svelte-1ymobr2");
-    			add_location(div8, file$1, 510, 4, 17169);
-    			attr_dev(div9, "class", "floatingIcons svelte-1ymobr2");
-    			add_location(div9, file$1, 506, 0, 17013);
-    			attr_dev(h2, "class", "svelte-1ymobr2");
-    			add_location(h2, file$1, 525, 4, 17588);
-    			attr_dev(span0, "class", "svelte-1ymobr2");
-    			add_location(span0, file$1, 527, 8, 17650);
-    			attr_dev(span1, "class", "svelte-1ymobr2");
-    			add_location(span1, file$1, 528, 8, 17677);
-    			attr_dev(div10, "class", "listHeader svelte-1ymobr2");
-    			add_location(div10, file$1, 526, 4, 17616);
-    			attr_dev(ul, "class", "svelte-1ymobr2");
-    			add_location(ul, file$1, 530, 4, 17725);
-    			attr_dev(div11, "class", "slideFromRightContainer svelte-1ymobr2");
-    			toggle_class(div11, "open", /*isSlidePanelOpen*/ ctx[2]);
-    			add_location(div11, file$1, 515, 0, 17303);
+    			add_location(div2, file$1, 448, 4, 15432);
+    			attr_dev(div3, "class", "flexColumn svelte-qtyqkc");
+    			set_style(div3, "align-items", "baseline");
+    			add_location(div3, file$1, 446, 0, 15299);
+    			attr_dev(i0, "class", "fas fa-share fa-2x svelte-qtyqkc");
+    			add_location(i0, file$1, 523, 8, 18308);
+    			attr_dev(div4, "class", "svelte-qtyqkc");
+    			add_location(div4, file$1, 522, 4, 18235);
+    			attr_dev(i1, "class", "fas fa-user-friends fa-2x svelte-qtyqkc");
+    			add_location(i1, file$1, 526, 8, 18429);
+    			attr_dev(div5, "class", "svelte-qtyqkc");
+    			add_location(div5, file$1, 525, 4, 18358);
+    			attr_dev(div6, "class", "floatingIcons svelte-qtyqkc");
+    			add_location(div6, file$1, 521, 0, 18202);
+    			attr_dev(h2, "class", "svelte-qtyqkc");
+    			add_location(h2, file$1, 540, 4, 18777);
+    			attr_dev(span0, "class", "svelte-qtyqkc");
+    			add_location(span0, file$1, 542, 8, 18839);
+    			attr_dev(span1, "class", "svelte-qtyqkc");
+    			add_location(span1, file$1, 543, 8, 18866);
+    			attr_dev(div7, "class", "listHeader svelte-qtyqkc");
+    			add_location(div7, file$1, 541, 4, 18805);
+    			attr_dev(ul, "class", "svelte-qtyqkc");
+    			add_location(ul, file$1, 545, 4, 18914);
+    			attr_dev(div8, "class", "slideFromRightContainer svelte-qtyqkc");
+    			toggle_class(div8, "open", /*isSlidePanelOpen*/ ctx[2]);
+    			add_location(div8, file$1, 530, 0, 18492);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div6, anchor);
-    			append_dev(div6, video);
-    			/*video_binding*/ ctx[23](video);
-    			append_dev(div6, t0);
-    			append_dev(div6, div2);
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, video);
+    			/*video_binding*/ ctx[22](video);
+    			append_dev(div3, t0);
+    			append_dev(div3, div2);
     			append_dev(div2, div1);
     			append_dev(div1, div0);
     			append_dev(div1, t1);
@@ -40656,51 +40730,40 @@ var app = (function () {
     				each_blocks_1[i].m(div1, null);
     			}
 
-    			append_dev(div6, t2);
+    			append_dev(div3, t2);
+    			if (if_block0) if_block0.m(div3, null);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, div6, anchor);
+    			append_dev(div6, div4);
+    			append_dev(div4, i0);
+    			append_dev(div6, t4);
     			append_dev(div6, div5);
-    			append_dev(div5, div3);
-    			append_dev(div3, input);
-    			set_input_value(input, /*newMarkerName*/ ctx[9]);
-    			append_dev(div3, t3);
-    			append_dev(div3, button);
-    			append_dev(div5, t5);
-    			append_dev(div5, div4);
-    			if (if_block0) if_block0.m(div4, null);
-    			insert_dev(target, t6, anchor);
-    			insert_dev(target, div9, anchor);
-    			append_dev(div9, div7);
-    			append_dev(div7, i0);
-    			append_dev(div9, t7);
-    			append_dev(div9, div8);
-    			append_dev(div8, i1);
-    			insert_dev(target, t8, anchor);
-    			insert_dev(target, div11, anchor);
-    			append_dev(div11, h2);
-    			append_dev(div11, t10);
-    			append_dev(div11, div10);
-    			append_dev(div10, span0);
-    			append_dev(div10, t12);
-    			append_dev(div10, span1);
-    			append_dev(div11, t14);
-    			append_dev(div11, ul);
+    			append_dev(div5, i1);
+    			insert_dev(target, t5, anchor);
+    			insert_dev(target, div8, anchor);
+    			append_dev(div8, h2);
+    			append_dev(div8, t7);
+    			append_dev(div8, div7);
+    			append_dev(div7, span0);
+    			append_dev(div7, t9);
+    			append_dev(div7, span1);
+    			append_dev(div8, t11);
+    			append_dev(div8, ul);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(ul, null);
     			}
 
-    			insert_dev(target, t15, anchor);
+    			insert_dev(target, t12, anchor);
     			if (if_block1) if_block1.m(target, anchor);
     			insert_dev(target, if_block1_anchor, anchor);
     			current = true;
 
     			dispose = [
-    				listen_dev(input, "input", /*input_input_handler*/ ctx[26]),
-    				listen_dev(input, "keypress", /*keypress_handler*/ ctx[27], false, false, false),
-    				listen_dev(button, "click", /*click_handler*/ ctx[28], false, false, false),
-    				listen_dev(div7, "click", /*click_handler_1*/ ctx[29], false, false, false),
-    				listen_dev(div8, "click", /*click_handler_2*/ ctx[30], false, false, false),
-    				listen_dev(div11, "mouseleave", /*mouseleave_handler_1*/ ctx[35], false, false, false),
-    				listen_dev(div11, "mouseenter", /*mouseenter_handler_1*/ ctx[36], false, false, false)
+    				listen_dev(div4, "click", /*click_handler_1*/ ctx[28], false, false, false),
+    				listen_dev(div5, "click", /*click_handler_2*/ ctx[29], false, false, false),
+    				listen_dev(div8, "mouseleave", /*mouseleave_handler_1*/ ctx[34], false, false, false),
+    				listen_dev(div8, "mouseenter", /*mouseenter_handler_1*/ ctx[35], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -40732,24 +40795,20 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty[0] & /*newMarkerName*/ 512 && input.value !== /*newMarkerName*/ ctx[9]) {
-    				set_input_value(input, /*newMarkerName*/ ctx[9]);
-    			}
-
-    			if (/*editRemoveName*/ ctx[10]) {
+    			if (connectionsHandler.isHost || /*meWatcher*/ ctx[13].length && /*meWatcher*/ ctx[13][0].controlLevel == 2) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
     					if_block0 = create_if_block_1(ctx);
     					if_block0.c();
-    					if_block0.m(div4, null);
+    					if_block0.m(div3, null);
     				}
     			} else if (if_block0) {
     				if_block0.d(1);
     				if_block0 = null;
     			}
 
-    			if (dirty[0] & /*watchers, broadcastOnlineWatchers*/ 8194) {
+    			if (dirty[0] & /*watchers, broadcastOnlineWatchers, $uid*/ 34818) {
     				each_value = /*watchers*/ ctx[1];
     				validate_each_argument(each_value);
     				let i;
@@ -40774,7 +40833,7 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*isSlidePanelOpen*/ 4) {
-    				toggle_class(div11, "open", /*isSlidePanelOpen*/ ctx[2]);
+    				toggle_class(div8, "open", /*isSlidePanelOpen*/ ctx[2]);
     			}
 
     			if (/*isCopyPanelActive*/ ctx[4]) {
@@ -40807,16 +40866,16 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div6);
-    			/*video_binding*/ ctx[23](null);
+    			if (detaching) detach_dev(div3);
+    			/*video_binding*/ ctx[22](null);
     			destroy_each(each_blocks_1, detaching);
     			if (if_block0) if_block0.d();
-    			if (detaching) detach_dev(t6);
-    			if (detaching) detach_dev(div9);
-    			if (detaching) detach_dev(t8);
-    			if (detaching) detach_dev(div11);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(div6);
+    			if (detaching) detach_dev(t5);
+    			if (detaching) detach_dev(div8);
     			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(t15);
+    			if (detaching) detach_dev(t12);
     			if (if_block1) if_block1.d(detaching);
     			if (detaching) detach_dev(if_block1_anchor);
     			run_all(dispose);
@@ -40843,9 +40902,9 @@ var app = (function () {
     	validate_store(uid, "uid");
     	component_subscribe($$self, uid, $$value => $$invalidate(11, $uid = $$value));
     	validate_store(username, "username");
-    	component_subscribe($$self, username, $$value => $$invalidate(17, $username = $$value));
+    	component_subscribe($$self, username, $$value => $$invalidate(12, $username = $$value));
     	validate_store(buttonsState, "buttonsState");
-    	component_subscribe($$self, buttonsState, $$value => $$invalidate(18, $buttonsState = $$value));
+    	component_subscribe($$self, buttonsState, $$value => $$invalidate(19, $buttonsState = $$value));
 
     	configBtn.assignFunction("main", () => {
     		console.log("%cPARECE QUE FOI!", "color: purple;font-size: 20px");
@@ -40945,6 +41004,10 @@ var app = (function () {
     				if (data.type == "currentPercentage") {
     					$$invalidate(8, currentPercentage = data.content);
     				}
+
+    				if (data.type == "fixedPositions") {
+    					$$invalidate(7, markers = data.content);
+    				}
     			}
     		);
 
@@ -40984,13 +41047,50 @@ var app = (function () {
     		setCubesState("btnMode");
 
     		// Broadcast through WebRTC any currentPercent changes on the server
+    		// and synchronize the currentPercent with the server
     		let currentPercentageRef = database.ref(`users/${$uid}/currentPercentage`);
 
-    		currentPercentageRef.on("value", () => {
+    		currentPercentageRef.on("value", snapshot => {
+    			if (!snapshot.val()) return;
+
     			const message = {
     				type: "currentPercentage",
     				from: connectionsHandler.peer.id,
-    				content: currentPercentage,
+    				content: snapshot.val(),
+    				displayName: $username
+    			};
+
+    			connectionsHandler.broadcast(JSON.stringify(message));
+    			$$invalidate(8, currentPercentage = snapshot.val());
+    		});
+
+    		// Listen the fixedPositions in the server and update the local ones
+    		let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
+
+    		fixedPositionsRef.on("value", snapshot => {
+    			const positions = snapshot.val();
+    			if (!positions) return;
+    			console.log(positions);
+    			let currentMarkerNames = positions.map(marker => marker.name);
+    			let markerNames = markers.map(marker => marker.name);
+
+    			if (markerNames.sort().join("") !== currentMarkerNames.sort().join("")) {
+    				$$invalidate(7, markers = []);
+
+    				for (let { name, percentage } of positions) {
+    					markers.push({
+    						name,
+    						percentage,
+    						tooltip: { isVisible: false, timeout: null }
+    					});
+    				}
+    			}
+
+    			// Broadcast the fixedPositions through WebRTC
+    			const message = {
+    				type: "fixedPositions",
+    				from: connectionsHandler.peer.id,
+    				content: markers,
     				displayName: $username
     			};
 
@@ -41011,7 +41111,7 @@ var app = (function () {
 
     				return prevState;
     			});
-    		}); // console.log(data)
+    		});
 
     		controlsBtn.assignFunction("main", async n => {
     			changeAndBroadcastControlState(n);
@@ -41045,12 +41145,32 @@ var app = (function () {
     				// make sure that I'm the host, if not, do nothing
     				if (!connectionsHandler.isHost) return;
 
-    				// when the handshake message is received, send the current controlsState
+    				// when the handshake message is received, send the current controlsState, fixedPositions and currentPercentage
     				if (data && data.type == "handshake") {
-    					const message = {
+    					let message = {
     						type: "controlsState",
     						from: connectionsHandler.peer.id,
     						content: $buttonsState.map(item => item ? 1 : 0),
+    						displayName: $username
+    					};
+
+    					connectionsHandler.broadcast(JSON.stringify(message));
+
+    					// send fixedPositions through WebRTC
+    					message = {
+    						type: "fixedPositions",
+    						from: connectionsHandler.peer.id,
+    						content: markers,
+    						displayName: $username
+    					};
+
+    					connectionsHandler.broadcast(JSON.stringify(message));
+
+    					// send currentPercentage through WebRTC
+    					message = {
+    						type: "currentPercentage",
+    						from: connectionsHandler.peer.id,
+    						content: currentPercentage,
     						displayName: $username
     					};
 
@@ -41134,53 +41254,9 @@ var app = (function () {
     		$$invalidate(8, currentPercentage = num);
     	};
 
-    	let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
-
-    	fixedPositionsRef.on("value", snapshot => {
-    		const positions = snapshot.val();
-    		if (!positions) return;
-    		console.log(positions);
-    		let currentMarkerNames = positions.map(marker => marker.name);
-    		let markerNames = markers.map(marker => marker.name);
-    		if (markerNames.sort().join("") === currentMarkerNames.sort().join("")) return;
-    		$$invalidate(7, markers = []);
-
-    		for (let { name, percentage } of positions) {
-    			markers.push({
-    				name,
-    				percentage,
-    				tooltip: { isVisible: false, timeout: null }
-    			});
-    		}
-    	}); // console.log(data)
-
-    	let currentPercentageRef = database.ref(`users/${$uid}/currentPercentage`);
-
-    	currentPercentageRef.on("value", snapshot => {
-    		if (!snapshot.val()) return;
-    		$$invalidate(8, currentPercentage = snapshot.val());
-    	});
-
     	const addFixedPosition = async (markerName, markerPercentage) => {
     		let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
 
-    		// let value = await fixedPositionsRef.get()
-    		// value = value.val()
-    		// console.log(value)
-    		// if(!value){
-    		//     database.ref(`users/${$uid}`).update({fixedPositions: {}})
-    		//     fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
-    		// }
-    		/*let myobject = {}*/
-    		/*let letters = 'abcdefghijklmnopqrstuvwxyz'*/
-    		/*let randomLetter = (n) => {*/
-    		/*let output = ''*/
-    		/*for(let i = 0; i<n; i++){*/
-    		/*output = output.concat(letters[Math.floor(Math.random()*25)])*/
-    		/*}*/
-    		/*console.log(output)*/
-    		/*return output*/
-    		/*}*/
     		$$invalidate(7, markers = [
     			...markers,
     			{
@@ -41260,11 +41336,11 @@ var app = (function () {
     	}
 
     	const keypress_handler = e => {
-    		if (e.key == "Enter") addFixedPosition(newMarkerName, Math.floor(Math.random() * 100));
+    		if (e.key == "Enter") addFixedPosition(newMarkerName, currentPercentage); /* Math.floor(Math.random() * 100) */
     	};
 
     	const click_handler = () => {
-    		addFixedPosition(newMarkerName, Math.floor(Math.random() * 100));
+    		addFixedPosition(newMarkerName, currentPercentage); /* Math.floor(Math.random() * 100) */
     	};
 
     	const click_handler_1 = () => $$invalidate(4, isCopyPanelActive = !isCopyPanelActive);
@@ -41333,8 +41409,6 @@ var app = (function () {
     		slidePanelTimeout,
     		markers,
     		currentPercentage,
-    		fixedPositionsRef,
-    		currentPercentageRef,
     		addFixedPosition,
     		offset,
     		removeCurrentFixedPosition,
@@ -41352,7 +41426,8 @@ var app = (function () {
     		$buttonsState,
     		Array,
     		Object,
-    		window
+    		window,
+    		meWatcher
     	});
 
     	$$self.$inject_state = $$props => {
@@ -41365,21 +41440,26 @@ var app = (function () {
     		if ("slidePanelTimeout" in $$props) $$invalidate(6, slidePanelTimeout = $$props.slidePanelTimeout);
     		if ("markers" in $$props) $$invalidate(7, markers = $$props.markers);
     		if ("currentPercentage" in $$props) $$invalidate(8, currentPercentage = $$props.currentPercentage);
-    		if ("fixedPositionsRef" in $$props) fixedPositionsRef = $$props.fixedPositionsRef;
-    		if ("currentPercentageRef" in $$props) currentPercentageRef = $$props.currentPercentageRef;
     		if ("editActive" in $$props) editActive = $$props.editActive;
     		if ("newMarkerName" in $$props) $$invalidate(9, newMarkerName = $$props.newMarkerName);
     		if ("editRemoveName" in $$props) $$invalidate(10, editRemoveName = $$props.editRemoveName);
-    		if ("i" in $$props) $$invalidate(16, i = $$props.i);
+    		if ("i" in $$props) $$invalidate(18, i = $$props.i);
+    		if ("meWatcher" in $$props) $$invalidate(13, meWatcher = $$props.meWatcher);
     	};
+
+    	let meWatcher;
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*markers, currentPercentage, i*/ 65920) {
-    			 if ($$invalidate(16, i = markers.filter(item => item.percentage + offset > currentPercentage && item.percentage - offset < currentPercentage)) && i.length) {
+    		if ($$self.$$.dirty[0] & /*watchers, $uid*/ 2050) {
+    			 $$invalidate(13, meWatcher = watchers.filter(item => item.id == $uid));
+    		}
+
+    		if ($$self.$$.dirty[0] & /*markers, currentPercentage, i*/ 262528) {
+    			 if ($$invalidate(18, i = markers.filter(item => item.percentage + offset > currentPercentage && item.percentage - offset < currentPercentage)) && i.length) {
     				$$invalidate(10, editRemoveName = i[0].name);
     			} else {
     				$$invalidate(10, editRemoveName = "");
@@ -41400,16 +41480,15 @@ var app = (function () {
     		newMarkerName,
     		editRemoveName,
     		$uid,
+    		$username,
+    		meWatcher,
     		copyText,
     		broadcastOnlineWatchers,
     		addFixedPosition,
     		removeCurrentFixedPosition,
     		i,
-    		$username,
     		$buttonsState,
     		changeAndBroadcastControlState,
-    		fixedPositionsRef,
-    		currentPercentageRef,
     		editActive,
     		video_binding,
     		mouseenter_handler,
@@ -43031,7 +43110,7 @@ var app = (function () {
     }
 
     // (73:54) 
-    function create_if_block_2(ctx) {
+    function create_if_block_2$1(ctx) {
     	let current;
     	const selectcameratoconnect = new SelectCameraToConnect({ $$inline: true });
 
@@ -43059,7 +43138,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2.name,
+    		id: create_if_block_2$1.name,
     		type: "if",
     		source: "(73:54) ",
     		ctx
@@ -43169,7 +43248,7 @@ var app = (function () {
     	const if_block_creators = [
     		create_if_block$4,
     		create_if_block_1$1,
-    		create_if_block_2,
+    		create_if_block_2$1,
     		create_if_block_3,
     		create_if_block_4
     	];
