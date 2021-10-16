@@ -1,5 +1,7 @@
 <script context="module">
   // import {backCallbacks} from '../stores/header.js'
+  /*const {autoupdater} = require('electron')*/
+
 
   export function subscribeToBackBtn(screen, callback) {
     backCallbacks.update((paramBackCallbacks) => {

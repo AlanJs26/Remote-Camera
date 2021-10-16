@@ -11,11 +11,11 @@
   let inputValue = "";
 
   function* notFirstGen() {
-    console.log("first");
+    console.log("first - blocked");
     yield false;
     let dotString = "";
     for (let i = 0; i < 3; i++) {
-      console.log("second" + dotString);
+      console.log("second - alowed" + dotString);
       yield true;
       dotString.concat(".");
     }
@@ -47,12 +47,10 @@
       );
       connectedWithRef.set($uid);
     } else {
-      let lastCamera = await lastCameraRef.get();
-
       let reconnectValidUntil = await reconnectValidUntilRef.get();
       reconnectValidUntil = reconnectValidUntil.val();
 
-      if (lastCamera.exists && reconnectValidUntil > Date.now()) {
+      if (lastCamera.exists && reconnectValidUntil*1000 > Date.now()) {
         console.log("using last camera uid as default");
         cameraUid = lastCamera.val();
       } else {
@@ -67,12 +65,12 @@
       "/users/" + cameraUid + "/reconnectValidUntil"
     );
     reconnectValidUntilRef.on("value", (snapshot) => {
-      console.log("reconnectValidUntil - " + snapshot.val());
+      const data = (snapshot.val()+10800) * 1000;
+
+      console.log("reconnectValidUntil - " + data);
 
       if (notFirst.next().value == false) return;
-      console.log("passed wowow");
 
-      const data = snapshot.val();
       if (data > Date.now()) {
         currentScreen.set("main");
 
