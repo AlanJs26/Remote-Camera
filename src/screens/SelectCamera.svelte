@@ -97,9 +97,9 @@
       }}
     />
 
-    <div class="transparentBtn" on:click={() => connectFromCode(inputValue)}>
+    <button class="transparentBtn" on:click={() => connectFromCode(inputValue)}>
       <p>Conectar</p>
-    </div>
+    </button>
   </div>
 </div>
 
@@ -111,6 +111,16 @@
   input {
     margin-right: 5px;
     width: 200% !important;
+  }
+
+  button.transparentBtn:not(:disabled):active{
+      background-color: rgba(255, 255, 255, 0.30); 
+  }
+
+  button.transparentBtn {
+    border: none;
+    outline: none;
+    margin: 5px;
   }
 
   .transparentBtn {

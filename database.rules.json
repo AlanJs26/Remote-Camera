@@ -55,15 +55,18 @@
           ".read": true,
           ".write": "$uid === auth.uid",
           // valid for 1 hour
-          ".validate": "newData.isNumber() && newData.val() <= now+60*60*1000"
+          ".validate": "newData.isNumber() && newData.val()*1000 <= now+60*60*1000"
         },
         "testAlive": {
           ".read": true,
           ".write": true,
-          // valid for 1 hour
           ".validate": "newData.isNumber() && newData.val() <= 1000"
         },
-        
+        "currentPercentage": {
+          ".read": true,
+          ".write": "$uid === auth.uid || auth.uid == root.child('/users/'+$uid+'/lastCamera').val()",
+          ".validate": "newData.isNumber() && newData.val() <= 100 && newData.val() >= 0",
+        },
         "$other": {
           ".validate": false
         }

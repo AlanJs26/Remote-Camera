@@ -2320,7 +2320,6 @@ var app = (function () {
             return service;
         }
     }
-    //# sourceMappingURL=index.esm.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -2856,7 +2855,6 @@ var app = (function () {
         };
         return ComponentContainer;
     }());
-    //# sourceMappingURL=index.esm.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3142,7 +3140,6 @@ var app = (function () {
             _loop_1(instance);
         }
     }
-    //# sourceMappingURL=index.esm.js.map
 
     /**
      * @license
@@ -3799,7 +3796,6 @@ var app = (function () {
     };
     var firebase$1 = firebase;
     registerCoreComponents(firebase$1);
-    //# sourceMappingURL=index.esm.js.map
 
     var name$d = "firebase";
     var version$2 = "8.6.8";
@@ -3822,7 +3818,6 @@ var app = (function () {
      */
     firebase$1.registerVersion(name$d, version$2, 'app');
     firebase$1.SDK_VERSION = version$2;
-    //# sourceMappingURL=index.esm.js.map
 
     (function() {/*
 
@@ -4193,8 +4188,6 @@ var app = (function () {
     Z(a,"OAuthProvider",Pg,[V("providerId")]);Z(a,"SAMLAuthProvider",Og,[V("providerId")]);Z(a,"PhoneAuthProvider",lh,[Bo()]);Z(a,"RecaptchaVerifier",uo,[X(V(),Ao(),"recaptchaContainer"),W("recaptchaParameters",!0),Co()]);Z(a,"ActionCodeURL",Jf,[]);Z(a,"PhoneMultiFactorGenerator",eo,[]);firebase$1.INTERNAL.registerComponent({name:"auth",instanceFactory:function(b){b=b.getProvider("app").getImmediate();return new Fn(b)},multipleInstances:!1,serviceProps:a,instantiationMode:"LAZY",type:"PUBLIC"});firebase$1.INTERNAL.registerComponent({name:"auth-internal",
     instanceFactory:function(b){b=b.getProvider("auth").getImmediate();return {getUid:q(b.getUid,b),getToken:q(b.nc,b),addAuthTokenListener:q(b.cc,b),removeAuthTokenListener:q(b.Pc,b)}},multipleInstances:!1,instantiationMode:"LAZY",type:"PRIVATE"});firebase$1.registerVersion("@firebase/auth","0.16.7");firebase$1.INTERNAL.extendNamespace({User:Im});}else throw Error("Cannot find the firebase namespace; be sure to include firebase-app.js before this library.");})();}).apply(typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : {});
 
-    //# sourceMappingURL=auth.esm.js.map
-
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
 
@@ -4241,7 +4234,7 @@ var app = (function () {
     var g, goog = goog || {}, k = commonjsGlobal || self;
     function aa() { }
     function ba(a) { var b = typeof a; b = "object" != b ? b : a ? Array.isArray(a) ? "array" : b : "null"; return "array" == b || "object" == b && "number" == typeof a.length; }
-    function n(a) { var b = typeof a; return "object" == b && null != a || "function" == b; }
+    function n$1(a) { var b = typeof a; return "object" == b && null != a || "function" == b; }
     function ca(a) { return Object.prototype.hasOwnProperty.call(a, da) && a[da] || (a[da] = ++ea); }
     var da = "closure_uid_" + (1E9 * Math.random() >>> 0), ea = 0;
     function fa(a, b, c) { return a.call.apply(a.bind, arguments); }
@@ -4443,11 +4436,11 @@ var app = (function () {
         for (var f = 0; f < b.length; f++)
             gb(a, b[f], c, d, e);
         return null;
-    } c = ib(c); return a && a[A] ? a.wa(b, c, n(d) ? !!d.capture : !!d, e) : jb(a, b, c, !1, d, e); }
+    } c = ib(c); return a && a[A] ? a.wa(b, c, n$1(d) ? !!d.capture : !!d, e) : jb(a, b, c, !1, d, e); }
     function jb(a, b, c, d, e, f) {
         if (!b)
             throw Error("Invalid event type");
-        var h = n(e) ? !!e.capture : !!e;
+        var h = n$1(e) ? !!e.capture : !!e;
         if (h && !Ua)
             return null;
         var m = kb(a);
@@ -4475,12 +4468,12 @@ var app = (function () {
         for (var f = 0; f < b.length; f++)
             hb(a, b[f], c, d, e);
         return null;
-    } c = ib(c); return a && a[A] ? a.xa(b, c, n(d) ? !!d.capture : !!d, e) : jb(a, b, c, !0, d, e); }
+    } c = ib(c); return a && a[A] ? a.xa(b, c, n$1(d) ? !!d.capture : !!d, e) : jb(a, b, c, !0, d, e); }
     function ob(a, b, c, d, e) { if (Array.isArray(b))
         for (var f = 0; f < b.length; f++)
             ob(a, b[f], c, d, e);
     else
-        (d = n(d) ? !!d.capture : !!d, c = ib(c), a && a[A]) ? (a = a.c, b = String(b).toString(), b in a.a && (f = a.a[b], c = bb(f, c, d, e), -1 < c && ($a(f[c]), Array.prototype.splice.call(f, c, 1), 0 == f.length && (delete a.a[b], a.b--)))) : a && (a = kb(a)) && (b = a.a[b.toString()], a = -1, b && (a = bb(b, c, d, e)), (c = -1 < a ? b[a] : null) && pb(c)); }
+        (d = n$1(d) ? !!d.capture : !!d, c = ib(c), a && a[A]) ? (a = a.c, b = String(b).toString(), b in a.a && (f = a.a[b], c = bb(f, c, d, e), -1 < c && ($a(f[c]), Array.prototype.splice.call(f, c, 1), 0 == f.length && (delete a.a[b], a.b--)))) : a && (a = kb(a)) && (b = a.a[b.toString()], a = -1, b && (a = bb(b, c, d, e)), (c = -1 < a ? b[a] : null) && pb(c)); }
     function pb(a) { if ("number" !== typeof a && a && !a.Y) {
         var b = a.src;
         if (b && b[A])
@@ -5112,7 +5105,7 @@ var app = (function () {
     ld.prototype.parse = function (a) { return k.JSON.parse(a, void 0); };
     function md() { this.a = new ld; }
     function nd(a, b, c) { var d = c || ""; try {
-        Lc(a, function (e, f) { var h = e; n(e) && (h = tb(e)); b.push(d + f + "=" + encodeURIComponent(h)); });
+        Lc(a, function (e, f) { var h = e; n$1(e) && (h = tb(e)); b.push(d + f + "=" + encodeURIComponent(h)); });
     }
     catch (e) {
         throw b.push(d + "type=" + encodeURIComponent("_badmap")), e;
@@ -5624,7 +5617,6 @@ var app = (function () {
     var FetchXmlHttpFactory = Rd;
     var WebChannel = bc;
     var XhrIo = X;
-    //# sourceMappingURL=index.esm.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -23452,7 +23444,6 @@ var app = (function () {
             return this._delegate.isEqual(t._delegate);
         }, t;
     }();
-    //# sourceMappingURL=prebuilt-df0f24f5-f4d3f7f5.js.map
 
     var I$1 = {
         Firestore: Tc$1,
@@ -23513,7 +23504,6 @@ var app = (function () {
     }
 
     P$2(firebase$1);
-    //# sourceMappingURL=index.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -38929,7 +38919,6 @@ var app = (function () {
         instance.registerVersion(name$e, version$3);
     }
     registerDatabase(firebase$1);
-    //# sourceMappingURL=index.esm.js.map
 
     // import firebase from 'firebase';
 
@@ -39052,7 +39041,7 @@ var app = (function () {
     },{"eventemitter3":"JJlS","./util":"BHXf","./logger":"WOs9","./socket":"wJlv","./mediaconnection":"dbHP","./dataconnection":"GBTQ","./enums":"ZRYf","./api":"in7L"}],"iTK6":[function(require,module,exports) {
     Object.defineProperty(exports,"__esModule",{value:!0}),exports.peerjs=void 0;var e=require("./util"),r=require("./peer");exports.peerjs={Peer:r.Peer,util:e.util},exports.default=r.Peer,window.peerjs=exports.peerjs,window.Peer=r.Peer;
     },{"./util":"BHXf","./peer":"Hxpd"}]},{},["iTK6"]);
-    //# sourceMappingURL=/peerjs.min.js.map
+
     });
 
     var Peer = unwrapExports(peerjs_min);
@@ -40096,35 +40085,39 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[38] = list[i];
-    	child_ctx[39] = list;
-    	child_ctx[40] = i;
+    	child_ctx[42] = list[i];
+    	child_ctx[43] = list;
+    	child_ctx[44] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[41] = list[i].percentage;
-    	child_ctx[42] = list[i].name;
-    	child_ctx[43] = list[i].tooltip;
+    	child_ctx[45] = list[i].percentage;
+    	child_ctx[46] = list[i].name;
+    	child_ctx[47] = list[i].tooltip;
     	return child_ctx;
     }
 
-    // (456:12) {#each markers as { percentage, name, tooltip }}
+    // (517:12) {#each markers as { percentage, name, tooltip }}
     function create_each_block_1(ctx) {
     	let div1;
     	let div0;
-    	let t0_value = /*name*/ ctx[42] + "";
+    	let t0_value = /*name*/ ctx[46] + "";
     	let t0;
     	let t1;
     	let dispose;
 
     	function mouseenter_handler(...args) {
-    		return /*mouseenter_handler*/ ctx[23](/*tooltip*/ ctx[43], ...args);
+    		return /*mouseenter_handler*/ ctx[26](/*tooltip*/ ctx[47], ...args);
     	}
 
     	function mouseleave_handler(...args) {
-    		return /*mouseleave_handler*/ ctx[24](/*tooltip*/ ctx[43], ...args);
+    		return /*mouseleave_handler*/ ctx[27](/*tooltip*/ ctx[47], ...args);
+    	}
+
+    	function click_handler(...args) {
+    		return /*click_handler*/ ctx[28](/*name*/ ctx[46], ...args);
     	}
 
     	const block = {
@@ -40134,11 +40127,11 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(div0, "class", "marker-tooltip svelte-qtyqkc");
-    			toggle_class(div0, "active", /*tooltip*/ ctx[43].isVisible);
-    			add_location(div0, file$1, 469, 20, 16262);
+    			toggle_class(div0, "active", /*tooltip*/ ctx[47].isVisible);
+    			add_location(div0, file$1, 533, 20, 18423);
     			attr_dev(div1, "class", "marker svelte-qtyqkc");
-    			set_style(div1, "--percentage", /*percentage*/ ctx[41]);
-    			add_location(div1, file$1, 456, 16, 15730);
+    			set_style(div1, "--percentage", /*percentage*/ ctx[45]);
+    			add_location(div1, file$1, 517, 16, 17780);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -40148,19 +40141,20 @@ var app = (function () {
 
     			dispose = [
     				listen_dev(div1, "mouseenter", mouseenter_handler, false, false, false),
-    				listen_dev(div1, "mouseleave", mouseleave_handler, false, false, false)
+    				listen_dev(div1, "mouseleave", mouseleave_handler, false, false, false),
+    				listen_dev(div1, "click", click_handler, false, false, false)
     			];
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*markers*/ 128 && t0_value !== (t0_value = /*name*/ ctx[42] + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*markers*/ 128 && t0_value !== (t0_value = /*name*/ ctx[46] + "")) set_data_dev(t0, t0_value);
 
     			if (dirty[0] & /*markers*/ 128) {
-    				toggle_class(div0, "active", /*tooltip*/ ctx[43].isVisible);
+    				toggle_class(div0, "active", /*tooltip*/ ctx[47].isVisible);
     			}
 
     			if (dirty[0] & /*markers*/ 128) {
-    				set_style(div1, "--percentage", /*percentage*/ ctx[41]);
+    				set_style(div1, "--percentage", /*percentage*/ ctx[45]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -40173,14 +40167,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(456:12) {#each markers as { percentage, name, tooltip }}",
+    		source: "(517:12) {#each markers as { percentage, name, tooltip }}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (480:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
+    // (544:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
     function create_if_block_1(ctx) {
     	let div2;
     	let div0;
@@ -40207,18 +40201,18 @@ var app = (function () {
     			attr_dev(input, "class", "transparentInput svelte-qtyqkc");
     			set_style(input, "flex", "1");
     			attr_dev(input, "placeholder", "Digite Aqui");
-    			add_location(input, file$1, 482, 16, 16765);
+    			add_location(input, file$1, 546, 16, 18926);
     			attr_dev(button, "class", "transparentBtn editItem svelte-qtyqkc");
-    			add_location(button, file$1, 497, 16, 17385);
+    			add_location(button, file$1, 561, 16, 19546);
     			attr_dev(div0, "class", "flexRow svelte-qtyqkc");
     			set_style(div0, "height", "20px");
     			set_style(div0, "margin", "5px 0");
-    			add_location(div0, file$1, 481, 12, 16689);
+    			add_location(div0, file$1, 545, 12, 18850);
     			attr_dev(div1, "class", "svelte-qtyqkc");
-    			add_location(div1, file$1, 508, 12, 17817);
+    			add_location(div1, file$1, 572, 12, 19978);
     			attr_dev(div2, "class", "editionBar svelte-qtyqkc");
     			set_style(div2, "width", "100%");
-    			add_location(div2, file$1, 480, 8, 16631);
+    			add_location(div2, file$1, 544, 8, 18792);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40232,9 +40226,9 @@ var app = (function () {
     			if (if_block) if_block.m(div1, null);
 
     			dispose = [
-    				listen_dev(input, "input", /*input_input_handler*/ ctx[25]),
-    				listen_dev(input, "keypress", /*keypress_handler*/ ctx[26], false, false, false),
-    				listen_dev(button, "click", /*click_handler*/ ctx[27], false, false, false)
+    				listen_dev(input, "input", /*input_input_handler*/ ctx[29]),
+    				listen_dev(input, "keypress", /*keypress_handler*/ ctx[30], false, false, false),
+    				listen_dev(button, "click", /*click_handler_1*/ ctx[31], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -40266,14 +40260,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(480:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}",
+    		source: "(544:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (510:16) {#if editRemoveName}
+    // (574:16) {#if editRemoveName}
     function create_if_block_2(ctx) {
     	let button;
     	let p;
@@ -40288,9 +40282,9 @@ var app = (function () {
     			t0 = text("Remover ");
     			t1 = text(/*editRemoveName*/ ctx[10]);
     			attr_dev(p, "class", "svelte-qtyqkc");
-    			add_location(p, file$1, 514, 24, 18060);
+    			add_location(p, file$1, 578, 24, 20221);
     			attr_dev(button, "class", "transparentBtn removeItem svelte-qtyqkc");
-    			add_location(button, file$1, 510, 20, 17882);
+    			add_location(button, file$1, 574, 20, 20043);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -40312,18 +40306,18 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(510:16) {#if editRemoveName}",
+    		source: "(574:16) {#if editRemoveName}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (547:8) {#each watchers as watcher}
+    // (611:8) {#each watchers as watcher}
     function create_each_block(ctx) {
     	let li;
     	let span;
-    	let t0_value = /*watcher*/ ctx[38].name + "";
+    	let t0_value = /*watcher*/ ctx[42].name + "";
     	let t0;
     	let t1;
     	let div;
@@ -40343,15 +40337,15 @@ var app = (function () {
     	let dispose;
 
     	function input0_change_handler() {
-    		/*input0_change_handler*/ ctx[30].call(input0, /*watcher*/ ctx[38]);
+    		/*input0_change_handler*/ ctx[34].call(input0, /*watcher*/ ctx[42]);
     	}
 
     	function input1_change_handler() {
-    		/*input1_change_handler*/ ctx[32].call(input1, /*watcher*/ ctx[38]);
+    		/*input1_change_handler*/ ctx[36].call(input1, /*watcher*/ ctx[42]);
     	}
 
     	function input2_change_handler() {
-    		/*input2_change_handler*/ ctx[33].call(input2, /*watcher*/ ctx[38]);
+    		/*input2_change_handler*/ ctx[37].call(input2, /*watcher*/ ctx[42]);
     	}
 
     	const block = {
@@ -40368,33 +40362,33 @@ var app = (function () {
     			input2 = element("input");
     			t4 = space();
     			attr_dev(span, "class", "svelte-qtyqkc");
-    			toggle_class(span, "me", /*watcher*/ ctx[38].id == /*$uid*/ ctx[11]);
-    			add_location(span, file$1, 548, 16, 18991);
-    			attr_dev(input0, "watcher", input0_watcher_value = /*watcher*/ ctx[38].name);
+    			toggle_class(span, "me", /*watcher*/ ctx[42].id == /*$uid*/ ctx[11]);
+    			add_location(span, file$1, 612, 16, 21152);
+    			attr_dev(input0, "watcher", input0_watcher_value = /*watcher*/ ctx[42].name);
     			attr_dev(input0, "type", "radio");
     			input0.__value = input0_value_value = 0;
     			input0.value = input0.__value;
     			attr_dev(input0, "class", "svelte-qtyqkc");
-    			/*$$binding_groups*/ ctx[31][0].push(input0);
-    			add_location(input0, file$1, 554, 20, 19253);
-    			attr_dev(input1, "watcher", input1_watcher_value = /*watcher*/ ctx[38].name);
+    			/*$$binding_groups*/ ctx[35][0].push(input0);
+    			add_location(input0, file$1, 618, 20, 21414);
+    			attr_dev(input1, "watcher", input1_watcher_value = /*watcher*/ ctx[42].name);
     			attr_dev(input1, "type", "radio");
     			input1.__value = input1_value_value = 1;
     			input1.value = input1.__value;
     			attr_dev(input1, "class", "svelte-qtyqkc");
-    			/*$$binding_groups*/ ctx[31][0].push(input1);
-    			add_location(input1, file$1, 561, 20, 19546);
-    			attr_dev(input2, "watcher", input2_watcher_value = /*watcher*/ ctx[38].name);
+    			/*$$binding_groups*/ ctx[35][0].push(input1);
+    			add_location(input1, file$1, 625, 20, 21707);
+    			attr_dev(input2, "watcher", input2_watcher_value = /*watcher*/ ctx[42].name);
     			attr_dev(input2, "type", "radio");
     			input2.__value = input2_value_value = 2;
     			input2.value = input2.__value;
     			attr_dev(input2, "class", "svelte-qtyqkc");
-    			/*$$binding_groups*/ ctx[31][0].push(input2);
-    			add_location(input2, file$1, 568, 20, 19839);
+    			/*$$binding_groups*/ ctx[35][0].push(input2);
+    			add_location(input2, file$1, 632, 20, 22000);
     			attr_dev(div, "style", div_style_value = `pointer-events: ${connectionsHandler.isHost ? "auto" : "none"}`);
-    			add_location(div, file$1, 549, 16, 19066);
+    			add_location(div, file$1, 613, 16, 21227);
     			attr_dev(li, "class", "svelte-qtyqkc");
-    			add_location(li, file$1, 547, 12, 18969);
+    			add_location(li, file$1, 611, 12, 21130);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40403,13 +40397,13 @@ var app = (function () {
     			append_dev(li, t1);
     			append_dev(li, div);
     			append_dev(div, input0);
-    			input0.checked = input0.__value === /*watcher*/ ctx[38].controlLevel;
+    			input0.checked = input0.__value === /*watcher*/ ctx[42].controlLevel;
     			append_dev(div, t2);
     			append_dev(div, input1);
-    			input1.checked = input1.__value === /*watcher*/ ctx[38].controlLevel;
+    			input1.checked = input1.__value === /*watcher*/ ctx[42].controlLevel;
     			append_dev(div, t3);
     			append_dev(div, input2);
-    			input2.checked = input2.__value === /*watcher*/ ctx[38].controlLevel;
+    			input2.checked = input2.__value === /*watcher*/ ctx[42].controlLevel;
     			append_dev(li, t4);
 
     			dispose = [
@@ -40423,41 +40417,41 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty[0] & /*watchers*/ 2 && t0_value !== (t0_value = /*watcher*/ ctx[38].name + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*watchers*/ 2 && t0_value !== (t0_value = /*watcher*/ ctx[42].name + "")) set_data_dev(t0, t0_value);
 
     			if (dirty[0] & /*watchers, $uid*/ 2050) {
-    				toggle_class(span, "me", /*watcher*/ ctx[38].id == /*$uid*/ ctx[11]);
+    				toggle_class(span, "me", /*watcher*/ ctx[42].id == /*$uid*/ ctx[11]);
     			}
 
-    			if (dirty[0] & /*watchers*/ 2 && input0_watcher_value !== (input0_watcher_value = /*watcher*/ ctx[38].name)) {
+    			if (dirty[0] & /*watchers*/ 2 && input0_watcher_value !== (input0_watcher_value = /*watcher*/ ctx[42].name)) {
     				attr_dev(input0, "watcher", input0_watcher_value);
     			}
 
     			if (dirty[0] & /*watchers*/ 2) {
-    				input0.checked = input0.__value === /*watcher*/ ctx[38].controlLevel;
+    				input0.checked = input0.__value === /*watcher*/ ctx[42].controlLevel;
     			}
 
-    			if (dirty[0] & /*watchers*/ 2 && input1_watcher_value !== (input1_watcher_value = /*watcher*/ ctx[38].name)) {
+    			if (dirty[0] & /*watchers*/ 2 && input1_watcher_value !== (input1_watcher_value = /*watcher*/ ctx[42].name)) {
     				attr_dev(input1, "watcher", input1_watcher_value);
     			}
 
     			if (dirty[0] & /*watchers*/ 2) {
-    				input1.checked = input1.__value === /*watcher*/ ctx[38].controlLevel;
+    				input1.checked = input1.__value === /*watcher*/ ctx[42].controlLevel;
     			}
 
-    			if (dirty[0] & /*watchers*/ 2 && input2_watcher_value !== (input2_watcher_value = /*watcher*/ ctx[38].name)) {
+    			if (dirty[0] & /*watchers*/ 2 && input2_watcher_value !== (input2_watcher_value = /*watcher*/ ctx[42].name)) {
     				attr_dev(input2, "watcher", input2_watcher_value);
     			}
 
     			if (dirty[0] & /*watchers*/ 2) {
-    				input2.checked = input2.__value === /*watcher*/ ctx[38].controlLevel;
+    				input2.checked = input2.__value === /*watcher*/ ctx[42].controlLevel;
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
-    			/*$$binding_groups*/ ctx[31][0].splice(/*$$binding_groups*/ ctx[31][0].indexOf(input0), 1);
-    			/*$$binding_groups*/ ctx[31][0].splice(/*$$binding_groups*/ ctx[31][0].indexOf(input1), 1);
-    			/*$$binding_groups*/ ctx[31][0].splice(/*$$binding_groups*/ ctx[31][0].indexOf(input2), 1);
+    			/*$$binding_groups*/ ctx[35][0].splice(/*$$binding_groups*/ ctx[35][0].indexOf(input0), 1);
+    			/*$$binding_groups*/ ctx[35][0].splice(/*$$binding_groups*/ ctx[35][0].indexOf(input1), 1);
+    			/*$$binding_groups*/ ctx[35][0].splice(/*$$binding_groups*/ ctx[35][0].indexOf(input2), 1);
     			run_all(dispose);
     		}
     	};
@@ -40466,14 +40460,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(547:8) {#each watchers as watcher}",
+    		source: "(611:8) {#each watchers as watcher}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (582:0) {#if isCopyPanelActive}
+    // (646:0) {#if isCopyPanelActive}
     function create_if_block(ctx) {
     	let div2;
     	let h2;
@@ -40507,18 +40501,18 @@ var app = (function () {
     			p = element("p");
     			t4 = text(t4_value);
     			attr_dev(h2, "class", "svelte-qtyqkc");
-    			add_location(h2, file$1, 592, 8, 20518);
+    			add_location(h2, file$1, 656, 8, 22679);
     			attr_dev(span, "class", "svelte-qtyqkc");
-    			add_location(span, file$1, 597, 12, 20664);
+    			add_location(span, file$1, 661, 12, 22825);
     			attr_dev(p, "class", "svelte-qtyqkc");
     			toggle_class(p, "active", /*isCopyAnimActive*/ ctx[3]);
-    			add_location(p, file$1, 599, 16, 20732);
+    			add_location(p, file$1, 663, 16, 22893);
     			attr_dev(div0, "class", "svelte-qtyqkc");
-    			add_location(div0, file$1, 598, 12, 20709);
+    			add_location(div0, file$1, 662, 12, 22870);
     			attr_dev(div1, "class", "svelte-qtyqkc");
-    			add_location(div1, file$1, 596, 8, 20645);
+    			add_location(div1, file$1, 660, 8, 22806);
     			attr_dev(div2, "class", "copyPanel svelte-qtyqkc");
-    			add_location(div2, file$1, 582, 4, 20222);
+    			add_location(div2, file$1, 646, 4, 22383);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40534,8 +40528,8 @@ var app = (function () {
 
     			dispose = [
     				listen_dev(p, "click", /*copyText*/ ctx[14], false, false, false),
-    				listen_dev(div2, "mouseleave", /*mouseleave_handler_2*/ ctx[36], false, false, false),
-    				listen_dev(div2, "mouseenter", /*mouseenter_handler_2*/ ctx[37], false, false, false)
+    				listen_dev(div2, "mouseleave", /*mouseleave_handler_2*/ ctx[40], false, false, false),
+    				listen_dev(div2, "mouseenter", /*mouseenter_handler_2*/ ctx[41], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -40573,7 +40567,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(582:0) {#if isCopyPanelActive}",
+    		source: "(646:0) {#if isCopyPanelActive}",
     		ctx
     	});
 
@@ -40677,41 +40671,41 @@ var app = (function () {
     			video.autoplay = true;
     			video.playsInline = true;
     			attr_dev(video, "class", "svelte-qtyqkc");
-    			add_location(video, file$1, 447, 4, 15359);
+    			add_location(video, file$1, 508, 4, 17409);
     			attr_dev(div0, "class", "currentPosition svelte-qtyqkc");
     			set_style(div0, "--percentage", /*currentPercentage*/ ctx[8]);
-    			add_location(div0, file$1, 450, 12, 15528);
+    			add_location(div0, file$1, 511, 12, 17578);
     			attr_dev(div1, "class", "positionBarContainer svelte-qtyqkc");
-    			add_location(div1, file$1, 449, 8, 15480);
+    			add_location(div1, file$1, 510, 8, 17530);
     			set_style(div2, "width", "100%");
     			set_style(div2, "height", "20px");
-    			add_location(div2, file$1, 448, 4, 15432);
+    			add_location(div2, file$1, 509, 4, 17482);
     			attr_dev(div3, "class", "flexColumn svelte-qtyqkc");
     			set_style(div3, "align-items", "baseline");
-    			add_location(div3, file$1, 446, 0, 15299);
+    			add_location(div3, file$1, 507, 0, 17349);
     			attr_dev(i0, "class", "fas fa-share fa-2x svelte-qtyqkc");
-    			add_location(i0, file$1, 523, 8, 18308);
+    			add_location(i0, file$1, 587, 8, 20469);
     			attr_dev(div4, "class", "svelte-qtyqkc");
-    			add_location(div4, file$1, 522, 4, 18235);
+    			add_location(div4, file$1, 586, 4, 20396);
     			attr_dev(i1, "class", "fas fa-user-friends fa-2x svelte-qtyqkc");
-    			add_location(i1, file$1, 526, 8, 18429);
+    			add_location(i1, file$1, 590, 8, 20590);
     			attr_dev(div5, "class", "svelte-qtyqkc");
-    			add_location(div5, file$1, 525, 4, 18358);
+    			add_location(div5, file$1, 589, 4, 20519);
     			attr_dev(div6, "class", "floatingIcons svelte-qtyqkc");
-    			add_location(div6, file$1, 521, 0, 18202);
+    			add_location(div6, file$1, 585, 0, 20363);
     			attr_dev(h2, "class", "svelte-qtyqkc");
-    			add_location(h2, file$1, 540, 4, 18777);
+    			add_location(h2, file$1, 604, 4, 20938);
     			attr_dev(span0, "class", "svelte-qtyqkc");
-    			add_location(span0, file$1, 542, 8, 18839);
+    			add_location(span0, file$1, 606, 8, 21000);
     			attr_dev(span1, "class", "svelte-qtyqkc");
-    			add_location(span1, file$1, 543, 8, 18866);
+    			add_location(span1, file$1, 607, 8, 21027);
     			attr_dev(div7, "class", "listHeader svelte-qtyqkc");
-    			add_location(div7, file$1, 541, 4, 18805);
+    			add_location(div7, file$1, 605, 4, 20966);
     			attr_dev(ul, "class", "svelte-qtyqkc");
-    			add_location(ul, file$1, 545, 4, 18914);
+    			add_location(ul, file$1, 609, 4, 21075);
     			attr_dev(div8, "class", "slideFromRightContainer svelte-qtyqkc");
     			toggle_class(div8, "open", /*isSlidePanelOpen*/ ctx[2]);
-    			add_location(div8, file$1, 530, 0, 18492);
+    			add_location(div8, file$1, 594, 0, 20653);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -40719,7 +40713,7 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
     			append_dev(div3, video);
-    			/*video_binding*/ ctx[22](video);
+    			/*video_binding*/ ctx[25](video);
     			append_dev(div3, t0);
     			append_dev(div3, div2);
     			append_dev(div2, div1);
@@ -40760,10 +40754,10 @@ var app = (function () {
     			current = true;
 
     			dispose = [
-    				listen_dev(div4, "click", /*click_handler_1*/ ctx[28], false, false, false),
-    				listen_dev(div5, "click", /*click_handler_2*/ ctx[29], false, false, false),
-    				listen_dev(div8, "mouseleave", /*mouseleave_handler_1*/ ctx[34], false, false, false),
-    				listen_dev(div8, "mouseenter", /*mouseenter_handler_1*/ ctx[35], false, false, false)
+    				listen_dev(div4, "click", /*click_handler_2*/ ctx[32], false, false, false),
+    				listen_dev(div5, "click", /*click_handler_3*/ ctx[33], false, false, false),
+    				listen_dev(div8, "mouseleave", /*mouseleave_handler_1*/ ctx[38], false, false, false),
+    				listen_dev(div8, "mouseenter", /*mouseenter_handler_1*/ ctx[39], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -40771,7 +40765,7 @@ var app = (function () {
     				set_style(div0, "--percentage", /*currentPercentage*/ ctx[8]);
     			}
 
-    			if (dirty[0] & /*markers*/ 128) {
+    			if (dirty[0] & /*markers, setActiveMarker*/ 262272) {
     				each_value_1 = /*markers*/ ctx[7];
     				validate_each_argument(each_value_1);
     				let i;
@@ -40867,7 +40861,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
-    			/*video_binding*/ ctx[22](null);
+    			/*video_binding*/ ctx[25](null);
     			destroy_each(each_blocks_1, detaching);
     			if (if_block0) if_block0.d();
     			if (detaching) detach_dev(t3);
@@ -40904,7 +40898,7 @@ var app = (function () {
     	validate_store(username, "username");
     	component_subscribe($$self, username, $$value => $$invalidate(12, $username = $$value));
     	validate_store(buttonsState, "buttonsState");
-    	component_subscribe($$self, buttonsState, $$value => $$invalidate(19, $buttonsState = $$value));
+    	component_subscribe($$self, buttonsState, $$value => $$invalidate(21, $buttonsState = $$value));
 
     	configBtn.assignFunction("main", () => {
     		console.log("%cPARECE QUE FOI!", "color: purple;font-size: 20px");
@@ -40965,14 +40959,16 @@ var app = (function () {
     		if (directions[twin[n]] == 1) directions[twin[n]] = directions[n] == 1 ? 0 : 1;
     		directionRef.set(directions);
 
-    		const message = {
-    			type: "controlsState",
-    			from: connectionsHandler.peer.id,
-    			content: directions,
-    			displayName: $username
-    		};
-
-    		connectionsHandler.broadcast(JSON.stringify(message));
+    		/*
+     * const message = {
+     *     type: "controlsState",
+     *     from: connectionsHandler.peer.id,
+     *     content: directions,
+     *     displayName: $username,
+     * };
+     * connectionsHandler.broadcast(JSON.stringify(message));
+     */
+    		setActiveMarker("");
     	}
 
     	// if there's a 'username'  means the user choose to connect to someone else camera
@@ -41103,6 +41099,7 @@ var app = (function () {
     		directionRef.on("value", snapshot => {
     			const data = snapshot.val();
     			if (!data) return;
+    			console.log(data);
 
     			buttonsState.update(prevState => {
     				for (let i = 0; i < data.length; i++) {
@@ -41111,6 +41108,15 @@ var app = (function () {
 
     				return prevState;
     			});
+
+    			let message = {
+    				type: "controlsState",
+    				from: connectionsHandler.peer.id,
+    				content: $buttonsState.map(item => item ? 1 : 0),
+    				displayName: $username
+    			};
+
+    			connectionsHandler.broadcast(JSON.stringify(message));
     		});
 
     		controlsBtn.assignFunction("main", async n => {
@@ -41175,6 +41181,8 @@ var app = (function () {
     					};
 
     					connectionsHandler.broadcast(JSON.stringify(message));
+    				} else if (data && data.type == "activeMarker") {
+    					activeMarker = data.content;
     				}
 
     				// update online watchers
@@ -41230,25 +41238,25 @@ var app = (function () {
     	let copyPanelTimeout = null;
     	let slidePanelTimeout = null;
 
-    	let markers = [
-    		{
-    			name: "inicio",
-    			percentage: 20,
-    			tooltip: { isVisible: false, timeout: null }
-    		},
-    		{
-    			name: "meio",
-    			percentage: 50,
-    			tooltip: { isVisible: false, timeout: null }
-    		},
-    		{
-    			name: "fim",
-    			percentage: 80,
-    			tooltip: { isVisible: false, timeout: null }
-    		}
-    	];
+    	let markers = []; /*
+     * {
+     *     name: "inicio",
+     *     percentage: 20,
+     *     tooltip: { isVisible: false, timeout: null },
+     * },
+     * {
+     *     name: "meio",
+     *     percentage: 50,
+     *     tooltip: { isVisible: false, timeout: null },
+     * },
+     * {
+     *     name: "fim",
+     *     percentage: 80,
+     *     tooltip: { isVisible: false, timeout: null },
+     * },
+     */
 
-    	let currentPercentage = 35;
+    	let currentPercentage = 0;
 
     	window.changePercentage = num => {
     		$$invalidate(8, currentPercentage = num);
@@ -41303,6 +41311,51 @@ var app = (function () {
     	let editActive = false;
     	let newMarkerName = "";
     	let editRemoveName = "";
+    	let activeMarker = "";
+
+    	function setActiveMarker(name) {
+    		if ($username.length != 0) {
+    			const message = {
+    				type: "activeMarker",
+    				from: connectionsHandler.peer.id,
+    				content: name,
+    				displayName: auth.currentUser.displayName
+    			};
+
+    			connectionsHandler.broadcast(JSON.stringify(message));
+    			return;
+    		}
+
+    		activeMarker = name;
+    	}
+
+    	function listenActiveMarker() {
+    		if (activeMarker) {
+    			const marker = markers.filter(item => item.name == activeMarker);
+    			if (!marker.length) return;
+
+    			if (Math.abs(marker[0].percentage - currentPercentage) <= 5) {
+    				let directionRef = database.ref(`users/${$uid}/direction`);
+    				directionRef.set([0, 0, 0, 0]);
+    				setActiveMarker("");
+    				changeAndBroadcastControlState(n);
+    				return;
+    			}
+
+    			let directionRightRef = database.ref(`users/${$uid}/direction/1`);
+    			let directionLeftRef = database.ref(`users/${$uid}/direction/2`);
+
+    			if (marker[0].percentage - currentPercentage < 0) {
+    				directionRightRef.set(0);
+    				directionLeftRef.set(1);
+    			} else {
+    				directionRightRef.set(1);
+    				directionLeftRef.set(0);
+    			}
+    		}
+    	}
+
+    	setInterval(listenActiveMarker, 200);
     	let i;
     	const $$binding_groups = [[]];
 
@@ -41330,6 +41383,10 @@ var app = (function () {
     		);
     	};
 
+    	const click_handler = name => {
+    		setActiveMarker(name);
+    	};
+
     	function input_input_handler() {
     		newMarkerName = this.value;
     		$$invalidate(9, newMarkerName);
@@ -41339,12 +41396,12 @@ var app = (function () {
     		if (e.key == "Enter") addFixedPosition(newMarkerName, currentPercentage); /* Math.floor(Math.random() * 100) */
     	};
 
-    	const click_handler = () => {
+    	const click_handler_1 = () => {
     		addFixedPosition(newMarkerName, currentPercentage); /* Math.floor(Math.random() * 100) */
     	};
 
-    	const click_handler_1 = () => $$invalidate(4, isCopyPanelActive = !isCopyPanelActive);
-    	const click_handler_2 = () => $$invalidate(2, isSlidePanelOpen = !isSlidePanelOpen);
+    	const click_handler_2 = () => $$invalidate(4, isCopyPanelActive = !isCopyPanelActive);
+    	const click_handler_3 = () => $$invalidate(2, isSlidePanelOpen = !isSlidePanelOpen);
 
     	function input0_change_handler(watcher) {
     		watcher.controlLevel = this.__value;
@@ -41415,6 +41472,9 @@ var app = (function () {
     		editActive,
     		newMarkerName,
     		editRemoveName,
+    		activeMarker,
+    		setActiveMarker,
+    		listenActiveMarker,
     		i,
     		console,
     		navigator,
@@ -41427,6 +41487,9 @@ var app = (function () {
     		Array,
     		Object,
     		window,
+    		Math,
+    		n,
+    		setInterval,
     		meWatcher
     	});
 
@@ -41443,7 +41506,8 @@ var app = (function () {
     		if ("editActive" in $$props) editActive = $$props.editActive;
     		if ("newMarkerName" in $$props) $$invalidate(9, newMarkerName = $$props.newMarkerName);
     		if ("editRemoveName" in $$props) $$invalidate(10, editRemoveName = $$props.editRemoveName);
-    		if ("i" in $$props) $$invalidate(18, i = $$props.i);
+    		if ("activeMarker" in $$props) activeMarker = $$props.activeMarker;
+    		if ("i" in $$props) $$invalidate(20, i = $$props.i);
     		if ("meWatcher" in $$props) $$invalidate(13, meWatcher = $$props.meWatcher);
     	};
 
@@ -41458,8 +41522,8 @@ var app = (function () {
     			 $$invalidate(13, meWatcher = watchers.filter(item => item.id == $uid));
     		}
 
-    		if ($$self.$$.dirty[0] & /*markers, currentPercentage, i*/ 262528) {
-    			 if ($$invalidate(18, i = markers.filter(item => item.percentage + offset > currentPercentage && item.percentage - offset < currentPercentage)) && i.length) {
+    		if ($$self.$$.dirty[0] & /*markers, currentPercentage, i*/ 1048960) {
+    			 if ($$invalidate(20, i = markers.filter(item => item.percentage + offset > currentPercentage && item.percentage - offset < currentPercentage)) && i.length) {
     				$$invalidate(10, editRemoveName = i[0].name);
     			} else {
     				$$invalidate(10, editRemoveName = "");
@@ -41486,18 +41550,22 @@ var app = (function () {
     		broadcastOnlineWatchers,
     		addFixedPosition,
     		removeCurrentFixedPosition,
+    		setActiveMarker,
+    		activeMarker,
     		i,
     		$buttonsState,
     		changeAndBroadcastControlState,
     		editActive,
+    		listenActiveMarker,
     		video_binding,
     		mouseenter_handler,
     		mouseleave_handler,
+    		click_handler,
     		input_input_handler,
     		keypress_handler,
-    		click_handler,
     		click_handler_1,
     		click_handler_2,
+    		click_handler_3,
     		input0_change_handler,
     		$$binding_groups,
     		input1_change_handler,
@@ -42272,8 +42340,8 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*warningText*/ ctx[0]);
-    			attr_dev(p, "class", "warningText svelte-oglphb");
-    			add_location(p, file$4, 58, 4, 1512);
+    			attr_dev(p, "class", "warningText svelte-1uldtoc");
+    			add_location(p, file$4, 58, 4, 1524);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -42316,14 +42384,14 @@ var app = (function () {
     }
 
     function create_fragment$4(ctx) {
-    	let div3;
-    	let div2;
+    	let div1;
     	let div0;
+    	let button0;
     	let p0;
     	let t1;
-    	let div1;
+    	let button1;
     	let p1;
-    	let div2_transition;
+    	let div0_transition;
     	let t3;
     	let current;
     	let dispose;
@@ -42331,56 +42399,56 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div3 = element("div");
-    			div2 = element("div");
+    			div1 = element("div");
     			div0 = element("div");
+    			button0 = element("button");
     			p0 = element("p");
     			p0.textContent = "Utilizar a própria câmera";
     			t1 = space();
-    			div1 = element("div");
+    			button1 = element("button");
     			p1 = element("p");
     			p1.textContent = "Conectar a uma câmera";
     			t3 = space();
     			if (if_block) if_block.c();
-    			attr_dev(p0, "class", "svelte-oglphb");
-    			add_location(p0, file$4, 46, 6, 1265);
-    			attr_dev(div0, "class", "transparentBtn svelte-oglphb");
-    			toggle_class(div0, "disabledBtn", /*warningText*/ ctx[0]);
-    			add_location(div0, file$4, 39, 4, 1080);
-    			add_location(p1, file$4, 53, 6, 1433);
-    			attr_dev(div1, "class", "transparentBtn");
-    			add_location(div1, file$4, 49, 4, 1317);
-    			attr_dev(div2, "id", "cameraOwner");
-    			attr_dev(div2, "class", "container");
-    			add_location(div2, file$4, 38, 2, 1018);
-    			attr_dev(div3, "class", "flexColumn svelte-oglphb");
-    			set_style(div3, "position", "absolute");
-    			set_style(div3, "z-index", "4");
-    			add_location(div3, file$4, 37, 0, 951);
+    			attr_dev(p0, "class", "svelte-1uldtoc");
+    			add_location(p0, file$4, 46, 6, 1268);
+    			attr_dev(button0, "class", "transparentBtn svelte-1uldtoc");
+    			toggle_class(button0, "disabledBtn", /*warningText*/ ctx[0]);
+    			add_location(button0, file$4, 39, 4, 1080);
+    			add_location(p1, file$4, 53, 6, 1442);
+    			attr_dev(button1, "class", "transparentBtn svelte-1uldtoc");
+    			add_location(button1, file$4, 49, 4, 1323);
+    			attr_dev(div0, "id", "cameraOwner");
+    			attr_dev(div0, "class", "container");
+    			add_location(div0, file$4, 38, 2, 1018);
+    			attr_dev(div1, "class", "flexColumn svelte-1uldtoc");
+    			set_style(div1, "position", "absolute");
+    			set_style(div1, "z-index", "4");
+    			add_location(div1, file$4, 37, 0, 951);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div3, anchor);
-    			append_dev(div3, div2);
-    			append_dev(div2, div0);
-    			append_dev(div0, p0);
-    			append_dev(div2, t1);
-    			append_dev(div2, div1);
-    			append_dev(div1, p1);
-    			append_dev(div3, t3);
-    			if (if_block) if_block.m(div3, null);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, button0);
+    			append_dev(button0, p0);
+    			append_dev(div0, t1);
+    			append_dev(div0, button1);
+    			append_dev(button1, p1);
+    			append_dev(div1, t3);
+    			if (if_block) if_block.m(div1, null);
     			current = true;
 
     			dispose = [
-    				listen_dev(div0, "click", /*click_handler*/ ctx[3], false, false, false),
-    				listen_dev(div1, "click", /*click_handler_1*/ ctx[4], false, false, false)
+    				listen_dev(button0, "click", /*click_handler*/ ctx[3], false, false, false),
+    				listen_dev(button1, "click", /*click_handler_1*/ ctx[4], false, false, false)
     			];
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*warningText*/ 1) {
-    				toggle_class(div0, "disabledBtn", /*warningText*/ ctx[0]);
+    				toggle_class(button0, "disabledBtn", /*warningText*/ ctx[0]);
     			}
 
     			if (/*warningText*/ ctx[0]) {
@@ -42391,7 +42459,7 @@ var app = (function () {
     					if_block = create_if_block$3(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
-    					if_block.m(div3, null);
+    					if_block.m(div1, null);
     				}
     			} else if (if_block) {
     				group_outros();
@@ -42407,22 +42475,22 @@ var app = (function () {
     			if (current) return;
 
     			add_render_callback(() => {
-    				if (!div2_transition) div2_transition = create_bidirectional_transition(div2, fade, {}, true);
-    				div2_transition.run(1);
+    				if (!div0_transition) div0_transition = create_bidirectional_transition(div0, fade, {}, true);
+    				div0_transition.run(1);
     			});
 
     			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
-    			if (!div2_transition) div2_transition = create_bidirectional_transition(div2, fade, {}, false);
-    			div2_transition.run(0);
+    			if (!div0_transition) div0_transition = create_bidirectional_transition(div0, fade, {}, false);
+    			div0_transition.run(0);
     			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div3);
-    			if (detaching && div2_transition) div2_transition.end();
+    			if (detaching) detach_dev(div1);
+    			if (detaching && div0_transition) div0_transition.end();
     			if (if_block) if_block.d();
     			run_all(dispose);
     		}
@@ -42672,65 +42740,65 @@ var app = (function () {
     const file$6 = "src/screens/SelectCamera.svelte";
 
     function create_fragment$6(ctx) {
-    	let div2;
+    	let div1;
     	let h3;
     	let t1;
-    	let div1;
+    	let div0;
     	let input;
     	let t2;
-    	let div0;
+    	let button;
     	let p;
-    	let div1_transition;
+    	let div0_transition;
     	let current;
     	let dispose;
 
     	const block = {
     		c: function create() {
-    			div2 = element("div");
+    			div1 = element("div");
     			h3 = element("h3");
     			h3.textContent = "Código da câmera";
     			t1 = space();
-    			div1 = element("div");
+    			div0 = element("div");
     			input = element("input");
     			t2 = space();
-    			div0 = element("div");
+    			button = element("button");
     			p = element("p");
     			p.textContent = "Conectar";
     			add_location(h3, file$6, 87, 2, 2591);
     			attr_dev(input, "type", "text");
-    			attr_dev(input, "class", "transparentInput svelte-1j4igm5");
+    			attr_dev(input, "class", "transparentInput svelte-1dudp0c");
     			attr_dev(input, "placeholder", "Digite Aqui");
     			add_location(input, file$6, 89, 4, 2682);
-    			add_location(p, file$6, 100, 6, 2999);
-    			attr_dev(div0, "class", "transparentBtn svelte-1j4igm5");
-    			add_location(div0, file$6, 99, 4, 2918);
-    			attr_dev(div1, "id", "cameraOwner");
-    			attr_dev(div1, "class", "container svelte-1j4igm5");
-    			add_location(div1, file$6, 88, 2, 2620);
-    			attr_dev(div2, "class", "flexColumn svelte-1j4igm5");
-    			set_style(div2, "position", "absolute");
-    			set_style(div2, "z-index", "4");
-    			add_location(div2, file$6, 86, 0, 2524);
+    			add_location(p, file$6, 100, 6, 3002);
+    			attr_dev(button, "class", "transparentBtn svelte-1dudp0c");
+    			add_location(button, file$6, 99, 4, 2918);
+    			attr_dev(div0, "id", "cameraOwner");
+    			attr_dev(div0, "class", "container svelte-1dudp0c");
+    			add_location(div0, file$6, 88, 2, 2620);
+    			attr_dev(div1, "class", "flexColumn svelte-1dudp0c");
+    			set_style(div1, "position", "absolute");
+    			set_style(div1, "z-index", "4");
+    			add_location(div1, file$6, 86, 0, 2524);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div2, anchor);
-    			append_dev(div2, h3);
-    			append_dev(div2, t1);
-    			append_dev(div2, div1);
-    			append_dev(div1, input);
-    			set_input_value(input, /*inputValue*/ ctx[0]);
-    			append_dev(div1, t2);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h3);
+    			append_dev(div1, t1);
     			append_dev(div1, div0);
-    			append_dev(div0, p);
+    			append_dev(div0, input);
+    			set_input_value(input, /*inputValue*/ ctx[0]);
+    			append_dev(div0, t2);
+    			append_dev(div0, button);
+    			append_dev(button, p);
     			current = true;
 
     			dispose = [
     				listen_dev(input, "input", /*input_input_handler*/ ctx[3]),
     				listen_dev(input, "keypress", /*keypress_handler*/ ctx[4], false, false, false),
-    				listen_dev(div0, "click", /*click_handler*/ ctx[5], false, false, false)
+    				listen_dev(button, "click", /*click_handler*/ ctx[5], false, false, false)
     			];
     		},
     		p: function update(ctx, [dirty]) {
@@ -42742,20 +42810,20 @@ var app = (function () {
     			if (current) return;
 
     			add_render_callback(() => {
-    				if (!div1_transition) div1_transition = create_bidirectional_transition(div1, fade, {}, true);
-    				div1_transition.run(1);
+    				if (!div0_transition) div0_transition = create_bidirectional_transition(div0, fade, {}, true);
+    				div0_transition.run(1);
     			});
 
     			current = true;
     		},
     		o: function outro(local) {
-    			if (!div1_transition) div1_transition = create_bidirectional_transition(div1, fade, {}, false);
-    			div1_transition.run(0);
+    			if (!div0_transition) div0_transition = create_bidirectional_transition(div0, fade, {}, false);
+    			div0_transition.run(0);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div2);
-    			if (detaching && div1_transition) div1_transition.end();
+    			if (detaching) detach_dev(div1);
+    			if (detaching && div0_transition) div0_transition.end();
     			run_all(dispose);
     		}
     	};

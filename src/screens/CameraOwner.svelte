@@ -37,7 +37,7 @@
 
 <div class="flexColumn" style="position: absolute; z-index: 4">
   <div id="cameraOwner" transition:fade class="container">
-    <div
+    <button
       class="transparentBtn"
       class:disabledBtn={warningText}
       on:click={() => {
@@ -45,14 +45,14 @@
       }}
     >
       <p>Utilizar a própria câmera</p>
-    </div>
+    </button>
 
-    <div
+    <button
       class="transparentBtn"
       on:click={() => currentScreen.set("selectCameraToConnect")}
     >
       <p>Conectar a uma câmera</p>
-    </div>
+    </button>
   </div>
 
   {#if warningText}
@@ -72,6 +72,18 @@
     color: #a7a7a7;
     cursor: default;
     box-shadow: none;
+  }
+
+  button.transparentBtn:not(:disabled):active{
+      background-color: rgba(255, 255, 255, 0.30); 
+  }
+
+  button.transparentBtn {
+    border: none;
+    outline: none;
+    margin: 5px;
+    height: clamp(50px, 15vh, 150px);
+    width: clamp(100px, 20vw, 200px);
   }
 
   .warningText {

@@ -79,13 +79,16 @@
 
         directionRef.set(directions);
 
-        const message = {
-            type: "controlsState",
-            from: connectionsHandler.peer.id,
-            content: directions,
-            displayName: $username,
-        };
-        connectionsHandler.broadcast(JSON.stringify(message));
+        /*
+         * const message = {
+         *     type: "controlsState",
+         *     from: connectionsHandler.peer.id,
+         *     content: directions,
+         *     displayName: $username,
+         * };
+         * connectionsHandler.broadcast(JSON.stringify(message));
+         */
+        setActiveMarker("");
     }
 
     // if there's a 'username'  means the user choose to connect to someone else camera
@@ -213,6 +216,7 @@
         directionRef.on("value", (snapshot) => {
             const data = snapshot.val();
             if (!data) return;
+            console.log(data);
 
             buttonsState.update((prevState) => {
                 for (let i = 0; i < data.length; i++) {
@@ -220,6 +224,14 @@
                 }
                 return prevState;
             });
+
+            let message = {
+                type: "controlsState",
+                from: connectionsHandler.peer.id,
+                content: $buttonsState.map((item) => (item ? 1 : 0)),
+                displayName: $username,
+            };
+            connectionsHandler.broadcast(JSON.stringify(message));
         });
 
         controlsBtn.assignFunction("main", async (n) => {
@@ -284,6 +296,8 @@
                         displayName: $username,
                     };
                     connectionsHandler.broadcast(JSON.stringify(message));
+                }else if(data && data.type == "activeMarker"){
+                    activeMarker = data.content
                 }
 
                 // update online watchers
@@ -347,24 +361,26 @@
     let slidePanelTimeout = null;
 
     let markers = [
-        {
-            name: "inicio",
-            percentage: 20,
-            tooltip: { isVisible: false, timeout: null },
-        },
-        {
-            name: "meio",
-            percentage: 50,
-            tooltip: { isVisible: false, timeout: null },
-        },
-        {
-            name: "fim",
-            percentage: 80,
-            tooltip: { isVisible: false, timeout: null },
-        },
+        /*
+         * {
+         *     name: "inicio",
+         *     percentage: 20,
+         *     tooltip: { isVisible: false, timeout: null },
+         * },
+         * {
+         *     name: "meio",
+         *     percentage: 50,
+         *     tooltip: { isVisible: false, timeout: null },
+         * },
+         * {
+         *     name: "fim",
+         *     percentage: 80,
+         *     tooltip: { isVisible: false, timeout: null },
+         * },
+         */
     ];
 
-    let currentPercentage = 35;
+    let currentPercentage = 0;
 
     window.changePercentage = (num) => {
         currentPercentage = num;
@@ -426,8 +442,53 @@
     let editActive = false;
     let newMarkerName = "";
     let editRemoveName = "";
+    let activeMarker = "";
 
-    $: meWatcher = watchers.filter((item) => item.id == $uid)
+function setActiveMarker(name){
+    if($username.length != 0){
+        const message = {
+            type: "activeMarker",
+            from: connectionsHandler.peer.id,
+            content: name,
+            displayName: auth.currentUser.displayName,
+        };
+
+        connectionsHandler.broadcast(JSON.stringify(message));
+        return
+    }
+
+    activeMarker = name
+}
+
+    function listenActiveMarker() {
+        if (activeMarker) {
+            const marker = markers.filter((item) => item.name == activeMarker);
+            if (!marker.length) return;
+
+            if (Math.abs(marker[0].percentage - currentPercentage) <= 5) {
+                let directionRef = database.ref(`users/${$uid}/direction`);
+                directionRef.set([0, 0, 0, 0]);
+                setActiveMarker("");
+                changeAndBroadcastControlState(n);
+                return;
+            }
+
+            let directionRightRef = database.ref(`users/${$uid}/direction/1`);
+            let directionLeftRef = database.ref(`users/${$uid}/direction/2`);
+
+            if (marker[0].percentage - currentPercentage < 0) {
+                directionRightRef.set(0);
+                directionLeftRef.set(1);
+            } else {
+                directionRightRef.set(1);
+                directionLeftRef.set(0);
+            }
+        }
+    }
+
+    setInterval(listenActiveMarker, 200);
+
+    $: meWatcher = watchers.filter((item) => item.id == $uid);
 
     let i;
     $: if (
@@ -465,6 +526,9 @@
                         tooltip.timeout = setTimeout(() => {
                             tooltip.isVisible = false;
                         }, 500);
+                    }}
+                    on:click={() => {
+                        setActiveMarker(name);
                     }}
                 >
                     <div
