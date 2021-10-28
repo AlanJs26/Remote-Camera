@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Remote Camera - Controle a sua câmera a distância!
 
 > Este programa faz parte do meu projeto de TCC de técnico em eletrônica, por isso foi pensado para ser utilizado em conjunto com a parte física. Sem ela isso é apenas um programa de vídeo chamadas.
@@ -13,6 +12,7 @@ O apresentador pode fornecer acesso total a câmera ou utilizar um sistema de vo
 
 Link para acessar a versão de navegador: https://remotecamera-6f583.web.app/
 =======
+
 # Remote Camera - Controle a sua câmera a distância!
 
 > Este programa faz parte do meu projeto de TCC de técnico em eletrônica, por isso foi pensado para ser utilizado em conjunto com a parte física. Sem ela isso é apenas um programa de vídeo chamadas.
@@ -42,4 +42,3 @@ O servidor é uma parte crucial para o funcionamento do projeto, pois ele é a p
 ### Transmissão de vídeo
 
 Embora o Firebase tenha muitas vantagens, ele tem um grande ponto negativo: não permitir a execução de programas. Com isso não é possível utilizar o servidor como meio-termo para a transmissão da imagem da câmera. Porém, existe uma tecnologia capaz transmitir dados entre dois usuários sem um intermediário direto, ela é chamada de WebRTC. Ela pode transmitir texto, áudio e vídeo sem a necessidade de um intermediador, mas como o WebRTC suporta apenas conexões de apenas dois usuários por vez, a implementação seria complicada. E para resolver esse problema foi utilizado um Framework chamado PeerJS para facilitar o desenvolvimento. Ele utiliza um servidor próprio para iniciar as conexões e encapsula o WebRTC de forma a ser como transmissor para diversos espectadores, invés de apenas transmissor-espectador, o que torna tudo mais simples.
->>>>>>> 3bd2398a5cd7659c40adbcce96dcdfa1f6b5c51a
