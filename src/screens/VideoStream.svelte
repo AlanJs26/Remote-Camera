@@ -108,7 +108,7 @@
                     let me = watchers.filter((item) => item.id == $uid);
 
                     if (me.length) {
-                        if (me[0].controlLevel > 0) {
+                        if (me[0].controlLevel > 1) {
                             setCubesState("btnMode");
                         } else {
                             setCubesState("floatOpening");
@@ -154,7 +154,9 @@
                         }
                         return prevState;
                     });
-                }
+            }else if(data.type == "votation") {
+                votations = data.content
+            }
             } catch (err) {}
         });
     } else {
@@ -247,7 +249,7 @@
                     let isFromTrustedWatcher =
                         watchers.filter(
                             (item) =>
-                                item.id == data.from && item.controlLevel > 0
+                                item.id == data.from && item.controlLevel > 1
                         ).length == 1
                             ? true
                             : false;
@@ -297,7 +299,16 @@
                     };
                     connectionsHandler.broadcast(JSON.stringify(message));
                 }else if(data && data.type == "activeMarker"){
-                    activeMarker = data.content
+                    let isFromTrustedWatcher =
+                        watchers.filter(
+                            (item) => item.id == data.from && item.controlLevel >= 1
+                        ).length == 1 ? true : false;
+
+                    if(isFromTrustedWatcher) 
+                        activeMarker = data.content
+                }else if(data && data.type == "votation"){
+                    if(markers.filter(item => item.name == data.content.name).length >= 1)
+                        addVotation(data.content.name, data.content.votes)
                 }
 
                 // update online watchers
@@ -446,6 +457,7 @@
 
 function setActiveMarker(name){
     if($username.length != 0){
+        if(name == '') return
         const message = {
             type: "activeMarker",
             from: connectionsHandler.peer.id,
@@ -469,7 +481,6 @@ function setActiveMarker(name){
                 let directionRef = database.ref(`users/${$uid}/direction`);
                 directionRef.set([0, 0, 0, 0]);
                 setActiveMarker("");
-                changeAndBroadcastControlState(n);
                 return;
             }
 
@@ -503,6 +514,81 @@ function setActiveMarker(name){
     } else {
         editRemoveName = "";
     }
+
+    let votations = [ 
+        /*
+         * {
+         *     name: "Item 1",
+         *     time: 10, // 100%
+         *     votes: 4,
+         *     maxVotes: 10,
+         * },
+         * {
+         *     name: "Item 2",
+         *     time: 70, // 100%
+         *     votes: 7,
+         *     maxVotes: 10,
+         * }
+         */
+    ]
+
+const updateVotations = () => {
+    if(votations.length == 0) return
+
+    for(let i = votations.length-1; i >= 0; i--){
+        votations[i].time+=10
+        if(votations[i].votes >= votations[i].maxVotes){
+            activeMarker = votations[i].name
+            votations.splice(i,1)
+        }else if(votations[i].time > 100){
+            votations.splice(i,1)
+        }
+    }
+}
+
+function addVotation(name, votes=0){
+
+    // As a watcher
+    if($username.length != 0){
+        const message = {
+            type: "votation",
+            from: connectionsHandler.peer.id,
+            content: {name, votes},
+            displayName: auth.currentUser.displayName,
+        };
+        connectionsHandler.broadcast(JSON.stringify(message))
+        return
+    }
+
+    const newVotation = {
+        name,
+        time: 0,
+        votes: 0,
+        maxVotes: Math.floor(watchers.length/2)||1 
+    }
+    if(votations.filter(item => item.name == name).length){
+
+        votations = votations.map((item) => {
+            if(item.name != name) return item
+
+            return {...item, votes: votes||item.votes}
+        })
+    }else{
+        votations.push(newVotation)
+    }
+
+    const message = {
+        type: "votation",
+        from: connectionsHandler.peer.id,
+        content: votations,
+        displayName: auth.currentUser.displayName,
+    };
+    connectionsHandler.broadcast(JSON.stringify(message))
+
+}
+
+setInterval(updateVotations, 5000)
+
 </script>
 
 <div class="flexColumn" style="align-items: baseline">
@@ -528,7 +614,11 @@ function setActiveMarker(name){
                         }, 500);
                     }}
                     on:click={() => {
+                    if(meWatcher.length && meWatcher[0].controlLevel == 1){
+                            addVotation(name)
+                    }else if(meWatcher.length && meWatcher[0].controlLevel >0 ){
                         setActiveMarker(name);
+                    }
                     }}
                 >
                     <div
@@ -666,6 +756,33 @@ function setActiveMarker(name){
                 </p>
             </div>
         </div>
+    </div>
+{/if}
+
+{#if votations.length}
+    <div class="votations" transition:fade>
+      <h3>Votações Ativas</h3>
+      <ul>
+        {#each votations as {name, time, votes, maxVotes} }
+            <li on:click={() => { addVotation(name, votes+1) }}>
+              <div class="timer">
+                <svg width="50" height="50" viewBox="0 0 100 100">
+                  <defs>
+                    <clipPath id="clipPath-{name.replace(' ' ,'-')}">
+                    <rect x="0" y="{Math.floor(100-votes/maxVotes*100)}" width="100" height="100"></rect>
+                    </clipPath>
+                  </defs>
+                  
+                  <circle class="progressFill" cx="50" cy="50" r="45" style=" clip-path: url(#clipPath-{name.replace(' ' ,'-')}); "></circle>
+
+                  <circle class="progressLine" stroke-linecap="round" cx="50" cy="50" r="45" stroke-width="7" fill="none" stroke-dasharray="315" stroke-dashoffset="{Math.floor(315-time/100*315)}" stroke-mitterlimit="0" transform="rotate(-90 ) translate(-100 0)"></circle>
+                </svg>
+                <span class="svgText">{votes}</span>
+              </div>
+              <p>{name}</p>
+            </li>
+        {/each}
+      </ul>
     </div>
 {/if}
 
@@ -982,4 +1099,78 @@ function setActiveMarker(name){
         opacity: 1;
         transition: height 0.2s ease-in 0s, opacity 0.2s ease-in 0s;
     }
+
+
+    /* Votation */
+
+.votations h3 {
+  color: white;
+        text-align: center;
+}
+
+.votations {
+  background: rgba(255,255,255,0.15);
+  width: 20vw;
+max-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px 5px;
+  font-family: sans-serif;
+    right: calc(-20vw - 25px);
+        position: absolute;
+}
+
+.votations ul {
+  padding: 0;
+  width: 100%;
+}
+
+.votations li {
+  padding: 3px 0;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.votations li:hover {
+  background: #ffffff50;
+}
+
+.timer .svgText {
+  font-size: 1.5em;
+  text-align: center;
+  position: absolute;
+  color: black;
+  font-weight: bold;
+}
+
+.timer .progressFill {
+  fill: rgba(255,255,255,0.5);
+}
+
+.timer .progressLine {
+  stroke: white
+}
+
+.votations li .timer {
+  width: 50px;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: none;
+}
+
+.votations li>p {
+  width: auto;
+  margin: 0;
+  padding: 0px 10px;
+}
 </style>
