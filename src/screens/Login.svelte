@@ -3,7 +3,7 @@
 
   import { setCubesState } from "../components/Cubes.svelte";
   import { currentScreen } from "../stores/app.js";
-  import { auth, database, googleProvider } from "../firebase";
+  import { auth, database } from "../firebase";
 
   let username = "";
   // let passwordText = ''

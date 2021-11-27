@@ -23,14 +23,16 @@
 
     let videoEl = null;
 
+
+
+
+
+
     function copyText() {
         isCopyAnimActive = true;
 
-        navigator.clipboard.writeText(this.innerText).then(
-            function () {},
-            function (err) {
-                console.error("Async: Could not copy text: ", err);
-            }
+        navigator.clipboard.writeText(this.innerText).catch(
+            (err) => { console.error("Async: Could not copy text: ", err) }
         );
 
         setTimeout(() => {
@@ -42,11 +44,11 @@
     function broadcastOnlineWatchers() {
         if (!connectionsHandler.isHost) return;
 
+        // if executed from radio input
         if (this) {
             watchers = watchers.map((item) => {
                 if (item.name == this.getAttribute("watcher")) {
                     item.controlLevel = parseInt(this.value);
-                    return item;
                 }
                 return item;
             });
@@ -63,16 +65,18 @@
 
     async function changeAndBroadcastControlState(n) {
         let twin = {
-            0: 3,
-            1: 2,
-            2: 1,
-            3: 0,
+            0: 3, //left
+            1: 2, //right
+            2: 1, //up
+            3: 0, //down
+            4: 4, //horizontal left
+            5: 5, //horizontal right
         };
 
         let directionRef = database.ref(`users/${$uid}/direction`);
 
         let directions = await directionRef.get();
-        directions = directions.val() || [0, 0, 0, 0];
+        directions = directions.val() || [0, 0, 0, 0,  0, 0];
         directions[n] = directions[n] == 1 ? 0 : 1;
         if (directions[twin[n]] == 1)
             directions[twin[n]] = directions[n] == 1 ? 0 : 1;
@@ -90,9 +94,11 @@
          */
         setActiveMarker("");
     }
+    
+    const isHost = $username.length == 0 
 
     // if there's a 'username'  means the user choose to connect to someone else camera
-    if ($username.length != 0) {
+    if (isHost == false) {
         // setup the peer connection as watcher
         connectToHost(
             $username,
@@ -104,27 +110,40 @@
 
                 if (data.type == "users") {
                     watchers = data.content;
+                    const me = watchers.filter((item) => item.id == $uid);
 
-                    let me = watchers.filter((item) => item.id == $uid);
-
-                    if (me.length) {
-                        if (me[0].controlLevel > 1) {
-                            setCubesState("btnMode");
-                        } else {
-                            setCubesState("floatOpening");
-                        }
-                    } else {
+                    if (!me.length){
                         connectionsHandler.peer.disconnect();
+                        return
+                    }
+
+                    if (me[0].controlLevel > 1) {
+                        setCubesState("btnMode");
+                    } else {
+                        setCubesState("floatOpening");
                     }
                 }
 
-                if (data.type == "currentPercentage") {
-                    currentPercentage = data.content;
+                switch(data.type){
+                    case "currentPercentage":
+                        currentPercentage = data.content;
+                        break
+                    case "currentPercentage":
+                        horizontalPercentage = data.content;
+                        break
+                    case "currentPercentage":
+                        markers = data.content;
+                        break
+                    case "controlsState":
+                        buttonsState.update(() => {
+                            return data.content.map(item => item ? true : false);
+                        });
+                        break
+                    case "votation":
+                        votations = data.content
+                        break
                 }
 
-                if (data.type == "fixedPositions") {
-                    markers = data.content;
-                }
             }
         );
 
@@ -142,32 +161,14 @@
             connectionsHandler.broadcast(JSON.stringify(message));
         });
 
-        // change my buttons state when the host send a message of type 'controlsState'
-        connectionsHandler.subscribeToAll("data", async (rawData) => {
-            try {
-                let data = JSON.parse(rawData);
-
-                if (data.type == "controlsState") {
-                    buttonsState.update((prevState) => {
-                        for (let i = 0; i < data.content.length; i++) {
-                            prevState[i] = data.content[i] ? true : false;
-                        }
-                        return prevState;
-                    });
-            }else if(data.type == "votation") {
-                votations = data.content
-            }
-            } catch (err) {}
-        });
-    } else {
+    } else if(isHost == true) {
         setCubesState("btnMode");
 
-        // Broadcast through WebRTC any currentPercent changes on the server
+        // Broadcast through WebRTC any currentPercent or horizontalPercentage changes on the server
         // and synchronize the currentPercent with the server
         let currentPercentageRef = database.ref(
             `users/${$uid}/currentPercentage`
         );
-
         currentPercentageRef.on("value", (snapshot) => {
             if (!snapshot.val()) return;
             const message = {
@@ -178,6 +179,22 @@
             };
             connectionsHandler.broadcast(JSON.stringify(message));
             currentPercentage = snapshot.val();
+        });
+
+
+        let horizontalPercentageRef = database.ref(
+            `users/${$uid}/horizontalPercentage`
+        );
+        horizontalPercentageRef.on("value", (snapshot) => {
+            if (!snapshot.val()) return;
+            const message = {
+                type: "horizontalPercentage",
+                from: connectionsHandler.peer.id,
+                content: snapshot.val(),
+                displayName: $username,
+            };
+            connectionsHandler.broadcast(JSON.stringify(message));
+            horizontalPercentage = snapshot.val();
         });
 
         // Listen the fixedPositions in the server and update the local ones
@@ -194,13 +211,13 @@
                 currentMarkerNames.sort().join("")
             ) {
                 markers = [];
-                for (let { name, percentage } of positions) {
-                    markers.push({
-                        name,
-                        percentage,
-                        tooltip: { isVisible: false, timeout: null },
-                    });
-                }
+
+                markers = positions.map(({name, percentage}) => ({
+                    name,
+                    percentage,
+                    tooltip: { isVisible: false, timeout: null },
+                })
+                )
             }
 
             // Broadcast the fixedPositions through WebRTC
@@ -220,11 +237,8 @@
             if (!data) return;
             console.log(data);
 
-            buttonsState.update((prevState) => {
-                for (let i = 0; i < data.length; i++) {
-                    prevState[i] = data[i] ? true : false;
-                }
-                return prevState;
+            buttonsState.update(() => {
+                return data.map(item => item ? true : false);
             });
 
             let message = {
@@ -240,27 +254,6 @@
             changeAndBroadcastControlState(n);
         });
 
-        // when receive a command to change the buttonsState from user with enough control acess, change and broadcast that command
-        connectionsHandler.subscribeToAll("data", (rawData) => {
-            try {
-                let data = JSON.parse(rawData);
-
-                if (data.type == "controls") {
-                    let isFromTrustedWatcher =
-                        watchers.filter(
-                            (item) =>
-                                item.id == data.from && item.controlLevel > 1
-                        ).length == 1
-                            ? true
-                            : false;
-                    if (!isFromTrustedWatcher) return;
-
-                    let n = data.content;
-
-                    changeAndBroadcastControlState(n);
-                }
-            } catch (err) {}
-        });
 
         // Setup the peer connection as host
         setupAsHost(
@@ -272,43 +265,79 @@
                 if (!connectionsHandler.isHost) return;
 
                 // when the handshake message is received, send the current controlsState, fixedPositions and currentPercentage
-                if (data && data.type == "handshake") {
-                    let message = {
-                        type: "controlsState",
-                        from: connectionsHandler.peer.id,
-                        content: $buttonsState.map((item) => (item ? 1 : 0)),
-                        displayName: $username,
-                    };
-                    connectionsHandler.broadcast(JSON.stringify(message));
+                switch(data.type){
+                    case "handshake":
+                        let message = {
+                            type: "controlsState",
+                            from: connectionsHandler.peer.id,
+                            content: $buttonsState.map((item) => (item ? 1 : 0)),
+                            displayName: $username,
+                        };
+                        connectionsHandler.broadcast(JSON.stringify(message));
 
-                    // send fixedPositions through WebRTC
-                    message = {
-                        type: "fixedPositions",
-                        from: connectionsHandler.peer.id,
-                        content: markers,
-                        displayName: $username,
-                    };
-                    connectionsHandler.broadcast(JSON.stringify(message));
+                        // send fixedPositions through WebRTC
+                        message = {
+                            type: "fixedPositions",
+                            from: connectionsHandler.peer.id,
+                            content: markers,
+                            displayName: $username,
+                        };
+                        connectionsHandler.broadcast(JSON.stringify(message));
 
-                    // send currentPercentage through WebRTC
-                    message = {
-                        type: "currentPercentage",
-                        from: connectionsHandler.peer.id,
-                        content: currentPercentage,
-                        displayName: $username,
-                    };
-                    connectionsHandler.broadcast(JSON.stringify(message));
-                }else if(data && data.type == "activeMarker"){
-                    let isFromTrustedWatcher =
-                        watchers.filter(
-                            (item) => item.id == data.from && item.controlLevel >= 1
-                        ).length == 1 ? true : false;
+                        // send currentPercentage through WebRTC
+                        message = {
+                            type: "currentPercentage",
+                            from: connectionsHandler.peer.id,
+                            content: currentPercentage,
+                            displayName: $username,
+                        };
+                        connectionsHandler.broadcast(JSON.stringify(message));
+                        break
+                    case "activeMarker":
+                        const isFromTrustedWatcher =
+                            watchers.filter(
+                                (item) => item.id == data.from && item.controlLevel >= 1
+                            ).length == 1 ? true : false;
 
-                    if(isFromTrustedWatcher) 
-                        activeMarker = data.content
-                }else if(data && data.type == "votation"){
-                    if(markers.filter(item => item.name == data.content.name).length >= 1)
-                        addVotation(data.content.name, data.content.votes)
+                        if(isFromTrustedWatcher) 
+                            activeMarker = data.content
+                        break
+                    case "votation":
+                        if(markers.filter(item => item.name == data.content.name).length >= 1)
+                            addVotation(data.content.name, data.content.votes.length ? [data.content.votes[0]] : [])
+                        break
+                    case "addMarker":
+                        const isFromTrustedWatcher =
+                            watchers.filter(
+                                (item) => item.id == data.from && item.controlLevel == 2
+                            ).length == 1 ? true : false;
+
+                        if(isFromTrustedWatcher){
+                            addMarker(data.content.name, data.content.percentage)
+                        } 
+                        break
+                    case "removeMarker":
+                        const isFromTrustedWatcher =
+                            watchers.filter(
+                                (item) => item.id == data.from && item.controlLevel == 2
+                            ).length == 1 ? true : false;
+
+                        if(isFromTrustedWatcher){
+                            removeCurrentFixedPosition()
+                        } 
+
+                        break
+                    case "controls":
+                        let isFromTrustedWatcher =
+                            watchers.filter(
+                                (item) => item.id == data.from && item.controlLevel == 2
+                            ).length == 1 ? true : false;
+                        if (!isFromTrustedWatcher) return;
+
+                        const n = data.content;
+
+                        changeAndBroadcastControlState(n);
+                        break
                 }
 
                 // update online watchers
@@ -392,22 +421,56 @@
     ];
 
     let currentPercentage = 0;
+    let horizontalPercentage = 50;
 
-    window.changePercentage = (num) => {
-        currentPercentage = num;
-    };
+    const addMarker = async (markerName, markerPercentage) => {
+        if(!markerName) return 
+        const newMarker = {
+            name: markerName,
+            percentage: markerPercentage,
+            tooltip: { isVisible: false, timeout: null },
+        }
 
-    const addFixedPosition = async (markerName, markerPercentage) => {
-        let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
+        if($username.length != 0){
 
-        markers = [
-            ...markers,
-            {
-                name: markerName,
-                percentage: markerPercentage,
-                tooltip: { isVisible: false, timeout: null },
-            },
-        ];
+            const message = {
+                type: "addMarker",
+                from: connectionsHandler.peer.id,
+                content: newMarker,
+                displayName: auth.currentUser.displayName,
+            };
+
+            connectionsHandler.broadcast(JSON.stringify(message));
+            return
+        }
+
+
+
+
+        if(markers.filter(item => item.name == markerName).length){
+            markers = markers.map((item) => {
+                if(item.name != markerName) return item
+
+                return {...item, percentage: markerPercentage}
+            })
+        }else{
+            markers = [...markers, newMarker]
+        }            
+
+        const message = {
+            type: "fixedPositions",
+            from: connectionsHandler.peer.id,
+            content: markers,
+            displayName: $username,
+        };
+        connectionsHandler.broadcast(JSON.stringify(message));
+
+        /*
+         * markers = [
+         *     ...markers,
+         *     newMarker,
+         * ];
+         */
         console.log(markers);
 
         /*myobject[randomLetter(5)] = Math.floor(Math.random()*100)*/
@@ -415,11 +478,28 @@
             return { name, percentage };
         });
 
+        let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
+
         fixedPositionsRef.set(newMarkers);
     };
 
     const offset = 4;
-    const removeCurrentFixedPosition = () => {
+    function removeCurrentFixedPosition() {
+
+        if($username.length != 0){
+
+            const message = {
+                type: "removeMarker",
+                from: connectionsHandler.peer.id,
+                content: null,
+                displayName: auth.currentUser.displayName,
+            };
+
+            connectionsHandler.broadcast(JSON.stringify(message));
+            return
+        }
+
+
         let foundIndexes = [];
         const currentMarkers = markers.filter(
             (item) =>
@@ -471,6 +551,7 @@ function setActiveMarker(name){
 
     activeMarker = name
 }
+    let sliderValue = 50
 
     function listenActiveMarker() {
         if (activeMarker) {
@@ -479,7 +560,7 @@ function setActiveMarker(name){
 
             if (Math.abs(marker[0].percentage - currentPercentage) <= 5) {
                 let directionRef = database.ref(`users/${$uid}/direction`);
-                directionRef.set([0, 0, 0, 0]);
+                directionRef.set([0, 0, 0, 0,  0, 0]);
                 setActiveMarker("");
                 return;
             }
@@ -498,6 +579,34 @@ function setActiveMarker(name){
     }
 
     setInterval(listenActiveMarker, 200);
+
+
+    function listenHorizontalPercentage() {
+        if (Math.abs(sliderValue - horizontalPercentage) > 5) {
+
+            let directionRightRef = database.ref(`users/${$uid}/direction/4`);
+            let directionLeftRef = database.ref(`users/${$uid}/direction/5`);
+
+            if (sliderValue - horizontalPercentage < 0) {
+                directionRightRef.set(0);
+                directionLeftRef.set(1);
+            } else {
+                directionRightRef.set(1);
+                directionLeftRef.set(0);
+            }
+        }else{
+            let directionRef = database.ref(`users/${$uid}/direction`);
+            directionRef.get().then((snapshot) => {
+                let data = snapshot.val()
+                data[4] = 0
+                data[5] = 0
+                directionRef.set(data);
+                
+            })
+        }
+    }
+
+    setInterval(listenHorizontalPercentage, 200);
 
     $: meWatcher = watchers.filter((item) => item.id == $uid);
 
@@ -537,7 +646,7 @@ const updateVotations = () => {
 
     for(let i = votations.length-1; i >= 0; i--){
         votations[i].time+=10
-        if(votations[i].votes >= votations[i].maxVotes){
+        if(votations[i].votes.length >= votations[i].maxVotes){
             activeMarker = votations[i].name
             votations.splice(i,1)
         }else if(votations[i].time > 100){
@@ -546,14 +655,14 @@ const updateVotations = () => {
     }
 }
 
-function addVotation(name, votes=0){
+function addVotation(name, votes=[]){
 
     // As a watcher
     if($username.length != 0){
         const message = {
             type: "votation",
             from: connectionsHandler.peer.id,
-            content: {name, votes},
+            content: {name, votes: votes.length ? votes[0] : []},
             displayName: auth.currentUser.displayName,
         };
         connectionsHandler.broadcast(JSON.stringify(message))
@@ -563,7 +672,7 @@ function addVotation(name, votes=0){
     const newVotation = {
         name,
         time: 0,
-        votes: 0,
+        votes: [],
         maxVotes: Math.floor(watchers.length/2)||1 
     }
     if(votations.filter(item => item.name == name).length){
@@ -571,7 +680,7 @@ function addVotation(name, votes=0){
         votations = votations.map((item) => {
             if(item.name != name) return item
 
-            return {...item, votes: votes||item.votes}
+            return {...item, votes: votes.length ? [...item.votes, votes[0]] : item.votes}
         })
     }else{
         votations.push(newVotation)
@@ -584,6 +693,8 @@ function addVotation(name, votes=0){
         displayName: auth.currentUser.displayName,
     };
     connectionsHandler.broadcast(JSON.stringify(message))
+
+    updateVotations()
 
 }
 
@@ -615,8 +726,8 @@ setInterval(updateVotations, 5000)
                     }}
                     on:click={() => {
                     if(meWatcher.length && meWatcher[0].controlLevel == 1){
-                            addVotation(name)
-                    }else if(meWatcher.length && meWatcher[0].controlLevel >0 ){
+                        addVotation(name, [auth.currentUser.displayName])
+                    }else if(connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel >0) ){
                         setActiveMarker(name);
                     }
                     }}
@@ -641,22 +752,25 @@ setInterval(updateVotations, 5000)
                     placeholder="Digite Aqui"
                     bind:value={newMarkerName}
                     on:keypress={(e) => {
-                        if (e.key == "Enter")
-                            addFixedPosition(
+                        if (e.key == "Enter"){
+                            addMarker(
                                 newMarkerName,
                                 currentPercentage
                                 /* Math.floor(Math.random() * 100) */
                             );
+                            newMarkerName = ""
+                        }
                     }}
                 />
                 <button
                     class="transparentBtn editItem"
                     on:click={() => {
-                        addFixedPosition(
+                        addMarker(
                             newMarkerName,
                             currentPercentage
                             /* Math.floor(Math.random() * 100) */
                         );
+                        newMarkerName = ""
                     }}>Adicionar Marcador</button
                 >
             </div>
@@ -670,6 +784,11 @@ setInterval(updateVotations, 5000)
                     </button>
                 {/if}
             </div>
+        </div>
+
+        <div class="slidebarContainer">
+            <div class="shadow" style={`--percentage: ${horizontalPercentage}%`} ></div>
+            <input type="range" bind:value={sliderValue}>
         </div>
     {/if}
 </div>
@@ -764,12 +883,12 @@ setInterval(updateVotations, 5000)
       <h3>Votações Ativas</h3>
       <ul>
         {#each votations as {name, time, votes, maxVotes} }
-            <li on:click={() => { addVotation(name, votes+1) }}>
+            <li on:click={() => { addVotation(name, [auth.currentUser.displayName]) }}>
               <div class="timer">
                 <svg width="50" height="50" viewBox="0 0 100 100">
                   <defs>
                     <clipPath id="clipPath-{name.replace(' ' ,'-')}">
-                    <rect x="0" y="{Math.floor(100-votes/maxVotes*100)}" width="100" height="100"></rect>
+                    <rect x="0" y="{Math.floor(100-votes.length/maxVotes*100)}" width="100" height="100"></rect>
                     </clipPath>
                   </defs>
                   
@@ -777,7 +896,7 @@ setInterval(updateVotations, 5000)
 
                   <circle class="progressLine" stroke-linecap="round" cx="50" cy="50" r="45" stroke-width="7" fill="none" stroke-dasharray="315" stroke-dashoffset="{Math.floor(315-time/100*315)}" stroke-mitterlimit="0" transform="rotate(-90 ) translate(-100 0)"></circle>
                 </svg>
-                <span class="svgText">{votes}</span>
+                <span class="svgText">{votes.length}</span>
               </div>
               <p>{name}</p>
             </li>
@@ -1173,4 +1292,61 @@ max-width: 200px;
   margin: 0;
   padding: 0px 10px;
 }
+
+
+.slidebarContainer {
+  width: 100%;
+  display: flex;
+  height: 10px;
+  position: relative;
+  margin-top: 20px;
+}
+
+.slidebarContainer input {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 100%;
+  background-color: rgb(201, 144, 242);
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  z-index: 0;
+}
+
+.slidebarContainer input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border: solid rgba(255,255,255,0.7) 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(113,0,228);
+  cursor: pointer;
+}
+
+.slidebarContainer input::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border: solid rgba(255,255,255,0.7) 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(113,0,228);
+  cursor: pointer;
+}
+
+.slidebarContainer .shadow {
+  /* border: solid rgb(201, 144, 242) 2px; */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-top: -5px;
+  background-color: rgb(201, 144, 242);
+  position: absolute;
+  margin-left: calc(var(--percentage) - 21px)
+  
+}
+
 </style>
