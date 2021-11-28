@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 
 export const backCallbacks = writable([]);
+export const facetrackOn = writable(false);
 
 export class ObservableButton{
     constructor(){

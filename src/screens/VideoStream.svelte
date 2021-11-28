@@ -12,13 +12,14 @@
     } from "../stores/cubes";
     import { setCubesState } from "../components/Cubes.svelte";
     import { username } from "../stores/main";
-    import { configBtn } from "../stores/header";
+    import { configBtn, facetrackOn } from "../stores/header";
     import { uid } from "../stores/app.js";
     import { fade } from "svelte/transition";
     import { database, auth } from "../firebase";
 
     configBtn.assignFunction("main", () => {
-        console.log("%cPARECE QUE FOI!", "color: purple;font-size: 20px");
+        /* console.log("%cPARECE QUE FOI!", "color: purple;font-size: 20px"); */
+        facetrackOn.update(prev => !prev)
     });
 
     let videoEl = null;
@@ -69,8 +70,8 @@
             1: 2, //right
             2: 1, //up
             3: 0, //down
-            4: 4, //horizontal left
-            5: 5, //horizontal right
+            4: 5, //horizontal left
+            5: 4, //horizontal right
         };
 
         let directionRef = database.ref(`users/${$uid}/direction`);
@@ -259,6 +260,94 @@
         setupAsHost(
             (localStream) => {
                 videoEl.srcObject = localStream;
+
+                console.log('loading ML models...')
+
+                Promise.all([
+                    faceapi.nets.tinyFaceDetector.loadFromUri('./dist/models'),
+                    faceapi.nets.faceLandmark68Net.loadFromUri('./dist/models'),
+                    faceapi.nets.faceRecognitionNet.loadFromUri('./dist/models'),
+                    faceapi.nets.faceExpressionNet.loadFromUri('./dist/models'),
+                ]).then(() => {
+
+                    console.log('ML models loaded!')
+
+                    const canvas = faceapi.createCanvasFromMedia(videoEl)
+                    let displaySize = { width: canvas.width, height: canvas.height }
+                    canvas.id = 'webcamVideo' 
+                    videoEl.parentNode.prepend(canvas)
+                    videoEl.style.height = '100%'
+                    canvas.style.height = '100%'
+                    videoEl.parentNode.style.height = `max(min(calc(45vw*(${canvas.height}/${canvas.width})), calc(80vh*(${canvas.height}/${canvas.width}))),calc(29vh*(${canvas.height}/${canvas.width})))`
+
+                    canvas.style.position = 'absolute'
+                    
+                    const directionLeftRef = database.ref(`users/${$uid}/direction/2`);
+                    const directionRightRef = database.ref(`users/${$uid}/direction/1`);
+                    const directionUpRef = database.ref(`users/${$uid}/direction/0`);
+                    const directionDownRef = database.ref(`users/${$uid}/direction/3`);
+
+                    setInterval(async () => {
+                        if($facetrackOn == false){
+                            canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+                            return
+                        }
+
+                        if(displaySize.width == 0 || displaySize.height == 0 ){
+                            console.log('zero')
+                            displaySize = { width: canvas.width, height: canvas.height }
+                            return
+                        }
+                        const detections = await faceapi.detectAllFaces(videoEl,
+                            new faceapi.TinyFaceDetectorOptions({
+                                scoreThreshold: 0.1
+                            }))
+                        if(detections.length){
+                            const wcenter = detections[0].box.left + detections[0].box.width/2
+                            const hcenter = detections[0].box.top + detections[0].box.height/2
+                            const wrelative = wcenter-canvas.width/2
+                            const hrelative = canvas.height/2-hcenter
+                            const wthreshold = canvas.width/5
+                            const hthreshold = canvas.height/5
+
+
+                            if(wrelative > wthreshold){
+                                directionRightRef.set(1)
+                                directionLeftRef.set(0)
+                            }else if(wrelative < -wthreshold){
+                                directionRightRef.set(0)
+                                directionLeftRef.set(1)
+                            }else{
+                                directionRightRef.set(0)
+                                directionLeftRef.set(0)
+                            }
+
+
+                            if(hrelative > hthreshold){
+                                directionUpRef.set(1)
+                                directionDownRef.set(0)
+                            }else if(hrelative < -hthreshold){
+                                directionUpRef.set(0)
+                                directionDownRef.set(1)
+                            }else{
+                                directionUpRef.set(0)
+                                directionDownRef.set(0)
+                            }
+
+                            console.log({wrelative, hrelative})
+                            /* console.log(detections[0].box()) */
+                        }
+                        
+
+                        const resizedDetections = faceapi.resizeResults(detections, displaySize)
+
+                        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+                        faceapi.draw.drawDetections(canvas, resizedDetections)
+                    }, 100)
+                })
+
+
+
             },
             (data) => {
                 // make sure that I'm the host, if not, do nothing
@@ -307,7 +396,7 @@
                             addVotation(data.content.name, data.content.votes.length ? [data.content.votes[0]] : [])
                         break
                     case "addMarker":
-                        const isFromTrustedWatcher =
+                        isFromTrustedWatcher =
                             watchers.filter(
                                 (item) => item.id == data.from && item.controlLevel == 2
                             ).length == 1 ? true : false;
@@ -317,7 +406,7 @@
                         } 
                         break
                     case "removeMarker":
-                        const isFromTrustedWatcher =
+                        isFromTrustedWatcher =
                             watchers.filter(
                                 (item) => item.id == data.from && item.controlLevel == 2
                             ).length == 1 ? true : false;
@@ -328,7 +417,7 @@
 
                         break
                     case "controls":
-                        let isFromTrustedWatcher =
+                        isFromTrustedWatcher =
                             watchers.filter(
                                 (item) => item.id == data.from && item.controlLevel == 2
                             ).length == 1 ? true : false;
@@ -598,6 +687,7 @@ function setActiveMarker(name){
             let directionRef = database.ref(`users/${$uid}/direction`);
             directionRef.get().then((snapshot) => {
                 let data = snapshot.val()
+                if(!data) return
                 data[4] = 0
                 data[5] = 0
                 directionRef.set(data);
@@ -703,7 +793,9 @@ setInterval(updateVotations, 5000)
 </script>
 
 <div class="flexColumn" style="align-items: baseline">
-    <video id="webcamVideo" autoplay playsinline bind:this={videoEl} />
+    <div class="videoContainer">
+        <video id="webcamVideo" autoplay playsinline bind:this={videoEl} />
+    </div>
     <div style="width:100%; height: 20px">
         <div class="positionBarContainer">
             <div
@@ -906,15 +998,21 @@ setInterval(updateVotations, 5000)
 {/if}
 
 <style>
-    video#webcamVideo {
+    .videoContainer {
         /* --size: 90%;
             width: var(--size); */
+        position: relative;
         width: 100%;
         /* height: var(--size); */
         /* margin-bottom: 1.5rem; */
         max-width: 80vh;
         background: #2c3e50;
     }
+
+    .videoContainer video {
+        height: 35vw
+    }
+
 
     .floatingIcons {
         position: fixed;

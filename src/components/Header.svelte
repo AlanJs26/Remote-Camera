@@ -30,7 +30,7 @@
   import VideoStream from "../screens/VideoStream.svelte";
   import { setCubesState } from "./Cubes.svelte";
   import { currentScreen } from "../stores/app.js";
-  import { backCallbacks, configBtn } from "../stores/header.js";
+  import { backCallbacks, configBtn, facetrackOn } from "../stores/header.js";
 
   let configDisabled = true;
   let backEnabled = false;
@@ -102,7 +102,12 @@
     <ul id="configItems">
       <li>Perfil</li>
       <li id="cameraConfigBtn" on:click={configBtn.run($currentScreen)}>
-        Configurações
+        {#if $facetrackOn} 
+           <i class="fas fa-toggle-on" />   
+        {:else}
+           <i class="fas fa-toggle-off" />   
+        {/if}
+         Seguir rostos
       </li>
       <li id="logoutBtn" on:click={() => auth.signOut()}>Log out</li>
     </ul>
