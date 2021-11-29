@@ -129,10 +129,10 @@
                     case "currentPercentage":
                         currentPercentage = data.content;
                         break
-                    case "currentPercentage":
+                    case "horizontalPercentage":
                         horizontalPercentage = data.content;
                         break
-                    case "currentPercentage":
+                    case "fixedPositions":
                         markers = data.content;
                         break
                     case "controlsState":
@@ -351,8 +351,10 @@
             },
             (data) => {
                 // make sure that I'm the host, if not, do nothing
-                if (!connectionsHandler.isHost) return;
+                if (!connectionsHandler.isHost || !data) return;
 
+                let isFromTrustedWatcher = null;
+                
                 // when the handshake message is received, send the current controlsState, fixedPositions and currentPercentage
                 switch(data.type){
                     case "handshake":
@@ -383,7 +385,7 @@
                         connectionsHandler.broadcast(JSON.stringify(message));
                         break
                     case "activeMarker":
-                        const isFromTrustedWatcher =
+                        isFromTrustedWatcher =
                             watchers.filter(
                                 (item) => item.id == data.from && item.controlLevel >= 1
                             ).length == 1 ? true : false;

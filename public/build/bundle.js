@@ -39115,7 +39115,13 @@ var app = (function () {
             this.subscribeToAll('data', onData);
 
             this.pingInterval = setInterval(() => {
-                this.broadcast('{"type": "ping"}');
+                const msg = {
+                  type: "ping",
+                  from: this.peer.id,
+                  content: "",
+                  displayName: ""
+                };
+                this.broadcast(JSON.stringify(msg));
 
                 let onlyAwakeConnections = this.connections.filter(connection => {
                     connection.pingStrikes -= 1;
@@ -40126,7 +40132,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (806:12) {#each markers as { percentage, name, tooltip }}
+    // (808:12) {#each markers as { percentage, name, tooltip }}
     function create_each_block_2(ctx) {
     	let div1;
     	let div0;
@@ -40155,10 +40161,10 @@ var app = (function () {
     			t1 = space();
     			attr_dev(div0, "class", "marker-tooltip svelte-1lbejrb");
     			toggle_class(div0, "active", /*tooltip*/ ctx[62].isVisible);
-    			add_location(div0, file$1, 826, 20, 29304);
+    			add_location(div0, file$1, 828, 20, 29375);
     			attr_dev(div1, "class", "marker svelte-1lbejrb");
     			set_style(div1, "--percentage", /*percentage*/ ctx[61]);
-    			add_location(div1, file$1, 806, 16, 28373);
+    			add_location(div1, file$1, 808, 16, 28444);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -40194,14 +40200,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(806:12) {#each markers as { percentage, name, tooltip }}",
+    		source: "(808:12) {#each markers as { percentage, name, tooltip }}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (837:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
+    // (839:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
     function create_if_block_2(ctx) {
     	let div2;
     	let div0;
@@ -40239,26 +40245,26 @@ var app = (function () {
     			attr_dev(input0, "class", "transparentInput svelte-1lbejrb");
     			set_style(input0, "flex", "1");
     			attr_dev(input0, "placeholder", "Digite Aqui");
-    			add_location(input0, file$1, 839, 16, 29807);
+    			add_location(input0, file$1, 841, 16, 29878);
     			attr_dev(button, "class", "transparentBtn editItem svelte-1lbejrb");
-    			add_location(button, file$1, 856, 16, 30496);
+    			add_location(button, file$1, 858, 16, 30567);
     			attr_dev(div0, "class", "flexRow svelte-1lbejrb");
     			set_style(div0, "height", "20px");
     			set_style(div0, "margin", "5px 0");
-    			add_location(div0, file$1, 838, 12, 29731);
+    			add_location(div0, file$1, 840, 12, 29802);
     			attr_dev(div1, "class", "svelte-1lbejrb");
-    			add_location(div1, file$1, 868, 12, 30965);
+    			add_location(div1, file$1, 870, 12, 31036);
     			attr_dev(div2, "class", "editionBar svelte-1lbejrb");
     			set_style(div2, "width", "100%");
-    			add_location(div2, file$1, 837, 8, 29673);
+    			add_location(div2, file$1, 839, 8, 29744);
     			attr_dev(div3, "class", "shadow svelte-1lbejrb");
     			attr_dev(div3, "style", div3_style_value = `--percentage: ${/*horizontalPercentage*/ ctx[9]}%`);
-    			add_location(div3, file$1, 881, 12, 31386);
+    			add_location(div3, file$1, 883, 12, 31457);
     			attr_dev(input1, "type", "range");
     			attr_dev(input1, "class", "svelte-1lbejrb");
-    			add_location(input1, file$1, 882, 12, 31476);
+    			add_location(input1, file$1, 884, 12, 31547);
     			attr_dev(div4, "class", "slidebarContainer svelte-1lbejrb");
-    			add_location(div4, file$1, 880, 8, 31341);
+    			add_location(div4, file$1, 882, 8, 31412);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40324,14 +40330,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(837:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}",
+    		source: "(839:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (870:16) {#if editRemoveName}
+    // (872:16) {#if editRemoveName}
     function create_if_block_3(ctx) {
     	let button;
     	let p;
@@ -40346,9 +40352,9 @@ var app = (function () {
     			t0 = text("Remover ");
     			t1 = text(/*editRemoveName*/ ctx[11]);
     			attr_dev(p, "class", "svelte-1lbejrb");
-    			add_location(p, file$1, 874, 24, 31208);
+    			add_location(p, file$1, 876, 24, 31279);
     			attr_dev(button, "class", "transparentBtn removeItem svelte-1lbejrb");
-    			add_location(button, file$1, 870, 20, 31030);
+    			add_location(button, file$1, 872, 20, 31101);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -40370,14 +40376,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(870:16) {#if editRemoveName}",
+    		source: "(872:16) {#if editRemoveName}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (912:8) {#each watchers as watcher}
+    // (914:8) {#each watchers as watcher}
     function create_each_block_1(ctx) {
     	let li;
     	let span;
@@ -40427,32 +40433,32 @@ var app = (function () {
     			t4 = space();
     			attr_dev(span, "class", "svelte-1lbejrb");
     			toggle_class(span, "me", /*watcher*/ ctx[58].id == /*$uid*/ ctx[14]);
-    			add_location(span, file$1, 913, 16, 32347);
+    			add_location(span, file$1, 915, 16, 32418);
     			attr_dev(input0, "watcher", input0_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input0, "type", "radio");
     			input0.__value = input0_value_value = 0;
     			input0.value = input0.__value;
     			attr_dev(input0, "class", "svelte-1lbejrb");
     			/*$$binding_groups*/ ctx[44][0].push(input0);
-    			add_location(input0, file$1, 919, 20, 32609);
+    			add_location(input0, file$1, 921, 20, 32680);
     			attr_dev(input1, "watcher", input1_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input1, "type", "radio");
     			input1.__value = input1_value_value = 1;
     			input1.value = input1.__value;
     			attr_dev(input1, "class", "svelte-1lbejrb");
     			/*$$binding_groups*/ ctx[44][0].push(input1);
-    			add_location(input1, file$1, 926, 20, 32902);
+    			add_location(input1, file$1, 928, 20, 32973);
     			attr_dev(input2, "watcher", input2_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input2, "type", "radio");
     			input2.__value = input2_value_value = 2;
     			input2.value = input2.__value;
     			attr_dev(input2, "class", "svelte-1lbejrb");
     			/*$$binding_groups*/ ctx[44][0].push(input2);
-    			add_location(input2, file$1, 933, 20, 33195);
+    			add_location(input2, file$1, 935, 20, 33266);
     			attr_dev(div, "style", div_style_value = `pointer-events: ${connectionsHandler.isHost ? "auto" : "none"}`);
-    			add_location(div, file$1, 914, 16, 32422);
+    			add_location(div, file$1, 916, 16, 32493);
     			attr_dev(li, "class", "svelte-1lbejrb");
-    			add_location(li, file$1, 912, 12, 32325);
+    			add_location(li, file$1, 914, 12, 32396);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40524,14 +40530,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(912:8) {#each watchers as watcher}",
+    		source: "(914:8) {#each watchers as watcher}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (947:0) {#if isCopyPanelActive}
+    // (949:0) {#if isCopyPanelActive}
     function create_if_block_1(ctx) {
     	let div2;
     	let h2;
@@ -40565,18 +40571,18 @@ var app = (function () {
     			p = element("p");
     			t4 = text(t4_value);
     			attr_dev(h2, "class", "svelte-1lbejrb");
-    			add_location(h2, file$1, 957, 8, 33874);
+    			add_location(h2, file$1, 959, 8, 33945);
     			attr_dev(span, "class", "svelte-1lbejrb");
-    			add_location(span, file$1, 962, 12, 34020);
+    			add_location(span, file$1, 964, 12, 34091);
     			attr_dev(p, "class", "svelte-1lbejrb");
     			toggle_class(p, "active", /*isCopyAnimActive*/ ctx[3]);
-    			add_location(p, file$1, 964, 16, 34088);
+    			add_location(p, file$1, 966, 16, 34159);
     			attr_dev(div0, "class", "svelte-1lbejrb");
-    			add_location(div0, file$1, 963, 12, 34065);
+    			add_location(div0, file$1, 965, 12, 34136);
     			attr_dev(div1, "class", "svelte-1lbejrb");
-    			add_location(div1, file$1, 961, 8, 34001);
+    			add_location(div1, file$1, 963, 8, 34072);
     			attr_dev(div2, "class", "copyPanel svelte-1lbejrb");
-    			add_location(div2, file$1, 947, 4, 33578);
+    			add_location(div2, file$1, 949, 4, 33649);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40631,14 +40637,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(947:0) {#if isCopyPanelActive}",
+    		source: "(949:0) {#if isCopyPanelActive}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (973:0) {#if votations.length}
+    // (975:0) {#if votations.length}
     function create_if_block(ctx) {
     	let div;
     	let h3;
@@ -40667,11 +40673,11 @@ var app = (function () {
     			}
 
     			attr_dev(h3, "class", "svelte-1lbejrb");
-    			add_location(h3, file$1, 974, 6, 34358);
+    			add_location(h3, file$1, 976, 6, 34429);
     			attr_dev(ul, "class", "svelte-1lbejrb");
-    			add_location(ul, file$1, 975, 6, 34390);
+    			add_location(ul, file$1, 977, 6, 34461);
     			attr_dev(div, "class", "votations svelte-1lbejrb");
-    			add_location(div, file$1, 973, 4, 34311);
+    			add_location(div, file$1, 975, 4, 34382);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -40736,14 +40742,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(973:0) {#if votations.length}",
+    		source: "(975:0) {#if votations.length}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (977:8) {#each votations as {name, time, votes, maxVotes}
+    // (979:8) {#each votations as {name, time, votes, maxVotes}
     function create_each_block(ctx) {
     	let li;
     	let div;
@@ -40792,16 +40798,16 @@ var app = (function () {
     			attr_dev(rect, "y", rect_y_value = Math.floor(100 - /*votes*/ ctx[54].length / /*maxVotes*/ ctx[55] * 100));
     			attr_dev(rect, "width", "100");
     			attr_dev(rect, "height", "100");
-    			add_location(rect, file$1, 982, 20, 34766);
+    			add_location(rect, file$1, 984, 20, 34837);
     			attr_dev(clipPath, "id", clipPath_id_value = "clipPath-" + /*name*/ ctx[52].replace(" ", "-"));
-    			add_location(clipPath, file$1, 981, 20, 34695);
-    			add_location(defs, file$1, 980, 18, 34667);
+    			add_location(clipPath, file$1, 983, 20, 34766);
+    			add_location(defs, file$1, 982, 18, 34738);
     			attr_dev(circle0, "class", "progressFill svelte-1lbejrb");
     			attr_dev(circle0, "cx", "50");
     			attr_dev(circle0, "cy", "50");
     			attr_dev(circle0, "r", "45");
     			set_style(circle0, "clip-path", "url(#clipPath-" + /*name*/ ctx[52].replace(" ", "-") + ")");
-    			add_location(circle0, file$1, 986, 18, 34958);
+    			add_location(circle0, file$1, 988, 18, 35029);
     			attr_dev(circle1, "class", "progressLine svelte-1lbejrb");
     			attr_dev(circle1, "stroke-linecap", "round");
     			attr_dev(circle1, "cx", "50");
@@ -40813,19 +40819,19 @@ var app = (function () {
     			attr_dev(circle1, "stroke-dashoffset", circle1_stroke_dashoffset_value = Math.floor(315 - /*time*/ ctx[53] / 100 * 315));
     			attr_dev(circle1, "stroke-mitterlimit", "0");
     			attr_dev(circle1, "transform", "rotate(-90 ) translate(-100 0)");
-    			add_location(circle1, file$1, 988, 18, 35103);
+    			add_location(circle1, file$1, 990, 18, 35174);
     			attr_dev(svg, "width", "50");
     			attr_dev(svg, "height", "50");
     			attr_dev(svg, "viewBox", "0 0 100 100");
-    			add_location(svg, file$1, 979, 16, 34597);
+    			add_location(svg, file$1, 981, 16, 34668);
     			attr_dev(span, "class", "svgText svelte-1lbejrb");
-    			add_location(span, file$1, 990, 16, 35398);
+    			add_location(span, file$1, 992, 16, 35469);
     			attr_dev(div, "class", "timer svelte-1lbejrb");
-    			add_location(div, file$1, 978, 14, 34560);
+    			add_location(div, file$1, 980, 14, 34631);
     			attr_dev(p, "class", "svelte-1lbejrb");
-    			add_location(p, file$1, 992, 14, 35479);
+    			add_location(p, file$1, 994, 14, 35550);
     			attr_dev(li, "class", "svelte-1lbejrb");
-    			add_location(li, file$1, 977, 12, 34469);
+    			add_location(li, file$1, 979, 12, 34540);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40877,7 +40883,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(977:8) {#each votations as {name, time, votes, maxVotes}",
+    		source: "(979:8) {#each votations as {name, time, votes, maxVotes}",
     		ctx
     	});
 
@@ -40987,43 +40993,43 @@ var app = (function () {
     			video.autoplay = true;
     			video.playsInline = true;
     			attr_dev(video, "class", "svelte-1lbejrb");
-    			add_location(video, file$1, 796, 8, 27990);
+    			add_location(video, file$1, 798, 8, 28061);
     			attr_dev(div0, "class", "videoContainer svelte-1lbejrb");
-    			add_location(div0, file$1, 795, 4, 27952);
+    			add_location(div0, file$1, 797, 4, 28023);
     			attr_dev(div1, "class", "currentPosition svelte-1lbejrb");
     			set_style(div1, "--percentage", /*currentPercentage*/ ctx[8]);
-    			add_location(div1, file$1, 800, 12, 28171);
+    			add_location(div1, file$1, 802, 12, 28242);
     			attr_dev(div2, "class", "positionBarContainer svelte-1lbejrb");
-    			add_location(div2, file$1, 799, 8, 28123);
+    			add_location(div2, file$1, 801, 8, 28194);
     			set_style(div3, "width", "100%");
     			set_style(div3, "height", "20px");
-    			add_location(div3, file$1, 798, 4, 28075);
+    			add_location(div3, file$1, 800, 4, 28146);
     			attr_dev(div4, "class", "flexColumn svelte-1lbejrb");
     			set_style(div4, "align-items", "baseline");
-    			add_location(div4, file$1, 794, 0, 27892);
+    			add_location(div4, file$1, 796, 0, 27963);
     			attr_dev(i0, "class", "fas fa-share fa-2x svelte-1lbejrb");
-    			add_location(i0, file$1, 888, 8, 31664);
+    			add_location(i0, file$1, 890, 8, 31735);
     			attr_dev(div5, "class", "svelte-1lbejrb");
-    			add_location(div5, file$1, 887, 4, 31591);
+    			add_location(div5, file$1, 889, 4, 31662);
     			attr_dev(i1, "class", "fas fa-user-friends fa-2x svelte-1lbejrb");
-    			add_location(i1, file$1, 891, 8, 31785);
+    			add_location(i1, file$1, 893, 8, 31856);
     			attr_dev(div6, "class", "svelte-1lbejrb");
-    			add_location(div6, file$1, 890, 4, 31714);
+    			add_location(div6, file$1, 892, 4, 31785);
     			attr_dev(div7, "class", "floatingIcons svelte-1lbejrb");
-    			add_location(div7, file$1, 886, 0, 31558);
+    			add_location(div7, file$1, 888, 0, 31629);
     			attr_dev(h2, "class", "svelte-1lbejrb");
-    			add_location(h2, file$1, 905, 4, 32133);
+    			add_location(h2, file$1, 907, 4, 32204);
     			attr_dev(span0, "class", "svelte-1lbejrb");
-    			add_location(span0, file$1, 907, 8, 32195);
+    			add_location(span0, file$1, 909, 8, 32266);
     			attr_dev(span1, "class", "svelte-1lbejrb");
-    			add_location(span1, file$1, 908, 8, 32222);
+    			add_location(span1, file$1, 910, 8, 32293);
     			attr_dev(div8, "class", "listHeader svelte-1lbejrb");
-    			add_location(div8, file$1, 906, 4, 32161);
+    			add_location(div8, file$1, 908, 4, 32232);
     			attr_dev(ul, "class", "svelte-1lbejrb");
-    			add_location(ul, file$1, 910, 4, 32270);
+    			add_location(ul, file$1, 912, 4, 32341);
     			attr_dev(div9, "class", "slideFromRightContainer svelte-1lbejrb");
     			toggle_class(div9, "open", /*isSlidePanelOpen*/ ctx[2]);
-    			add_location(div9, file$1, 895, 0, 31848);
+    			add_location(div9, file$1, 897, 0, 31919);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -41357,10 +41363,10 @@ var app = (function () {
     					case "currentPercentage":
     						$$invalidate(8, currentPercentage = data.content);
     						break;
-    					case "currentPercentage":
+    					case "horizontalPercentage":
     						$$invalidate(9, horizontalPercentage = data.content);
     						break;
-    					case "currentPercentage":
+    					case "fixedPositions":
     						$$invalidate(7, markers = data.content);
     						break;
     					case "controlsState":
@@ -41576,7 +41582,9 @@ var app = (function () {
     			},
     			data => {
     				// make sure that I'm the host, if not, do nothing
-    				if (!connectionsHandler.isHost) return;
+    				if (!connectionsHandler.isHost || !data) return;
+
+    				let isFromTrustedWatcher = null;
 
     				// when the handshake message is received, send the current controlsState, fixedPositions and currentPercentage
     				switch (data.type) {
@@ -41606,7 +41614,7 @@ var app = (function () {
     						connectionsHandler.broadcast(JSON.stringify(message));
     						break;
     					case "activeMarker":
-    						const isFromTrustedWatcher = watchers.filter(item => item.id == data.from && item.controlLevel >= 1).length == 1
+    						isFromTrustedWatcher = watchers.filter(item => item.id == data.from && item.controlLevel >= 1).length == 1
     						? true
     						: false;
     						if (isFromTrustedWatcher) activeMarker = data.content;
@@ -43347,17 +43355,17 @@ var app = (function () {
     			div0 = element("div");
     			p = element("p");
     			p.textContent = "Próximo";
-    			attr_dev(h3, "class", "svelte-it2xg6");
+    			attr_dev(h3, "class", "svelte-obfeha");
     			add_location(h3, file$5, 22, 4, 621);
     			attr_dev(input, "type", "text");
-    			attr_dev(input, "class", "transparentInput svelte-it2xg6");
+    			attr_dev(input, "class", "transparentInput svelte-obfeha");
     			attr_dev(input, "placeholder", "Digite Aqui");
     			add_location(input, file$5, 23, 4, 667);
     			add_location(p, file$5, 30, 8, 870);
     			attr_dev(div0, "class", "transparentBtn");
     			add_location(div0, file$5, 29, 4, 810);
     			set_style(div1, "position", "absolute");
-    			attr_dev(div1, "class", "container svelte-it2xg6");
+    			attr_dev(div1, "class", "container svelte-obfeha");
     			add_location(div1, file$5, 21, 0, 548);
     		},
     		l: function claim(nodes) {

@@ -1,0 +1,76 @@
+{
+  "rules": {
+    "cameras": {
+      "codes": {
+        ".read": true,
+        "$code": {
+          ".read": true,
+          ".write": true,
+          ".validate": "newData.val() === auth.uid && $code.length == 4",
+        }
+      }
+    },
+    "users": {
+      "$uid": {
+        "direction": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+          "0": {".validate": "newData.val() === 0 || newData.val() === 1"},
+          "1": {".validate": "newData.val() === 0 || newData.val() === 1"},
+          "2": {".validate": "newData.val() === 0 || newData.val() === 1"},
+          "3": {".validate": "newData.val() === 0 || newData.val() === 1"}
+        },
+        "watchers": {
+          ".read": true,
+          ".write": true,
+          "$index": {
+          	".validate": "newData.val() === auth.uid && now < root.child('/users/'+$uid+'/callExpirationDate').val()" 
+          },
+        },
+        "callExpirationDate": {".validate": "newData.val() > now && newData.isNumber()"},
+
+        "ready": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+        },
+        "connectedWith": {
+          ".read": true,
+          ".write": true,
+          ".validate": "newData.val() == auth.uid"
+        },
+        "name": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+        },
+        "lastCamera": {
+          ".read": "$uid === auth.uid",
+          ".write": "$uid === auth.uid",
+          ".validate": "root.child('/users/'+newData.val()).exists()"
+        },
+        "fixedPositions": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+        },
+        "reconnectValidUntil": {
+          ".read": true,
+          ".write": "$uid === auth.uid",
+          // valid for 1 hour
+          ".validate": "newData.isNumber() && newData.val()*1000 <= now+60*60*1000"
+        },
+        "testAlive": {
+          ".read": true,
+          ".write": true,
+          ".validate": "newData.isNumber() && newData.val() <= 1000"
+        },
+        "currentPercentage": {
+          ".read": true,
+          ".write": "$uid === auth.uid || auth.uid == root.child('/users/'+$uid+'/lastCamera').val()",
+          ".validate": "newData.isNumber() && newData.val() <= 100 && newData.val() >= 0",
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}

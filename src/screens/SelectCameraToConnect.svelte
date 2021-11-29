@@ -37,6 +37,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        z-index: 5;
     }
     .transparentInput {
         height: 30px;

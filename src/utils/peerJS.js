@@ -55,7 +55,13 @@ class ConnectionsHandler{
         this.subscribeToAll('data', onData)
 
         this.pingInterval = setInterval(() => {
-            this.broadcast('{"type": "ping"}')
+            const msg = {
+              type: "ping",
+              from: this.peer.id,
+              content: "",
+              displayName: ""
+            }
+            this.broadcast(JSON.stringify(msg))
 
             let onlyAwakeConnections = this.connections.filter(connection => {
                 connection.pingStrikes -= 1

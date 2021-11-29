@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
+import strip from '@rollup/plugin-strip';
 import { terser } from 'rollup-plugin-terser';
 
 import css from 'rollup-plugin-css-only'
@@ -28,6 +29,7 @@ export default {
 			}
 		}),
 
+
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
 		// some cases you'll need additional configuration -
@@ -46,6 +48,15 @@ export default {
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
 		!production && livereload('public'),
+
+
+		// strip debugging commands like console.log etc.
+		production && strip({
+				include: '**/*.(mjs|js|svelte)',
+				// defaults to `[ 'console.*', 'assert.*' ]`
+				functions: ['console.log', 'assert.*', 'debug', 'alert'],
+		}),
+
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
