@@ -26,7 +26,10 @@
     const btnModeClass = writable(false);
     const absolutePosition = writable({x: 0, y: 0})
 
+
     function floatAnimIntervalParser(x, y) {
+        if(animationState != "floatOpening") return
+
         animVal.update((value) => {
             return { x: x, y: value.y + 1 };
         });
@@ -34,6 +37,10 @@
             return { x: x, y: value.y + 1 };
         });
     }
+
+    const floatInterval = setInterval(() => {
+        floatAnimIntervalParser(0, 0);
+    }, 500);
 
     function AnimVal2cubes(value, value2) {
         let toSine = (v) => {
@@ -52,7 +59,6 @@
                     { x: ` 33vw`, y: `${toCosine(value.y)                - 70 + 100}px` },
                     { x: ` 33vw`, y: `${  toSine(value2.y + Math.PI / 6) - 70 - 100}px` },
                 ];
-                break;
             case "btnMode":
                 return [
                     { x: '0', y: '0' },
@@ -60,7 +66,6 @@
                     { x: '0', y: '0' },
                     { x: '0', y: '0' },
                 ];
-                break;
             default:
                 return [
                     { x: '0', y: '0' },
@@ -68,18 +73,17 @@
                     { x: '0', y: '0' },
                     { x: '0', y: '0' },
                 ];
-                break;
         }
     }
 
-    let floatInterval;
+    /* let floatInterval; */
     export function setCubesState(state) {
         animationState = state;
 
         if (state != "floatOpening") {
             animVal.set({ x: 0, y: 0 });
             animVal2.set({ x: 0, y: 0 });
-            clearInterval(floatInterval);
+            /* clearInterval(floatInterval); */
         }
 
         switch (state) {
@@ -92,9 +96,9 @@
 
                 floatAnimIntervalParser(0, 0);
 
-                floatInterval = setInterval(() => {
-                    floatAnimIntervalParser(0, 0);
-                }, 500);
+                /* floatInterval = setInterval(() => { */
+                    /* floatAnimIntervalParser(0, 0); */
+                /* }, 500); */
                 break;
             case "btnMode":
                 btnModeClass.set(true)

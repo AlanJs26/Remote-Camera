@@ -3,12 +3,16 @@
   import { currentScreen, uid } from "../stores/app.js";
   import { auth, database } from "../firebase";
   import { subscribeToBackBtn } from "../components/Header.svelte";
+  import Loading from '../screens/Loading.svelte'
 
   subscribeToBackBtn("selectCamera", () => {
     currentScreen.set("cameraOwner");
   });
 
+
   let inputValue = "";
+  let isLoading = true;
+  let loadingTimeout = setTimeout(() => {isLoading = false}, 1000)
 
   function* notFirstGen() {
     console.log("first - blocked");
@@ -72,6 +76,7 @@
       if (notFirst.next().value == false) return;
 
       if (data > Date.now()) {
+        clearTimeout(loadingTimeout)
         currentScreen.set("main");
 
         reconnectValidUntilRef.off();
@@ -84,7 +89,12 @@
   }
 </script>
 
-<div class="flexColumn" style="position: absolute; z-index: 4">
+<div class="flexColumn" class:isLoading style="position: absolute; z-index: 4">
+{#if isLoading }
+  <div style="height: 80vh; display: flex; justify-content: center">
+    <Loading />
+  </div>
+{:else}
   <h3>Código da câmera</h3>
   <div id="cameraOwner" transition:fade class="container">
     <input
@@ -101,7 +111,9 @@
       <p>Conectar</p>
     </button>
   </div>
+{/if}
 </div>
+
 
 <style>
   .container {
@@ -133,5 +145,10 @@
     max-width: 500px;
     max-height: 100px;
     margin: 15px;
+  }
+
+  .flexColumn.isLoading {
+    max-width: unset;
+    max-height: unset;
   }
 </style>

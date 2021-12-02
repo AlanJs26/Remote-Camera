@@ -107,7 +107,7 @@
                 videoEl.srcObject = remoteStream;
             },
             (data) => {
-                if (connectionsHandler.isHost) return;
+                if (connectionsHandler.isHost || !data) return;
 
                 if (data.type == "users") {
                     watchers = data.content;
@@ -142,6 +142,13 @@
                         break
                     case "votation":
                         votations = data.content
+                        updateVotations()
+                        break
+                    case "updateVotation":
+                        for(let i = 0; i<votations.length; i++){
+                            votations[i] = Object.assign(votations[i], data.content[i])
+                        }
+                        updateVotations()
                         break
                 }
 
@@ -197,6 +204,11 @@
             connectionsHandler.broadcast(JSON.stringify(message));
             horizontalPercentage = snapshot.val();
         });
+
+        horizontalPercentageRef.get().then(snapshot => {
+            if(!snapshot.val()) return
+            sliderValue = snapshot.val()
+        })
 
         // Listen the fixedPositions in the server and update the local ones
         let fixedPositionsRef = database.ref(`users/${$uid}/fixedPositions`);
@@ -268,19 +280,22 @@
                     faceapi.nets.faceLandmark68Net.loadFromUri('./dist/models'),
                     faceapi.nets.faceRecognitionNet.loadFromUri('./dist/models'),
                     faceapi.nets.faceExpressionNet.loadFromUri('./dist/models'),
+                    new Promise(resolve => {videoEl.addEventListener("canplay", ev => {resolve(ev)})})
                 ]).then(() => {
 
                     console.log('ML models loaded!')
 
                     const canvas = faceapi.createCanvasFromMedia(videoEl)
                     let displaySize = { width: canvas.width, height: canvas.height }
-                    canvas.id = 'webcamVideo' 
+
+
                     videoEl.parentNode.prepend(canvas)
-                    videoEl.style.height = '100%'
-                    canvas.style.height = '100%'
-                    videoEl.parentNode.style.height = `max(min(calc(45vw*(${canvas.height}/${canvas.width})), calc(80vh*(${canvas.height}/${canvas.width}))),calc(29vh*(${canvas.height}/${canvas.width})))`
+                    /* videoEl.style.height = '100%' */
+                    /* canvas.style.height = '100%' */
+                    /* videoEl.parentNode.style.height = `max(min(calc(45vw*(${canvas.height}/${canvas.width})), calc(80vh*(${canvas.height}/${canvas.width}))),calc(29vh*(${canvas.height}/${canvas.width})))` */
 
                     canvas.style.position = 'absolute'
+                    canvas.style.width = '100%'
                     
                     const directionLeftRef = database.ref(`users/${$uid}/direction/2`);
                     const directionRightRef = database.ref(`users/${$uid}/direction/1`);
@@ -395,7 +410,7 @@
                         break
                     case "votation":
                         if(markers.filter(item => item.name == data.content.name).length >= 1)
-                            addVotation(data.content.name, data.content.votes.length ? [data.content.votes[0]] : [])
+                            addVotation(data.content.name, data.content.votes.slice(0,1))
                         break
                     case "addMarker":
                         isFromTrustedWatcher =
@@ -736,15 +751,34 @@ function setActiveMarker(name){
 const updateVotations = () => {
     if(votations.length == 0) return
 
+    if(isHost){
+        var message = {
+            type: "updateVotation",
+            from: connectionsHandler.peer.id,
+            content: [],
+            displayName: auth.currentUser.displayName,
+        };
+    }
+
     for(let i = votations.length-1; i >= 0; i--){
-        votations[i].time+=10
-        if(votations[i].votes.length >= votations[i].maxVotes){
-            activeMarker = votations[i].name
+
+        if(isHost){
+            votations[i].time+=10
+            message.content[i] = {name: votations[i].name, time: votations[i].time}
+        }
+
+        if(votations[i].votes.length > votations[i].maxVotes){
+            if(isHost)
+                activeMarker = votations[i].name
+
             votations.splice(i,1)
         }else if(votations[i].time > 100){
             votations.splice(i,1)
         }
     }
+
+    
+    isHost&&connectionsHandler.broadcast(JSON.stringify(message))
 }
 
 function addVotation(name, votes=[]){
@@ -754,27 +788,26 @@ function addVotation(name, votes=[]){
         const message = {
             type: "votation",
             from: connectionsHandler.peer.id,
-            content: {name, votes: votes.length ? votes[0] : []},
+            content: {name, votes: votes.length ? [votes[0]] : []},
             displayName: auth.currentUser.displayName,
         };
         connectionsHandler.broadcast(JSON.stringify(message))
         return
     }
 
-    const newVotation = {
-        name,
-        time: 0,
-        votes: [],
-        maxVotes: Math.floor(watchers.length/2)||1 
-    }
-    if(votations.filter(item => item.name == name).length){
+    votations = votations.map((item) => {
+        if(item.name != name || item.votes.includes(votes[0])) return item
 
-        votations = votations.map((item) => {
-            if(item.name != name) return item
+        return {...item, votes: votes.length ? [...item.votes, votes[0]] : item.votes}
+    })
 
-            return {...item, votes: votes.length ? [...item.votes, votes[0]] : item.votes}
-        })
-    }else{
+    if(votations.filter(item => item.name == name).length == 0){
+        const newVotation = {
+            name,
+            time: 0,
+            votes: votes.slice(0,1),
+            maxVotes: Math.floor(watchers.length/2)||1 
+        }
         votations.push(newVotation)
     }
 
@@ -794,10 +827,8 @@ setInterval(updateVotations, 5000)
 
 </script>
 
-<div class="flexColumn" style="align-items: baseline">
-    <div class="videoContainer">
-        <video id="webcamVideo" autoplay playsinline bind:this={videoEl} />
-    </div>
+<div class="flexColumn" style="align-items: baseline; position: relative;">
+    <video id="webcamVideo" autoplay playsinline bind:this={videoEl} />
     <div style="width:100%; height: 20px">
         <div class="positionBarContainer">
             <div
@@ -982,7 +1013,7 @@ setInterval(updateVotations, 5000)
                 <svg width="50" height="50" viewBox="0 0 100 100">
                   <defs>
                     <clipPath id="clipPath-{name.replace(' ' ,'-')}">
-                    <rect x="0" y="{Math.floor(100-votes.length/maxVotes*100)}" width="100" height="100"></rect>
+                    <rect x="0" y="{Math.floor(100-(votes.length)/(maxVotes)*100)}" width="100" height="100"></rect>
                     </clipPath>
                   </defs>
                   
@@ -1000,19 +1031,10 @@ setInterval(updateVotations, 5000)
 {/if}
 
 <style>
-    .videoContainer {
-        /* --size: 90%;
-            width: var(--size); */
-        position: relative;
-        width: 100%;
-        /* height: var(--size); */
-        /* margin-bottom: 1.5rem; */
-        max-width: 80vh;
-        background: #2c3e50;
-    }
 
-    .videoContainer video {
-        height: 35vw
+    video {
+        width: 100%;
+        max-height: 50vh;
     }
 
 

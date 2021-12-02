@@ -55,12 +55,14 @@
 </script>
 
 <div class="shapes">
+<!--
   <div class="circle" style="--size: 500px; --left: 5; --order: 5;" />
   <div class="circle" style="--size: 400px; --left: 2; --order: 4;" />
   <div class="circle" style="--size: 300px; --left: 3; --order: 3;" />
   <div style="--size: 200px; --left: 1; --order: 2;" />
   <div class="circle" style="--size: 100px; --left: 4; --order: 2.5;" />
   <div style="--size: 100px; --left: 4; --order: 2.5;" />
+-->
 </div>
 
 <Header />

@@ -31,6 +31,7 @@
   import { setCubesState } from "./Cubes.svelte";
   import { currentScreen } from "../stores/app.js";
   import { backCallbacks, configBtn, facetrackOn } from "../stores/header.js";
+  import { username } from "../stores/main";
 
   let configDisabled = true;
   let backEnabled = false;
@@ -101,14 +102,17 @@
     <div id="configBtn"><i class="fas fa-cog fa-2x" /></div>
     <ul id="configItems">
       <li>Perfil</li>
-      <li id="cameraConfigBtn" on:click={configBtn.run($currentScreen)}>
-        {#if $facetrackOn} 
-           <i class="fas fa-toggle-on" />   
-        {:else}
-           <i class="fas fa-toggle-off" />   
-        {/if}
-         Seguir rostos
-      </li>
+       
+      {#if !$username}
+        <li id="cameraConfigBtn" on:click={configBtn.run($currentScreen)}>
+          {#if $facetrackOn} 
+             <i class="fas fa-toggle-on" />   
+          {:else}
+             <i class="fas fa-toggle-off" />   
+          {/if}
+           Seguir rostos
+        </li>
+      {/if}
       <li id="logoutBtn" on:click={() => auth.signOut()}>Log out</li>
     </ul>
   </div>
