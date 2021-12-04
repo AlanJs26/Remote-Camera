@@ -3,6 +3,8 @@
   import { currentScreen } from "../stores/app.js";
   import { auth } from "../firebase";
   import { subscribeToBackBtn } from "../components/Header.svelte";
+  import Loading  from "../screens/Loading.svelte";
+  import { username } from "../stores/main.js";
 
   subscribeToBackBtn("cameraOwner", () => {
     auth.signOut();
@@ -10,8 +12,11 @@
   });
 
   let videoInputs = [];
+  let warningText = "";
+  let refreshInterval;
+  let loading = false;
 
-  const intervalFunction = () => {
+  const detectAvailableCameras = () => {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
       videoInputs = [];
       for (let device of devices) {
@@ -23,46 +28,74 @@
         // console.log(warningText)
       }
     });
+
+    if (!warningText && window.location.search) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const usernameToConnect = urlParams.get("q");
+
+      if (usernameToConnect) {
+        clearInterval(refreshInterval);
+        loading=true;
+        setTimeout(() => {
+          username.set(usernameToConnect);
+          currentScreen.set("main");
+        }, 1000);
+      }
+    }
   };
 
-  setInterval(intervalFunction, 2000);
-  intervalFunction();
+  refreshInterval = setInterval(detectAvailableCameras, 2000);
+  detectAvailableCameras();
 
   $: if (videoInputs.length > 0) {
     warningText = "";
   }
-
-  let warningText = "";
 </script>
 
-<div class="flexColumn" style="position: absolute; z-index: 4">
-  <div id="cameraOwner" transition:fade class="container">
-    <button
-      class="transparentBtn"
-      class:disabledBtn={warningText}
-      on:click={() => {
-        if (!warningText) currentScreen.set("selectCamera");
-      }}
-    >
-      <p>Utilizar a própria câmera</p>
-    </button>
-
-    <button
-      class="transparentBtn"
-      on:click={() => currentScreen.set("selectCameraToConnect")}
-    >
-      <p>Conectar a uma câmera</p>
-    </button>
+{#if loading}
+  <div class="loading">
+    <Loading/>
   </div>
+{:else}
+  <div class="flexColumn" style="position: absolute; z-index: 4">
+    <div id="cameraOwner" transition:fade class="container">
+      <button
+        class="transparentBtn"
+        class:disabledBtn={warningText}
+        on:click={() => {
+          if (!warningText) currentScreen.set("selectCamera");
+        }}
+      >
+        <p>Utilizar a própria câmera</p>
+      </button>
 
-  {#if warningText}
-    <p class="warningText" transition:fade>
-      {warningText}
-    </p>
-  {/if}
-</div>
+      <button
+        class="transparentBtn"
+        on:click={() => {
+          clearInterval(refreshInterval);
+          currentScreen.set("selectCameraToConnect");
+        }}
+      >
+        <p>Conectar a uma câmera</p>
+      </button>
+    </div>
+
+    {#if warningText}
+      <p class="warningText" transition:fade>
+        {warningText}
+      </p>
+    {/if}
+  </div>
+{/if}
 
 <style>
+  .loading {
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+    display: flex;
+  }
+
   .disabledBtn {
     background: #dadada38;
   }
@@ -74,8 +107,8 @@
     box-shadow: none;
   }
 
-  button.transparentBtn:not(:disabled):active{
-      background-color: rgba(255, 255, 255, 0.30); 
+  button.transparentBtn:not(:disabled):active {
+    background-color: rgba(255, 255, 255, 0.3);
   }
 
   button.transparentBtn {

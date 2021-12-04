@@ -827,8 +827,8 @@ setInterval(updateVotations, 5000)
 
 </script>
 
-<div class="flexColumn" style="align-items: baseline; position: relative;">
-    <video id="webcamVideo" autoplay playsinline bind:this={videoEl} />
+<div class="flexColumn" style="align-items: baseline; position: relative; max-width: 50vh">
+    <video id="webcamVideo" autoplay playsinline bind:this={videoEl} muted={isHost} />
     <div style="width:100%; height: 20px">
         <div class="positionBarContainer">
             <div
@@ -1033,8 +1033,8 @@ setInterval(updateVotations, 5000)
 <style>
 
     video {
-        width: 100%;
-        max-height: 50vh;
+        width: 95vw;
+        max-width: 50vh;
     }
 
 
@@ -1467,7 +1467,7 @@ max-width: 200px;
   margin-top: -5px;
   background-color: rgb(201, 144, 242);
   position: absolute;
-  margin-left: calc(var(--percentage) - 21px)
+  margin-left: calc(var(--percentage)*.95)
   
 }
 

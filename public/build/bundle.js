@@ -40161,12 +40161,12 @@ var app = (function () {
     			div0 = element("div");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr_dev(div0, "class", "marker-tooltip svelte-16nxna4");
+    			attr_dev(div0, "class", "marker-tooltip svelte-4juqmk");
     			toggle_class(div0, "active", /*tooltip*/ ctx[62].isVisible);
-    			add_location(div0, file$1, 859, 20, 30460);
-    			attr_dev(div1, "class", "marker svelte-16nxna4");
+    			add_location(div0, file$1, 859, 20, 30491);
+    			attr_dev(div1, "class", "marker svelte-4juqmk");
     			set_style(div1, "--percentage", /*percentage*/ ctx[61]);
-    			add_location(div1, file$1, 839, 16, 29529);
+    			add_location(div1, file$1, 839, 16, 29560);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -40244,29 +40244,29 @@ var app = (function () {
     			t4 = space();
     			input1 = element("input");
     			attr_dev(input0, "type", "text");
-    			attr_dev(input0, "class", "transparentInput svelte-16nxna4");
+    			attr_dev(input0, "class", "transparentInput svelte-4juqmk");
     			set_style(input0, "flex", "1");
     			attr_dev(input0, "placeholder", "Digite Aqui");
-    			add_location(input0, file$1, 872, 16, 30963);
-    			attr_dev(button, "class", "transparentBtn editItem svelte-16nxna4");
-    			add_location(button, file$1, 889, 16, 31652);
-    			attr_dev(div0, "class", "flexRow svelte-16nxna4");
+    			add_location(input0, file$1, 872, 16, 30994);
+    			attr_dev(button, "class", "transparentBtn editItem svelte-4juqmk");
+    			add_location(button, file$1, 889, 16, 31683);
+    			attr_dev(div0, "class", "flexRow svelte-4juqmk");
     			set_style(div0, "height", "20px");
     			set_style(div0, "margin", "5px 0");
-    			add_location(div0, file$1, 871, 12, 30887);
-    			attr_dev(div1, "class", "svelte-16nxna4");
-    			add_location(div1, file$1, 901, 12, 32121);
-    			attr_dev(div2, "class", "editionBar svelte-16nxna4");
+    			add_location(div0, file$1, 871, 12, 30918);
+    			attr_dev(div1, "class", "svelte-4juqmk");
+    			add_location(div1, file$1, 901, 12, 32152);
+    			attr_dev(div2, "class", "editionBar svelte-4juqmk");
     			set_style(div2, "width", "100%");
-    			add_location(div2, file$1, 870, 8, 30829);
-    			attr_dev(div3, "class", "shadow svelte-16nxna4");
+    			add_location(div2, file$1, 870, 8, 30860);
+    			attr_dev(div3, "class", "shadow svelte-4juqmk");
     			attr_dev(div3, "style", div3_style_value = `--percentage: ${/*horizontalPercentage*/ ctx[9]}%`);
-    			add_location(div3, file$1, 914, 12, 32542);
+    			add_location(div3, file$1, 914, 12, 32573);
     			attr_dev(input1, "type", "range");
-    			attr_dev(input1, "class", "svelte-16nxna4");
-    			add_location(input1, file$1, 915, 12, 32632);
-    			attr_dev(div4, "class", "slidebarContainer svelte-16nxna4");
-    			add_location(div4, file$1, 913, 8, 32497);
+    			attr_dev(input1, "class", "svelte-4juqmk");
+    			add_location(input1, file$1, 915, 12, 32663);
+    			attr_dev(div4, "class", "slidebarContainer svelte-4juqmk");
+    			add_location(div4, file$1, 913, 8, 32528);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40353,17 +40353,17 @@ var app = (function () {
     			p = element("p");
     			t0 = text("Remover ");
     			t1 = text(/*editRemoveName*/ ctx[11]);
-    			attr_dev(p, "class", "svelte-16nxna4");
-    			add_location(p, file$1, 907, 24, 32364);
-    			attr_dev(button, "class", "transparentBtn removeItem svelte-16nxna4");
-    			add_location(button, file$1, 903, 20, 32186);
+    			attr_dev(p, "class", "svelte-4juqmk");
+    			add_location(p, file$1, 907, 24, 32395);
+    			attr_dev(button, "class", "transparentBtn removeItem svelte-4juqmk");
+    			add_location(button, file$1, 903, 20, 32217);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
     			append_dev(button, p);
     			append_dev(p, t0);
     			append_dev(p, t1);
-    			dispose = listen_dev(button, "click", /*removeCurrentFixedPosition*/ ctx[20], false, false, false);
+    			dispose = listen_dev(button, "click", /*removeCurrentFixedPosition*/ ctx[21], false, false, false);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty[0] & /*editRemoveName*/ 2048) set_data_dev(t1, /*editRemoveName*/ ctx[11]);
@@ -40433,34 +40433,34 @@ var app = (function () {
     			t3 = space();
     			input2 = element("input");
     			t4 = space();
-    			attr_dev(span, "class", "svelte-16nxna4");
+    			attr_dev(span, "class", "svelte-4juqmk");
     			toggle_class(span, "me", /*watcher*/ ctx[58].id == /*$uid*/ ctx[14]);
-    			add_location(span, file$1, 946, 16, 33503);
+    			add_location(span, file$1, 946, 16, 33534);
     			attr_dev(input0, "watcher", input0_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input0, "type", "radio");
     			input0.__value = input0_value_value = 0;
     			input0.value = input0.__value;
-    			attr_dev(input0, "class", "svelte-16nxna4");
+    			attr_dev(input0, "class", "svelte-4juqmk");
     			/*$$binding_groups*/ ctx[44][0].push(input0);
-    			add_location(input0, file$1, 952, 20, 33765);
+    			add_location(input0, file$1, 952, 20, 33796);
     			attr_dev(input1, "watcher", input1_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input1, "type", "radio");
     			input1.__value = input1_value_value = 1;
     			input1.value = input1.__value;
-    			attr_dev(input1, "class", "svelte-16nxna4");
+    			attr_dev(input1, "class", "svelte-4juqmk");
     			/*$$binding_groups*/ ctx[44][0].push(input1);
-    			add_location(input1, file$1, 959, 20, 34058);
+    			add_location(input1, file$1, 959, 20, 34089);
     			attr_dev(input2, "watcher", input2_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input2, "type", "radio");
     			input2.__value = input2_value_value = 2;
     			input2.value = input2.__value;
-    			attr_dev(input2, "class", "svelte-16nxna4");
+    			attr_dev(input2, "class", "svelte-4juqmk");
     			/*$$binding_groups*/ ctx[44][0].push(input2);
-    			add_location(input2, file$1, 966, 20, 34351);
+    			add_location(input2, file$1, 966, 20, 34382);
     			attr_dev(div, "style", div_style_value = `pointer-events: ${connectionsHandler.isHost ? "auto" : "none"}`);
-    			add_location(div, file$1, 947, 16, 33578);
-    			attr_dev(li, "class", "svelte-16nxna4");
-    			add_location(li, file$1, 945, 12, 33481);
+    			add_location(div, file$1, 947, 16, 33609);
+    			attr_dev(li, "class", "svelte-4juqmk");
+    			add_location(li, file$1, 945, 12, 33512);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40572,19 +40572,19 @@ var app = (function () {
     			div0 = element("div");
     			p = element("p");
     			t4 = text(t4_value);
-    			attr_dev(h2, "class", "svelte-16nxna4");
-    			add_location(h2, file$1, 990, 8, 35030);
-    			attr_dev(span, "class", "svelte-16nxna4");
-    			add_location(span, file$1, 995, 12, 35176);
-    			attr_dev(p, "class", "svelte-16nxna4");
+    			attr_dev(h2, "class", "svelte-4juqmk");
+    			add_location(h2, file$1, 990, 8, 35061);
+    			attr_dev(span, "class", "svelte-4juqmk");
+    			add_location(span, file$1, 995, 12, 35207);
+    			attr_dev(p, "class", "svelte-4juqmk");
     			toggle_class(p, "active", /*isCopyAnimActive*/ ctx[3]);
-    			add_location(p, file$1, 997, 16, 35244);
-    			attr_dev(div0, "class", "svelte-16nxna4");
-    			add_location(div0, file$1, 996, 12, 35221);
-    			attr_dev(div1, "class", "svelte-16nxna4");
-    			add_location(div1, file$1, 994, 8, 35157);
-    			attr_dev(div2, "class", "copyPanel svelte-16nxna4");
-    			add_location(div2, file$1, 980, 4, 34734);
+    			add_location(p, file$1, 997, 16, 35275);
+    			attr_dev(div0, "class", "svelte-4juqmk");
+    			add_location(div0, file$1, 996, 12, 35252);
+    			attr_dev(div1, "class", "svelte-4juqmk");
+    			add_location(div1, file$1, 994, 8, 35188);
+    			attr_dev(div2, "class", "copyPanel svelte-4juqmk");
+    			add_location(div2, file$1, 980, 4, 34765);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40674,12 +40674,12 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(h3, "class", "svelte-16nxna4");
-    			add_location(h3, file$1, 1007, 6, 35514);
-    			attr_dev(ul, "class", "svelte-16nxna4");
-    			add_location(ul, file$1, 1008, 6, 35546);
-    			attr_dev(div, "class", "votations svelte-16nxna4");
-    			add_location(div, file$1, 1006, 4, 35467);
+    			attr_dev(h3, "class", "svelte-4juqmk");
+    			add_location(h3, file$1, 1007, 6, 35545);
+    			attr_dev(ul, "class", "svelte-4juqmk");
+    			add_location(ul, file$1, 1008, 6, 35577);
+    			attr_dev(div, "class", "votations svelte-4juqmk");
+    			add_location(div, file$1, 1006, 4, 35498);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -40694,7 +40694,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*addVotation, votations*/ 4202496) {
+    			if (dirty[0] & /*addVotation, votations*/ 8396800) {
     				each_value = /*votations*/ ctx[13];
     				validate_each_argument(each_value);
     				let i;
@@ -40800,17 +40800,17 @@ var app = (function () {
     			attr_dev(rect, "y", rect_y_value = Math.floor(100 - /*votes*/ ctx[54].length / /*maxVotes*/ ctx[55] * 100));
     			attr_dev(rect, "width", "100");
     			attr_dev(rect, "height", "100");
-    			add_location(rect, file$1, 1015, 20, 35922);
+    			add_location(rect, file$1, 1015, 20, 35953);
     			attr_dev(clipPath, "id", clipPath_id_value = "clipPath-" + /*name*/ ctx[52].replace(" ", "-"));
-    			add_location(clipPath, file$1, 1014, 20, 35851);
-    			add_location(defs, file$1, 1013, 18, 35823);
-    			attr_dev(circle0, "class", "progressFill svelte-16nxna4");
+    			add_location(clipPath, file$1, 1014, 20, 35882);
+    			add_location(defs, file$1, 1013, 18, 35854);
+    			attr_dev(circle0, "class", "progressFill svelte-4juqmk");
     			attr_dev(circle0, "cx", "50");
     			attr_dev(circle0, "cy", "50");
     			attr_dev(circle0, "r", "45");
     			set_style(circle0, "clip-path", "url(#clipPath-" + /*name*/ ctx[52].replace(" ", "-") + ")");
-    			add_location(circle0, file$1, 1019, 18, 36118);
-    			attr_dev(circle1, "class", "progressLine svelte-16nxna4");
+    			add_location(circle0, file$1, 1019, 18, 36149);
+    			attr_dev(circle1, "class", "progressLine svelte-4juqmk");
     			attr_dev(circle1, "stroke-linecap", "round");
     			attr_dev(circle1, "cx", "50");
     			attr_dev(circle1, "cy", "50");
@@ -40821,19 +40821,19 @@ var app = (function () {
     			attr_dev(circle1, "stroke-dashoffset", circle1_stroke_dashoffset_value = Math.floor(315 - /*time*/ ctx[53] / 100 * 315));
     			attr_dev(circle1, "stroke-mitterlimit", "0");
     			attr_dev(circle1, "transform", "rotate(-90 ) translate(-100 0)");
-    			add_location(circle1, file$1, 1021, 18, 36263);
+    			add_location(circle1, file$1, 1021, 18, 36294);
     			attr_dev(svg, "width", "50");
     			attr_dev(svg, "height", "50");
     			attr_dev(svg, "viewBox", "0 0 100 100");
-    			add_location(svg, file$1, 1012, 16, 35753);
-    			attr_dev(span, "class", "svgText svelte-16nxna4");
-    			add_location(span, file$1, 1023, 16, 36558);
-    			attr_dev(div, "class", "timer svelte-16nxna4");
-    			add_location(div, file$1, 1011, 14, 35716);
-    			attr_dev(p, "class", "svelte-16nxna4");
-    			add_location(p, file$1, 1025, 14, 36639);
-    			attr_dev(li, "class", "svelte-16nxna4");
-    			add_location(li, file$1, 1010, 12, 35625);
+    			add_location(svg, file$1, 1012, 16, 35784);
+    			attr_dev(span, "class", "svgText svelte-4juqmk");
+    			add_location(span, file$1, 1023, 16, 36589);
+    			attr_dev(div, "class", "timer svelte-4juqmk");
+    			add_location(div, file$1, 1011, 14, 35747);
+    			attr_dev(p, "class", "svelte-4juqmk");
+    			add_location(p, file$1, 1025, 14, 36670);
+    			attr_dev(li, "class", "svelte-4juqmk");
+    			add_location(li, file$1, 1010, 12, 35656);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40992,43 +40992,45 @@ var app = (function () {
     			attr_dev(video, "id", "webcamVideo");
     			video.autoplay = true;
     			video.playsInline = true;
-    			attr_dev(video, "class", "svelte-16nxna4");
-    			add_location(video, file$1, 830, 4, 29158);
-    			attr_dev(div0, "class", "currentPosition svelte-16nxna4");
+    			video.muted = /*isHost*/ ctx[19];
+    			attr_dev(video, "class", "svelte-4juqmk");
+    			add_location(video, file$1, 830, 4, 29174);
+    			attr_dev(div0, "class", "currentPosition svelte-4juqmk");
     			set_style(div0, "--percentage", /*currentPercentage*/ ctx[8]);
-    			add_location(div0, file$1, 833, 12, 29327);
-    			attr_dev(div1, "class", "positionBarContainer svelte-16nxna4");
-    			add_location(div1, file$1, 832, 8, 29279);
+    			add_location(div0, file$1, 833, 12, 29358);
+    			attr_dev(div1, "class", "positionBarContainer svelte-4juqmk");
+    			add_location(div1, file$1, 832, 8, 29310);
     			set_style(div2, "width", "100%");
     			set_style(div2, "height", "20px");
-    			add_location(div2, file$1, 831, 4, 29231);
-    			attr_dev(div3, "class", "flexColumn svelte-16nxna4");
+    			add_location(div2, file$1, 831, 4, 29262);
+    			attr_dev(div3, "class", "flexColumn svelte-4juqmk");
     			set_style(div3, "align-items", "baseline");
     			set_style(div3, "position", "relative");
+    			set_style(div3, "max-width", "50vh");
     			add_location(div3, file$1, 829, 0, 29077);
-    			attr_dev(i0, "class", "fas fa-share fa-2x svelte-16nxna4");
-    			add_location(i0, file$1, 921, 8, 32820);
-    			attr_dev(div4, "class", "svelte-16nxna4");
-    			add_location(div4, file$1, 920, 4, 32747);
-    			attr_dev(i1, "class", "fas fa-user-friends fa-2x svelte-16nxna4");
-    			add_location(i1, file$1, 924, 8, 32941);
-    			attr_dev(div5, "class", "svelte-16nxna4");
-    			add_location(div5, file$1, 923, 4, 32870);
-    			attr_dev(div6, "class", "floatingIcons svelte-16nxna4");
-    			add_location(div6, file$1, 919, 0, 32714);
-    			attr_dev(h2, "class", "svelte-16nxna4");
-    			add_location(h2, file$1, 938, 4, 33289);
-    			attr_dev(span0, "class", "svelte-16nxna4");
-    			add_location(span0, file$1, 940, 8, 33351);
-    			attr_dev(span1, "class", "svelte-16nxna4");
-    			add_location(span1, file$1, 941, 8, 33378);
-    			attr_dev(div7, "class", "listHeader svelte-16nxna4");
-    			add_location(div7, file$1, 939, 4, 33317);
-    			attr_dev(ul, "class", "svelte-16nxna4");
-    			add_location(ul, file$1, 943, 4, 33426);
-    			attr_dev(div8, "class", "slideFromRightContainer svelte-16nxna4");
+    			attr_dev(i0, "class", "fas fa-share fa-2x svelte-4juqmk");
+    			add_location(i0, file$1, 921, 8, 32851);
+    			attr_dev(div4, "class", "svelte-4juqmk");
+    			add_location(div4, file$1, 920, 4, 32778);
+    			attr_dev(i1, "class", "fas fa-user-friends fa-2x svelte-4juqmk");
+    			add_location(i1, file$1, 924, 8, 32972);
+    			attr_dev(div5, "class", "svelte-4juqmk");
+    			add_location(div5, file$1, 923, 4, 32901);
+    			attr_dev(div6, "class", "floatingIcons svelte-4juqmk");
+    			add_location(div6, file$1, 919, 0, 32745);
+    			attr_dev(h2, "class", "svelte-4juqmk");
+    			add_location(h2, file$1, 938, 4, 33320);
+    			attr_dev(span0, "class", "svelte-4juqmk");
+    			add_location(span0, file$1, 940, 8, 33382);
+    			attr_dev(span1, "class", "svelte-4juqmk");
+    			add_location(span1, file$1, 941, 8, 33409);
+    			attr_dev(div7, "class", "listHeader svelte-4juqmk");
+    			add_location(div7, file$1, 939, 4, 33348);
+    			attr_dev(ul, "class", "svelte-4juqmk");
+    			add_location(ul, file$1, 943, 4, 33457);
+    			attr_dev(div8, "class", "slideFromRightContainer svelte-4juqmk");
     			toggle_class(div8, "open", /*isSlidePanelOpen*/ ctx[2]);
-    			add_location(div8, file$1, 928, 0, 33004);
+    			add_location(div8, file$1, 928, 0, 33035);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -41090,7 +41092,7 @@ var app = (function () {
     				set_style(div0, "--percentage", /*currentPercentage*/ ctx[8]);
     			}
 
-    			if (dirty[0] & /*markers, meWatcher, addVotation, setActiveMarker*/ 6357120) {
+    			if (dirty[0] & /*markers, meWatcher, addVotation, setActiveMarker*/ 12648576) {
     				each_value_2 = /*markers*/ ctx[7];
     				validate_each_argument(each_value_2);
     				let i;
@@ -41248,9 +41250,9 @@ var app = (function () {
     	validate_store(username, "username");
     	component_subscribe($$self, username, $$value => $$invalidate(15, $username = $$value));
     	validate_store(buttonsState, "buttonsState");
-    	component_subscribe($$self, buttonsState, $$value => $$invalidate(25, $buttonsState = $$value));
+    	component_subscribe($$self, buttonsState, $$value => $$invalidate(26, $buttonsState = $$value));
     	validate_store(facetrackOn, "facetrackOn");
-    	component_subscribe($$self, facetrackOn, $$value => $$invalidate(26, $facetrackOn = $$value));
+    	component_subscribe($$self, facetrackOn, $$value => $$invalidate(27, $facetrackOn = $$value));
 
     	configBtn.assignFunction("main", () => {
     		/* console.log("%cPARECE QUE FOI!", "color: purple;font-size: 20px"); */
@@ -42187,7 +42189,7 @@ var app = (function () {
     		if ("editRemoveName" in $$props) $$invalidate(11, editRemoveName = $$props.editRemoveName);
     		if ("activeMarker" in $$props) activeMarker = $$props.activeMarker;
     		if ("sliderValue" in $$props) $$invalidate(12, sliderValue = $$props.sliderValue);
-    		if ("i" in $$props) $$invalidate(24, i = $$props.i);
+    		if ("i" in $$props) $$invalidate(25, i = $$props.i);
     		if ("votations" in $$props) $$invalidate(13, votations = $$props.votations);
     		if ("meWatcher" in $$props) $$invalidate(16, meWatcher = $$props.meWatcher);
     	};
@@ -42203,8 +42205,8 @@ var app = (function () {
     			 $$invalidate(16, meWatcher = watchers.filter(item => item.id == $uid));
     		}
 
-    		if ($$self.$$.dirty[0] & /*markers, currentPercentage, i*/ 16777600) {
-    			 if ($$invalidate(24, i = markers.filter(item => item.percentage + offset > currentPercentage && item.percentage - offset < currentPercentage)) && i.length) {
+    		if ($$self.$$.dirty[0] & /*markers, currentPercentage, i*/ 33554816) {
+    			 if ($$invalidate(25, i = markers.filter(item => item.percentage + offset > currentPercentage && item.percentage - offset < currentPercentage)) && i.length) {
     				$$invalidate(11, editRemoveName = i[0].name);
     			} else {
     				$$invalidate(11, editRemoveName = "");
@@ -42232,6 +42234,7 @@ var app = (function () {
     		meWatcher,
     		copyText,
     		broadcastOnlineWatchers,
+    		isHost,
     		addMarker,
     		removeCurrentFixedPosition,
     		setActiveMarker,
@@ -42241,7 +42244,6 @@ var app = (function () {
     		$buttonsState,
     		$facetrackOn,
     		changeAndBroadcastControlState,
-    		isHost,
     		editActive,
     		listenActiveMarker,
     		listenHorizontalPercentage,
@@ -43154,64 +43156,133 @@ var app = (function () {
     	}
     }
 
-    /* src/screens/CameraOwner.svelte generated by Svelte v3.19.1 */
-    const file$4 = "src/screens/CameraOwner.svelte";
+    /* src/components/Spinner.svelte generated by Svelte v3.19.1 */
 
-    // (58:2) {#if warningText}
-    function create_if_block$3(ctx) {
-    	let p;
-    	let t;
-    	let p_transition;
-    	let current;
+    const file$4 = "src/components/Spinner.svelte";
+
+    function create_fragment$4(ctx) {
+    	let i;
 
     	const block = {
     		c: function create() {
-    			p = element("p");
-    			t = text(/*warningText*/ ctx[0]);
-    			attr_dev(p, "class", "warningText svelte-1uldtoc");
-    			add_location(p, file$4, 58, 4, 1524);
+    			i = element("i");
+    			attr_dev(i, "class", "fas fa-spinner rotate svelte-1dpca1e");
+    			add_location(i, file$4, 0, 0, 0);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, p, anchor);
-    			append_dev(p, t);
-    			current = true;
+    			insert_dev(target, i, anchor);
     		},
-    		p: function update(ctx, dirty) {
-    			if (!current || dirty & /*warningText*/ 1) set_data_dev(t, /*warningText*/ ctx[0]);
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-
-    			add_render_callback(() => {
-    				if (!p_transition) p_transition = create_bidirectional_transition(p, fade, {}, true);
-    				p_transition.run(1);
-    			});
-
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			if (!p_transition) p_transition = create_bidirectional_transition(p, fade, {}, false);
-    			p_transition.run(0);
-    			current = false;
-    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p);
-    			if (detaching && p_transition) p_transition.end();
+    			if (detaching) detach_dev(i);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
-    		type: "if",
-    		source: "(58:2) {#if warningText}",
+    		id: create_fragment$4.name,
+    		type: "component",
+    		source: "",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$4(ctx) {
+    class Spinner extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$4, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Spinner",
+    			options,
+    			id: create_fragment$4.name
+    		});
+    	}
+    }
+
+    /* src/screens/Loading.svelte generated by Svelte v3.19.1 */
+    const file$5 = "src/screens/Loading.svelte";
+
+    function create_fragment$5(ctx) {
+    	let div;
+    	let current;
+    	const spinner = new Spinner({ $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(spinner.$$.fragment);
+    			attr_dev(div, "class", "flexColumn svelte-24o2l0");
+    			set_style(div, "position", "absolute");
+    			add_location(div, file$5, 5, 0, 78);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(spinner, div, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(spinner.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(spinner.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(spinner);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$5.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$4($$self, $$props, $$invalidate) {
+    	$$self.$capture_state = () => ({ Spinner });
+    	return [];
+    }
+
+    class Loading extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$4, create_fragment$5, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Loading",
+    			options,
+    			id: create_fragment$5.name
+    		});
+    	}
+    }
+
+    /* src/screens/CameraOwner.svelte generated by Svelte v3.19.1 */
+    const file$6 = "src/screens/CameraOwner.svelte";
+
+    // (59:0) {:else}
+    function create_else_block$1(ctx) {
     	let div1;
     	let div0;
     	let button0;
@@ -43223,7 +43294,7 @@ var app = (function () {
     	let t3;
     	let current;
     	let dispose;
-    	let if_block = /*warningText*/ ctx[0] && create_if_block$3(ctx);
+    	let if_block = /*warningText*/ ctx[0] && create_if_block_1$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -43238,24 +43309,21 @@ var app = (function () {
     			p1.textContent = "Conectar a uma câmera";
     			t3 = space();
     			if (if_block) if_block.c();
-    			attr_dev(p0, "class", "svelte-1uldtoc");
-    			add_location(p0, file$4, 46, 6, 1268);
-    			attr_dev(button0, "class", "transparentBtn svelte-1uldtoc");
+    			attr_dev(p0, "class", "svelte-4mh0rc");
+    			add_location(p0, file$6, 68, 8, 1966);
+    			attr_dev(button0, "class", "transparentBtn svelte-4mh0rc");
     			toggle_class(button0, "disabledBtn", /*warningText*/ ctx[0]);
-    			add_location(button0, file$4, 39, 4, 1080);
-    			add_location(p1, file$4, 53, 6, 1442);
-    			attr_dev(button1, "class", "transparentBtn svelte-1uldtoc");
-    			add_location(button1, file$4, 49, 4, 1323);
+    			add_location(button0, file$6, 61, 6, 1764);
+    			add_location(p1, file$6, 78, 8, 2220);
+    			attr_dev(button1, "class", "transparentBtn svelte-4mh0rc");
+    			add_location(button1, file$6, 71, 6, 2025);
     			attr_dev(div0, "id", "cameraOwner");
     			attr_dev(div0, "class", "container");
-    			add_location(div0, file$4, 38, 2, 1018);
-    			attr_dev(div1, "class", "flexColumn svelte-1uldtoc");
+    			add_location(div0, file$6, 60, 4, 1700);
+    			attr_dev(div1, "class", "flexColumn svelte-4mh0rc");
     			set_style(div1, "position", "absolute");
     			set_style(div1, "z-index", "4");
-    			add_location(div1, file$4, 37, 0, 951);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    			add_location(div1, file$6, 59, 2, 1631);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -43270,11 +43338,11 @@ var app = (function () {
     			current = true;
 
     			dispose = [
-    				listen_dev(button0, "click", /*click_handler*/ ctx[3], false, false, false),
-    				listen_dev(button1, "click", /*click_handler_1*/ ctx[4], false, false, false)
+    				listen_dev(button0, "click", /*click_handler*/ ctx[5], false, false, false),
+    				listen_dev(button1, "click", /*click_handler_1*/ ctx[6], false, false, false)
     			];
     		},
-    		p: function update(ctx, [dirty]) {
+    		p: function update(ctx, dirty) {
     			if (dirty & /*warningText*/ 1) {
     				toggle_class(button0, "disabledBtn", /*warningText*/ ctx[0]);
     			}
@@ -43284,7 +43352,7 @@ var app = (function () {
     					if_block.p(ctx, dirty);
     					transition_in(if_block, 1);
     				} else {
-    					if_block = create_if_block$3(ctx);
+    					if_block = create_if_block_1$2(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div1, null);
@@ -43326,7 +43394,186 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$4.name,
+    		id: create_else_block$1.name,
+    		type: "else",
+    		source: "(59:0) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (55:0) {#if loading}
+    function create_if_block$3(ctx) {
+    	let div;
+    	let current;
+    	const loading_1 = new Loading({ $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(loading_1.$$.fragment);
+    			attr_dev(div, "class", "loading svelte-4mh0rc");
+    			add_location(div, file$6, 55, 2, 1571);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(loading_1, div, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(loading_1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(loading_1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(loading_1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(55:0) {#if loading}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (83:4) {#if warningText}
+    function create_if_block_1$2(ctx) {
+    	let p;
+    	let t;
+    	let p_transition;
+    	let current;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t = text(/*warningText*/ ctx[0]);
+    			attr_dev(p, "class", "warningText svelte-4mh0rc");
+    			add_location(p, file$6, 83, 6, 2310);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty & /*warningText*/ 1) set_data_dev(t, /*warningText*/ ctx[0]);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!p_transition) p_transition = create_bidirectional_transition(p, fade, {}, true);
+    				p_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!p_transition) p_transition = create_bidirectional_transition(p, fade, {}, false);
+    			p_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    			if (detaching && p_transition) p_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$2.name,
+    		type: "if",
+    		source: "(83:4) {#if warningText}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$6(ctx) {
+    	let current_block_type_index;
+    	let if_block;
+    	let if_block_anchor;
+    	let current;
+    	const if_block_creators = [create_if_block$3, create_else_block$1];
+    	const if_blocks = [];
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*loading*/ ctx[2]) return 0;
+    		return 1;
+    	}
+
+    	current_block_type_index = select_block_type(ctx);
+    	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+
+    	const block = {
+    		c: function create() {
+    			if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			if_blocks[current_block_type_index].m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			let previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(ctx);
+
+    			if (current_block_type_index === previous_block_index) {
+    				if_blocks[current_block_type_index].p(ctx, dirty);
+    			} else {
+    				group_outros();
+
+    				transition_out(if_blocks[previous_block_index], 1, 1, () => {
+    					if_blocks[previous_block_index] = null;
+    				});
+
+    				check_outros();
+    				if_block = if_blocks[current_block_type_index];
+
+    				if (!if_block) {
+    					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    					if_block.c();
+    				}
+
+    				transition_in(if_block, 1);
+    				if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if_blocks[current_block_type_index].d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$6.name,
     		type: "component",
     		source: "",
     		ctx
@@ -43335,17 +43582,20 @@ var app = (function () {
     	return block;
     }
 
-    function instance$4($$self, $$props, $$invalidate) {
+    function instance$5($$self, $$props, $$invalidate) {
     	subscribeToBackBtn("cameraOwner", () => {
     		auth.signOut();
     		console.log("signing out");
     	});
 
     	let videoInputs = [];
+    	let warningText = "";
+    	let refreshInterval;
+    	let loading = false;
 
-    	const intervalFunction = () => {
+    	const detectAvailableCameras = () => {
     		navigator.mediaDevices.enumerateDevices().then(devices => {
-    			$$invalidate(1, videoInputs = []);
+    			$$invalidate(3, videoInputs = []);
 
     			for (let device of devices) {
     				if (device.kind == "videoinput") videoInputs.push(device);
@@ -43356,34 +43606,64 @@ var app = (function () {
     				$$invalidate(0, warningText = "Nenhuma camêra detectada");
     			} // console.log(warningText)
     		});
+
+    		if (!warningText && window.location.search) {
+    			const urlParams = new URLSearchParams(window.location.search);
+    			const usernameToConnect = urlParams.get("q");
+
+    			if (usernameToConnect) {
+    				clearInterval(refreshInterval);
+    				$$invalidate(2, loading = true);
+
+    				setTimeout(
+    					() => {
+    						username.set(usernameToConnect);
+    						currentScreen.set("main");
+    					},
+    					1000
+    				);
+    			}
+    		}
     	};
 
-    	setInterval(intervalFunction, 2000);
-    	intervalFunction();
-    	let warningText = "";
+    	refreshInterval = setInterval(detectAvailableCameras, 2000);
+    	detectAvailableCameras();
 
     	const click_handler = () => {
     		if (!warningText) currentScreen.set("selectCamera");
     	};
 
-    	const click_handler_1 = () => currentScreen.set("selectCameraToConnect");
+    	const click_handler_1 = () => {
+    		clearInterval(refreshInterval);
+    		currentScreen.set("selectCameraToConnect");
+    	};
 
     	$$self.$capture_state = () => ({
     		fade,
     		currentScreen,
     		auth,
     		subscribeToBackBtn,
+    		Loading,
+    		username,
     		videoInputs,
-    		intervalFunction,
     		warningText,
+    		refreshInterval,
+    		loading,
+    		detectAvailableCameras,
     		console,
     		navigator,
+    		window,
+    		URLSearchParams,
+    		clearInterval,
+    		setTimeout,
     		setInterval
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("videoInputs" in $$props) $$invalidate(1, videoInputs = $$props.videoInputs);
+    		if ("videoInputs" in $$props) $$invalidate(3, videoInputs = $$props.videoInputs);
     		if ("warningText" in $$props) $$invalidate(0, warningText = $$props.warningText);
+    		if ("refreshInterval" in $$props) $$invalidate(1, refreshInterval = $$props.refreshInterval);
+    		if ("loading" in $$props) $$invalidate(2, loading = $$props.loading);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -43391,34 +43671,42 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*videoInputs*/ 2) {
+    		if ($$self.$$.dirty & /*videoInputs*/ 8) {
     			 if (videoInputs.length > 0) {
     				$$invalidate(0, warningText = "");
     			}
     		}
     	};
 
-    	return [warningText, videoInputs, intervalFunction, click_handler, click_handler_1];
+    	return [
+    		warningText,
+    		refreshInterval,
+    		loading,
+    		videoInputs,
+    		detectAvailableCameras,
+    		click_handler,
+    		click_handler_1
+    	];
     }
 
     class CameraOwner extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
+    		init(this, options, instance$5, create_fragment$6, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "CameraOwner",
     			options,
-    			id: create_fragment$4.name
+    			id: create_fragment$6.name
     		});
     	}
     }
 
     /* src/screens/SelectCameraToConnect.svelte generated by Svelte v3.19.1 */
-    const file$5 = "src/screens/SelectCameraToConnect.svelte";
+    const file$7 = "src/screens/SelectCameraToConnect.svelte";
 
-    function create_fragment$5(ctx) {
+    function create_fragment$7(ctx) {
     	let div1;
     	let h3;
     	let t1;
@@ -43442,17 +43730,17 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "Próximo";
     			attr_dev(h3, "class", "svelte-obfeha");
-    			add_location(h3, file$5, 22, 4, 621);
+    			add_location(h3, file$7, 22, 4, 621);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "transparentInput svelte-obfeha");
     			attr_dev(input, "placeholder", "Digite Aqui");
-    			add_location(input, file$5, 23, 4, 667);
-    			add_location(p, file$5, 30, 8, 870);
+    			add_location(input, file$7, 23, 4, 667);
+    			add_location(p, file$7, 30, 8, 870);
     			attr_dev(div0, "class", "transparentBtn");
-    			add_location(div0, file$5, 29, 4, 810);
+    			add_location(div0, file$7, 29, 4, 810);
     			set_style(div1, "position", "absolute");
     			attr_dev(div1, "class", "container svelte-obfeha");
-    			add_location(div1, file$5, 21, 0, 548);
+    			add_location(div1, file$7, 21, 0, 548);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -43502,7 +43790,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$5.name,
+    		id: create_fragment$7.name,
     		type: "component",
     		source: "",
     		ctx
@@ -43511,7 +43799,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$5($$self, $$props, $$invalidate) {
+    function instance$6($$self, $$props, $$invalidate) {
     	let inputValue = "";
 
     	subscribeToBackBtn("selectCameraToConnect", () => {
@@ -43553,133 +43841,11 @@ var app = (function () {
     class SelectCameraToConnect extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
-
-    		dispatch_dev("SvelteRegisterComponent", {
-    			component: this,
-    			tagName: "SelectCameraToConnect",
-    			options,
-    			id: create_fragment$5.name
-    		});
-    	}
-    }
-
-    /* src/components/Spinner.svelte generated by Svelte v3.19.1 */
-
-    const file$6 = "src/components/Spinner.svelte";
-
-    function create_fragment$6(ctx) {
-    	let i;
-
-    	const block = {
-    		c: function create() {
-    			i = element("i");
-    			attr_dev(i, "class", "fas fa-spinner rotate svelte-1dpca1e");
-    			add_location(i, file$6, 0, 0, 0);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, i, anchor);
-    		},
-    		p: noop,
-    		i: noop,
-    		o: noop,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(i);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_fragment$6.name,
-    		type: "component",
-    		source: "",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    class Spinner extends SvelteComponentDev {
-    	constructor(options) {
-    		super(options);
-    		init(this, options, null, create_fragment$6, safe_not_equal, {});
-
-    		dispatch_dev("SvelteRegisterComponent", {
-    			component: this,
-    			tagName: "Spinner",
-    			options,
-    			id: create_fragment$6.name
-    		});
-    	}
-    }
-
-    /* src/screens/Loading.svelte generated by Svelte v3.19.1 */
-    const file$7 = "src/screens/Loading.svelte";
-
-    function create_fragment$7(ctx) {
-    	let div;
-    	let current;
-    	const spinner = new Spinner({ $$inline: true });
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			create_component(spinner.$$.fragment);
-    			attr_dev(div, "class", "flexColumn svelte-24o2l0");
-    			set_style(div, "position", "absolute");
-    			add_location(div, file$7, 5, 0, 78);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			mount_component(spinner, div, null);
-    			current = true;
-    		},
-    		p: noop,
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(spinner.$$.fragment, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(spinner.$$.fragment, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			destroy_component(spinner);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_fragment$7.name,
-    		type: "component",
-    		source: "",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    function instance$6($$self, $$props, $$invalidate) {
-    	$$self.$capture_state = () => ({ Spinner });
-    	return [];
-    }
-
-    class Loading extends SvelteComponentDev {
-    	constructor(options) {
-    		super(options);
     		init(this, options, instance$6, create_fragment$7, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
-    			tagName: "Loading",
+    			tagName: "SelectCameraToConnect",
     			options,
     			id: create_fragment$7.name
     		});
@@ -43690,7 +43856,7 @@ var app = (function () {
     const file$8 = "src/screens/SelectCamera.svelte";
 
     // (97:0) {:else}
-    function create_else_block$1(ctx) {
+    function create_else_block$2(ctx) {
     	let h3;
     	let t1;
     	let div;
@@ -43773,7 +43939,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block$1.name,
+    		id: create_else_block$2.name,
     		type: "else",
     		source: "(97:0) {:else}",
     		ctx
@@ -43834,7 +44000,7 @@ var app = (function () {
     	let current_block_type_index;
     	let if_block;
     	let current;
-    	const if_block_creators = [create_if_block$4, create_else_block$1];
+    	const if_block_creators = [create_if_block$4, create_else_block$2];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -44191,7 +44357,7 @@ var app = (function () {
     }
 
     // (73:44) 
-    function create_if_block_1$2(ctx) {
+    function create_if_block_1$3(ctx) {
     	let current;
     	const cameraowner = new CameraOwner({ $$inline: true });
 
@@ -44219,7 +44385,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$2.name,
+    		id: create_if_block_1$3.name,
     		type: "if",
     		source: "(73:44) ",
     		ctx
@@ -44279,7 +44445,7 @@ var app = (function () {
 
     	const if_block_creators = [
     		create_if_block$5,
-    		create_if_block_1$2,
+    		create_if_block_1$3,
     		create_if_block_2$2,
     		create_if_block_3$1,
     		create_if_block_4
