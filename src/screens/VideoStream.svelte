@@ -688,20 +688,25 @@ function setActiveMarker(name){
 
 
     function listenHorizontalPercentage() {
+        let directionRef = database.ref(`users/${$uid}/direction`);
         if (Math.abs(sliderValue - horizontalPercentage) > 5) {
 
-            let directionRightRef = database.ref(`users/${$uid}/direction/4`);
-            let directionLeftRef = database.ref(`users/${$uid}/direction/5`);
+            directionRef.get().then(snapshot => {
+                let data = snapshot.val()
+                if(!data) return
 
-            if (sliderValue - horizontalPercentage < 0) {
-                directionRightRef.set(0);
-                directionLeftRef.set(1);
-            } else {
-                directionRightRef.set(1);
-                directionLeftRef.set(0);
-            }
+                if (sliderValue - horizontalPercentage < 0) {
+                    data[4] = 0
+                    data[5] = 1
+                } else {
+                    data[4] = 1
+                    data[5] = 0
+                }
+                directionRef.set(data);
+
+            })
+
         }else{
-            let directionRef = database.ref(`users/${$uid}/direction`);
             directionRef.get().then((snapshot) => {
                 let data = snapshot.val()
                 if(!data) return
