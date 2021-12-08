@@ -2327,7 +2327,6 @@ var app = (function () {
             return service;
         }
     }
-    //# sourceMappingURL=index.esm.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -2863,7 +2862,6 @@ var app = (function () {
         };
         return ComponentContainer;
     }());
-    //# sourceMappingURL=index.esm.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3149,7 +3147,6 @@ var app = (function () {
             _loop_1(instance);
         }
     }
-    //# sourceMappingURL=index.esm.js.map
 
     /**
      * @license
@@ -3806,7 +3803,6 @@ var app = (function () {
     };
     var firebase$1 = firebase;
     registerCoreComponents(firebase$1);
-    //# sourceMappingURL=index.esm.js.map
 
     var name$d = "firebase";
     var version$2 = "8.6.8";
@@ -3829,7 +3825,6 @@ var app = (function () {
      */
     firebase$1.registerVersion(name$d, version$2, 'app');
     firebase$1.SDK_VERSION = version$2;
-    //# sourceMappingURL=index.esm.js.map
 
     (function() {/*
 
@@ -4199,8 +4194,6 @@ var app = (function () {
     (function(){if("undefined"!==typeof firebase$1&&firebase$1.INTERNAL&&firebase$1.INTERNAL.registerComponent){var a={ActionCodeInfo:{Operation:{EMAIL_SIGNIN:Af,PASSWORD_RESET:"PASSWORD_RESET",RECOVER_EMAIL:"RECOVER_EMAIL",REVERT_SECOND_FACTOR_ADDITION:Cf,VERIFY_AND_CHANGE_EMAIL:Bf,VERIFY_EMAIL:"VERIFY_EMAIL"}},Auth:Fn,AuthCredential:Bg,Error:t};Z(a,"EmailAuthProvider",Zg,[]);Z(a,"FacebookAuthProvider",Qg,[]);Z(a,"GithubAuthProvider",Sg,[]);Z(a,"GoogleAuthProvider",Ug,[]);Z(a,"TwitterAuthProvider",Wg,[]);
     Z(a,"OAuthProvider",Pg,[V("providerId")]);Z(a,"SAMLAuthProvider",Og,[V("providerId")]);Z(a,"PhoneAuthProvider",lh,[Bo()]);Z(a,"RecaptchaVerifier",uo,[X(V(),Ao(),"recaptchaContainer"),W("recaptchaParameters",!0),Co()]);Z(a,"ActionCodeURL",Jf,[]);Z(a,"PhoneMultiFactorGenerator",eo,[]);firebase$1.INTERNAL.registerComponent({name:"auth",instanceFactory:function(b){b=b.getProvider("app").getImmediate();return new Fn(b)},multipleInstances:!1,serviceProps:a,instantiationMode:"LAZY",type:"PUBLIC"});firebase$1.INTERNAL.registerComponent({name:"auth-internal",
     instanceFactory:function(b){b=b.getProvider("auth").getImmediate();return {getUid:q(b.getUid,b),getToken:q(b.nc,b),addAuthTokenListener:q(b.cc,b),removeAuthTokenListener:q(b.Pc,b)}},multipleInstances:!1,instantiationMode:"LAZY",type:"PRIVATE"});firebase$1.registerVersion("@firebase/auth","0.16.7");firebase$1.INTERNAL.extendNamespace({User:Im});}else throw Error("Cannot find the firebase namespace; be sure to include firebase-app.js before this library.");})();}).apply(typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : {});
-
-    //# sourceMappingURL=auth.esm.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -5631,7 +5624,6 @@ var app = (function () {
     var FetchXmlHttpFactory = Rd;
     var WebChannel = bc;
     var XhrIo = X;
-    //# sourceMappingURL=index.esm.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -23459,7 +23451,6 @@ var app = (function () {
             return this._delegate.isEqual(t._delegate);
         }, t;
     }();
-    //# sourceMappingURL=prebuilt-df0f24f5-f4d3f7f5.js.map
 
     var I$1 = {
         Firestore: Tc$1,
@@ -23520,7 +23511,6 @@ var app = (function () {
     }
 
     P$2(firebase$1);
-    //# sourceMappingURL=index.js.map
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -38936,7 +38926,6 @@ var app = (function () {
         instance.registerVersion(name$e, version$3);
     }
     registerDatabase(firebase$1);
-    //# sourceMappingURL=index.esm.js.map
 
     // import firebase from 'firebase';
 
@@ -39059,7 +39048,7 @@ var app = (function () {
     },{"eventemitter3":"JJlS","./util":"BHXf","./logger":"WOs9","./socket":"wJlv","./mediaconnection":"dbHP","./dataconnection":"GBTQ","./enums":"ZRYf","./api":"in7L"}],"iTK6":[function(require,module,exports) {
     Object.defineProperty(exports,"__esModule",{value:!0}),exports.peerjs=void 0;var e=require("./util"),r=require("./peer");exports.peerjs={Peer:r.Peer,util:e.util},exports.default=r.Peer,window.peerjs=exports.peerjs,window.Peer=r.Peer;
     },{"./util":"BHXf","./peer":"Hxpd"}]},{},["iTK6"]);
-    //# sourceMappingURL=/peerjs.min.js.map
+
     });
 
     var Peer = unwrapExports(peerjs_min);
@@ -40134,7 +40123,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (839:12) {#each markers as { percentage, name, tooltip }}
+    // (854:12) {#each markers as { percentage, name, tooltip }}
     function create_each_block_2(ctx) {
     	let div1;
     	let div0;
@@ -40163,10 +40152,10 @@ var app = (function () {
     			t1 = space();
     			attr_dev(div0, "class", "marker-tooltip svelte-4juqmk");
     			toggle_class(div0, "active", /*tooltip*/ ctx[62].isVisible);
-    			add_location(div0, file$1, 859, 20, 30491);
+    			add_location(div0, file$1, 874, 20, 30808);
     			attr_dev(div1, "class", "marker svelte-4juqmk");
     			set_style(div1, "--percentage", /*percentage*/ ctx[61]);
-    			add_location(div1, file$1, 839, 16, 29560);
+    			add_location(div1, file$1, 854, 16, 29877);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -40202,14 +40191,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(839:12) {#each markers as { percentage, name, tooltip }}",
+    		source: "(854:12) {#each markers as { percentage, name, tooltip }}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (870:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
+    // (885:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}
     function create_if_block_2(ctx) {
     	let div2;
     	let div0;
@@ -40247,26 +40236,26 @@ var app = (function () {
     			attr_dev(input0, "class", "transparentInput svelte-4juqmk");
     			set_style(input0, "flex", "1");
     			attr_dev(input0, "placeholder", "Digite Aqui");
-    			add_location(input0, file$1, 872, 16, 30994);
+    			add_location(input0, file$1, 887, 16, 31311);
     			attr_dev(button, "class", "transparentBtn editItem svelte-4juqmk");
-    			add_location(button, file$1, 889, 16, 31683);
+    			add_location(button, file$1, 904, 16, 32000);
     			attr_dev(div0, "class", "flexRow svelte-4juqmk");
     			set_style(div0, "height", "20px");
     			set_style(div0, "margin", "5px 0");
-    			add_location(div0, file$1, 871, 12, 30918);
+    			add_location(div0, file$1, 886, 12, 31235);
     			attr_dev(div1, "class", "svelte-4juqmk");
-    			add_location(div1, file$1, 901, 12, 32152);
+    			add_location(div1, file$1, 916, 12, 32469);
     			attr_dev(div2, "class", "editionBar svelte-4juqmk");
     			set_style(div2, "width", "100%");
-    			add_location(div2, file$1, 870, 8, 30860);
+    			add_location(div2, file$1, 885, 8, 31177);
     			attr_dev(div3, "class", "shadow svelte-4juqmk");
     			attr_dev(div3, "style", div3_style_value = `--percentage: ${/*horizontalPercentage*/ ctx[9]}%`);
-    			add_location(div3, file$1, 914, 12, 32573);
+    			add_location(div3, file$1, 929, 12, 32890);
     			attr_dev(input1, "type", "range");
     			attr_dev(input1, "class", "svelte-4juqmk");
-    			add_location(input1, file$1, 915, 12, 32663);
+    			add_location(input1, file$1, 930, 12, 32980);
     			attr_dev(div4, "class", "slidebarContainer svelte-4juqmk");
-    			add_location(div4, file$1, 913, 8, 32528);
+    			add_location(div4, file$1, 928, 8, 32845);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40332,14 +40321,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(870:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}",
+    		source: "(885:4) {#if connectionsHandler.isHost || (meWatcher.length && meWatcher[0].controlLevel == 2)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (903:16) {#if editRemoveName}
+    // (918:16) {#if editRemoveName}
     function create_if_block_3(ctx) {
     	let button;
     	let p;
@@ -40354,9 +40343,9 @@ var app = (function () {
     			t0 = text("Remover ");
     			t1 = text(/*editRemoveName*/ ctx[11]);
     			attr_dev(p, "class", "svelte-4juqmk");
-    			add_location(p, file$1, 907, 24, 32395);
+    			add_location(p, file$1, 922, 24, 32712);
     			attr_dev(button, "class", "transparentBtn removeItem svelte-4juqmk");
-    			add_location(button, file$1, 903, 20, 32217);
+    			add_location(button, file$1, 918, 20, 32534);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -40378,14 +40367,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(903:16) {#if editRemoveName}",
+    		source: "(918:16) {#if editRemoveName}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (945:8) {#each watchers as watcher}
+    // (960:8) {#each watchers as watcher}
     function create_each_block_1(ctx) {
     	let li;
     	let span;
@@ -40435,32 +40424,32 @@ var app = (function () {
     			t4 = space();
     			attr_dev(span, "class", "svelte-4juqmk");
     			toggle_class(span, "me", /*watcher*/ ctx[58].id == /*$uid*/ ctx[14]);
-    			add_location(span, file$1, 946, 16, 33534);
+    			add_location(span, file$1, 961, 16, 33851);
     			attr_dev(input0, "watcher", input0_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input0, "type", "radio");
     			input0.__value = input0_value_value = 0;
     			input0.value = input0.__value;
     			attr_dev(input0, "class", "svelte-4juqmk");
     			/*$$binding_groups*/ ctx[44][0].push(input0);
-    			add_location(input0, file$1, 952, 20, 33796);
+    			add_location(input0, file$1, 967, 20, 34113);
     			attr_dev(input1, "watcher", input1_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input1, "type", "radio");
     			input1.__value = input1_value_value = 1;
     			input1.value = input1.__value;
     			attr_dev(input1, "class", "svelte-4juqmk");
     			/*$$binding_groups*/ ctx[44][0].push(input1);
-    			add_location(input1, file$1, 959, 20, 34089);
+    			add_location(input1, file$1, 974, 20, 34406);
     			attr_dev(input2, "watcher", input2_watcher_value = /*watcher*/ ctx[58].name);
     			attr_dev(input2, "type", "radio");
     			input2.__value = input2_value_value = 2;
     			input2.value = input2.__value;
     			attr_dev(input2, "class", "svelte-4juqmk");
     			/*$$binding_groups*/ ctx[44][0].push(input2);
-    			add_location(input2, file$1, 966, 20, 34382);
+    			add_location(input2, file$1, 981, 20, 34699);
     			attr_dev(div, "style", div_style_value = `pointer-events: ${connectionsHandler.isHost ? "auto" : "none"}`);
-    			add_location(div, file$1, 947, 16, 33609);
+    			add_location(div, file$1, 962, 16, 33926);
     			attr_dev(li, "class", "svelte-4juqmk");
-    			add_location(li, file$1, 945, 12, 33512);
+    			add_location(li, file$1, 960, 12, 33829);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40532,14 +40521,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(945:8) {#each watchers as watcher}",
+    		source: "(960:8) {#each watchers as watcher}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (980:0) {#if isCopyPanelActive}
+    // (995:0) {#if isCopyPanelActive}
     function create_if_block_1(ctx) {
     	let div2;
     	let h2;
@@ -40573,18 +40562,18 @@ var app = (function () {
     			p = element("p");
     			t4 = text(t4_value);
     			attr_dev(h2, "class", "svelte-4juqmk");
-    			add_location(h2, file$1, 990, 8, 35061);
+    			add_location(h2, file$1, 1005, 8, 35378);
     			attr_dev(span, "class", "svelte-4juqmk");
-    			add_location(span, file$1, 995, 12, 35207);
+    			add_location(span, file$1, 1010, 12, 35524);
     			attr_dev(p, "class", "svelte-4juqmk");
     			toggle_class(p, "active", /*isCopyAnimActive*/ ctx[3]);
-    			add_location(p, file$1, 997, 16, 35275);
+    			add_location(p, file$1, 1012, 16, 35592);
     			attr_dev(div0, "class", "svelte-4juqmk");
-    			add_location(div0, file$1, 996, 12, 35252);
+    			add_location(div0, file$1, 1011, 12, 35569);
     			attr_dev(div1, "class", "svelte-4juqmk");
-    			add_location(div1, file$1, 994, 8, 35188);
+    			add_location(div1, file$1, 1009, 8, 35505);
     			attr_dev(div2, "class", "copyPanel svelte-4juqmk");
-    			add_location(div2, file$1, 980, 4, 34765);
+    			add_location(div2, file$1, 995, 4, 35082);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -40639,14 +40628,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(980:0) {#if isCopyPanelActive}",
+    		source: "(995:0) {#if isCopyPanelActive}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1006:0) {#if votations.length}
+    // (1021:0) {#if votations.length}
     function create_if_block(ctx) {
     	let div;
     	let h3;
@@ -40675,11 +40664,11 @@ var app = (function () {
     			}
 
     			attr_dev(h3, "class", "svelte-4juqmk");
-    			add_location(h3, file$1, 1007, 6, 35545);
+    			add_location(h3, file$1, 1022, 6, 35862);
     			attr_dev(ul, "class", "svelte-4juqmk");
-    			add_location(ul, file$1, 1008, 6, 35577);
+    			add_location(ul, file$1, 1023, 6, 35894);
     			attr_dev(div, "class", "votations svelte-4juqmk");
-    			add_location(div, file$1, 1006, 4, 35498);
+    			add_location(div, file$1, 1021, 4, 35815);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -40744,14 +40733,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(1006:0) {#if votations.length}",
+    		source: "(1021:0) {#if votations.length}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1010:8) {#each votations as {name, time, votes, maxVotes}
+    // (1025:8) {#each votations as {name, time, votes, maxVotes}
     function create_each_block(ctx) {
     	let li;
     	let div;
@@ -40800,16 +40789,16 @@ var app = (function () {
     			attr_dev(rect, "y", rect_y_value = Math.floor(100 - /*votes*/ ctx[54].length / /*maxVotes*/ ctx[55] * 100));
     			attr_dev(rect, "width", "100");
     			attr_dev(rect, "height", "100");
-    			add_location(rect, file$1, 1015, 20, 35953);
+    			add_location(rect, file$1, 1030, 20, 36270);
     			attr_dev(clipPath, "id", clipPath_id_value = "clipPath-" + /*name*/ ctx[52].replace(" ", "-"));
-    			add_location(clipPath, file$1, 1014, 20, 35882);
-    			add_location(defs, file$1, 1013, 18, 35854);
+    			add_location(clipPath, file$1, 1029, 20, 36199);
+    			add_location(defs, file$1, 1028, 18, 36171);
     			attr_dev(circle0, "class", "progressFill svelte-4juqmk");
     			attr_dev(circle0, "cx", "50");
     			attr_dev(circle0, "cy", "50");
     			attr_dev(circle0, "r", "45");
     			set_style(circle0, "clip-path", "url(#clipPath-" + /*name*/ ctx[52].replace(" ", "-") + ")");
-    			add_location(circle0, file$1, 1019, 18, 36149);
+    			add_location(circle0, file$1, 1034, 18, 36466);
     			attr_dev(circle1, "class", "progressLine svelte-4juqmk");
     			attr_dev(circle1, "stroke-linecap", "round");
     			attr_dev(circle1, "cx", "50");
@@ -40821,19 +40810,19 @@ var app = (function () {
     			attr_dev(circle1, "stroke-dashoffset", circle1_stroke_dashoffset_value = Math.floor(315 - /*time*/ ctx[53] / 100 * 315));
     			attr_dev(circle1, "stroke-mitterlimit", "0");
     			attr_dev(circle1, "transform", "rotate(-90 ) translate(-100 0)");
-    			add_location(circle1, file$1, 1021, 18, 36294);
+    			add_location(circle1, file$1, 1036, 18, 36611);
     			attr_dev(svg, "width", "50");
     			attr_dev(svg, "height", "50");
     			attr_dev(svg, "viewBox", "0 0 100 100");
-    			add_location(svg, file$1, 1012, 16, 35784);
+    			add_location(svg, file$1, 1027, 16, 36101);
     			attr_dev(span, "class", "svgText svelte-4juqmk");
-    			add_location(span, file$1, 1023, 16, 36589);
+    			add_location(span, file$1, 1038, 16, 36906);
     			attr_dev(div, "class", "timer svelte-4juqmk");
-    			add_location(div, file$1, 1011, 14, 35747);
+    			add_location(div, file$1, 1026, 14, 36064);
     			attr_dev(p, "class", "svelte-4juqmk");
-    			add_location(p, file$1, 1025, 14, 36670);
+    			add_location(p, file$1, 1040, 14, 36987);
     			attr_dev(li, "class", "svelte-4juqmk");
-    			add_location(li, file$1, 1010, 12, 35656);
+    			add_location(li, file$1, 1025, 12, 35973);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -40885,7 +40874,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(1010:8) {#each votations as {name, time, votes, maxVotes}",
+    		source: "(1025:8) {#each votations as {name, time, votes, maxVotes}",
     		ctx
     	});
 
@@ -40994,43 +40983,43 @@ var app = (function () {
     			video.playsInline = true;
     			video.muted = /*isHost*/ ctx[19];
     			attr_dev(video, "class", "svelte-4juqmk");
-    			add_location(video, file$1, 830, 4, 29174);
+    			add_location(video, file$1, 845, 4, 29491);
     			attr_dev(div0, "class", "currentPosition svelte-4juqmk");
     			set_style(div0, "--percentage", /*currentPercentage*/ ctx[8]);
-    			add_location(div0, file$1, 833, 12, 29358);
+    			add_location(div0, file$1, 848, 12, 29675);
     			attr_dev(div1, "class", "positionBarContainer svelte-4juqmk");
-    			add_location(div1, file$1, 832, 8, 29310);
+    			add_location(div1, file$1, 847, 8, 29627);
     			set_style(div2, "width", "100%");
     			set_style(div2, "height", "20px");
-    			add_location(div2, file$1, 831, 4, 29262);
+    			add_location(div2, file$1, 846, 4, 29579);
     			attr_dev(div3, "class", "flexColumn svelte-4juqmk");
     			set_style(div3, "align-items", "baseline");
     			set_style(div3, "position", "relative");
     			set_style(div3, "max-width", "50vh");
-    			add_location(div3, file$1, 829, 0, 29077);
+    			add_location(div3, file$1, 844, 0, 29394);
     			attr_dev(i0, "class", "fas fa-share fa-2x svelte-4juqmk");
-    			add_location(i0, file$1, 921, 8, 32851);
+    			add_location(i0, file$1, 936, 8, 33168);
     			attr_dev(div4, "class", "svelte-4juqmk");
-    			add_location(div4, file$1, 920, 4, 32778);
+    			add_location(div4, file$1, 935, 4, 33095);
     			attr_dev(i1, "class", "fas fa-user-friends fa-2x svelte-4juqmk");
-    			add_location(i1, file$1, 924, 8, 32972);
+    			add_location(i1, file$1, 939, 8, 33289);
     			attr_dev(div5, "class", "svelte-4juqmk");
-    			add_location(div5, file$1, 923, 4, 32901);
+    			add_location(div5, file$1, 938, 4, 33218);
     			attr_dev(div6, "class", "floatingIcons svelte-4juqmk");
-    			add_location(div6, file$1, 919, 0, 32745);
+    			add_location(div6, file$1, 934, 0, 33062);
     			attr_dev(h2, "class", "svelte-4juqmk");
-    			add_location(h2, file$1, 938, 4, 33320);
+    			add_location(h2, file$1, 953, 4, 33637);
     			attr_dev(span0, "class", "svelte-4juqmk");
-    			add_location(span0, file$1, 940, 8, 33382);
+    			add_location(span0, file$1, 955, 8, 33699);
     			attr_dev(span1, "class", "svelte-4juqmk");
-    			add_location(span1, file$1, 941, 8, 33409);
+    			add_location(span1, file$1, 956, 8, 33726);
     			attr_dev(div7, "class", "listHeader svelte-4juqmk");
-    			add_location(div7, file$1, 939, 4, 33348);
+    			add_location(div7, file$1, 954, 4, 33665);
     			attr_dev(ul, "class", "svelte-4juqmk");
-    			add_location(ul, file$1, 943, 4, 33457);
+    			add_location(ul, file$1, 958, 4, 33774);
     			attr_dev(div8, "class", "slideFromRightContainer svelte-4juqmk");
     			toggle_class(div8, "open", /*isSlidePanelOpen*/ ctx[2]);
-    			add_location(div8, file$1, 928, 0, 33035);
+    			add_location(div8, file$1, 943, 0, 33352);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -41533,10 +41522,12 @@ var app = (function () {
     					canvas.style.position = "absolute";
 
     					canvas.style.width = "100%";
-    					const directionLeftRef = database.ref(`users/${$uid}/direction/2`);
-    					const directionRightRef = database.ref(`users/${$uid}/direction/1`);
-    					const directionUpRef = database.ref(`users/${$uid}/direction/0`);
-    					const directionDownRef = database.ref(`users/${$uid}/direction/3`);
+
+    					/* const directionLeftRef = database.ref(`users/${$uid}/direction/2`); */
+    					/* const directionRightRef = database.ref(`users/${$uid}/direction/1`); */
+    					/* const directionUpRef = database.ref(`users/${$uid}/direction/0`); */
+    					/* const directionDownRef = database.ref(`users/${$uid}/direction/3`); */
+    					let directionRef = database.ref(`users/${$uid}/direction`);
 
     					setInterval(
     						async () => {
@@ -41566,27 +41557,34 @@ var app = (function () {
     								const wthreshold = canvas.width / 5;
     								const hthreshold = canvas.height / 5;
 
-    								if (wrelative > wthreshold) {
-    									directionRightRef.set(1);
-    									directionLeftRef.set(0);
-    								} else if (wrelative < -wthreshold) {
-    									directionRightRef.set(0);
-    									directionLeftRef.set(1);
-    								} else {
-    									directionRightRef.set(0);
-    									directionLeftRef.set(0);
-    								}
+    								directionRef.get().then(snapshot => {
+    									let data = snapshot.val();
+    									if (!data) return;
 
-    								if (hrelative > hthreshold) {
-    									directionUpRef.set(1);
-    									directionDownRef.set(0);
-    								} else if (hrelative < -hthreshold) {
-    									directionUpRef.set(0);
-    									directionDownRef.set(1);
-    								} else {
-    									directionUpRef.set(0);
-    									directionDownRef.set(0);
-    								}
+    									if (wrelative > wthreshold) {
+    										data[1] = 1;
+    										data[2] = 0;
+    									} else if (wrelative < -wthreshold) {
+    										data[1] = 0;
+    										data[2] = 1;
+    									} else {
+    										data[1] = 0;
+    										data[2] = 0;
+    									}
+
+    									if (hrelative > hthreshold) {
+    										data[0] = 1;
+    										data[3] = 0;
+    									} else if (hrelative < -hthreshold) {
+    										data[0] = 0;
+    										data[3] = 1;
+    									} else {
+    										data[0] = 0;
+    										data[3] = 0;
+    									}
+
+    									directionRef.set(data);
+    								});
 
     								console.log({ wrelative, hrelative });
     							} /* console.log(detections[0].box()) */
@@ -41887,20 +41885,24 @@ var app = (function () {
     	setInterval(listenActiveMarker, 200);
 
     	function listenHorizontalPercentage() {
+    		let directionRef = database.ref(`users/${$uid}/direction`);
+
     		if (Math.abs(sliderValue - horizontalPercentage) > 5) {
-    			let directionRightRef = database.ref(`users/${$uid}/direction/4`);
-    			let directionLeftRef = database.ref(`users/${$uid}/direction/5`);
+    			directionRef.get().then(snapshot => {
+    				let data = snapshot.val();
+    				if (!data) return;
 
-    			if (sliderValue - horizontalPercentage < 0) {
-    				directionRightRef.set(0);
-    				directionLeftRef.set(1);
-    			} else {
-    				directionRightRef.set(1);
-    				directionLeftRef.set(0);
-    			}
+    				if (sliderValue - horizontalPercentage < 0) {
+    					data[4] = 0;
+    					data[5] = 1;
+    				} else {
+    					data[4] = 1;
+    					data[5] = 0;
+    				}
+
+    				directionRef.set(data);
+    			});
     		} else {
-    			let directionRef = database.ref(`users/${$uid}/direction`);
-
     			directionRef.get().then(snapshot => {
     				let data = snapshot.val();
     				if (!data) return;

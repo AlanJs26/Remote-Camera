@@ -297,10 +297,11 @@
                     canvas.style.position = 'absolute'
                     canvas.style.width = '100%'
                     
-                    const directionLeftRef = database.ref(`users/${$uid}/direction/2`);
-                    const directionRightRef = database.ref(`users/${$uid}/direction/1`);
-                    const directionUpRef = database.ref(`users/${$uid}/direction/0`);
-                    const directionDownRef = database.ref(`users/${$uid}/direction/3`);
+                    /* const directionLeftRef = database.ref(`users/${$uid}/direction/2`); */
+                    /* const directionRightRef = database.ref(`users/${$uid}/direction/1`); */
+                    /* const directionUpRef = database.ref(`users/${$uid}/direction/0`); */
+                    /* const directionDownRef = database.ref(`users/${$uid}/direction/3`); */
+                    let directionRef = database.ref(`users/${$uid}/direction`);
 
                     setInterval(async () => {
                         if($facetrackOn == false){
@@ -326,28 +327,37 @@
                             const hthreshold = canvas.height/5
 
 
-                            if(wrelative > wthreshold){
-                                directionRightRef.set(1)
-                                directionLeftRef.set(0)
-                            }else if(wrelative < -wthreshold){
-                                directionRightRef.set(0)
-                                directionLeftRef.set(1)
-                            }else{
-                                directionRightRef.set(0)
-                                directionLeftRef.set(0)
-                            }
+                            directionRef.get().then(snapshot => {
+                                let data = snapshot.val()
+                                if(!data) return
+
+                                if(wrelative > wthreshold){
+                                    data[1] = 1
+                                    data[2] = 0
+                                }else if(wrelative < -wthreshold){
+                                    data[1] = 0
+                                    data[2] = 1
+                                }else{
+                                    data[1] = 0
+                                    data[2] = 0
+                                }
 
 
-                            if(hrelative > hthreshold){
-                                directionUpRef.set(1)
-                                directionDownRef.set(0)
-                            }else if(hrelative < -hthreshold){
-                                directionUpRef.set(0)
-                                directionDownRef.set(1)
-                            }else{
-                                directionUpRef.set(0)
-                                directionDownRef.set(0)
-                            }
+                                if(hrelative > hthreshold){
+                                    data[0] = 1
+                                    data[3] = 0
+                                }else if(hrelative < -hthreshold){
+                                    data[0] = 0
+                                    data[3] = 1
+                                }else{
+                                    data[0] = 0
+                                    data[3] = 0
+                                }
+
+                                directionRef.set(data);
+
+                            })
+
 
                             console.log({wrelative, hrelative})
                             /* console.log(detections[0].box()) */
