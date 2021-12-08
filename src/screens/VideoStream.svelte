@@ -316,7 +316,7 @@
                         }
                         const detections = await faceapi.detectAllFaces(videoEl,
                             new faceapi.TinyFaceDetectorOptions({
-                                scoreThreshold: 0.1
+                                scoreThreshold: 0.4
                             }))
                         if(detections.length){
                             const wcenter = detections[0].box.left + detections[0].box.width/2
