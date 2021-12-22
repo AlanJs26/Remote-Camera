@@ -10,9 +10,6 @@ O apresentador pode fornecer acesso total a câmera ou utilizar um sistema de vo
 
 ![site](./imgs/img2.jpeg)
 
-Link para acessar a versão de navegador: https://remotecamera-6f583.web.app/
-=======
-
 # Remote Camera - Controle a sua câmera a distância!
 
 > Este programa faz parte do meu projeto de TCC de técnico em eletrônica, por isso foi pensado para ser utilizado em conjunto com a parte física. Sem ela isso é apenas um programa de vídeo chamadas.
