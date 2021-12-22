@@ -1,19 +1,14 @@
 # Remote Camera - Controle a sua câmera a distância!
 
-> Este programa faz parte do meu projeto de TCC de técnico em eletrônica, por isso foi pensado para ser utilizado em conjunto com a parte física. Sem ela isso é apenas um programa de vídeo chamadas.
->
-> ![projeto](./imgs/img1.jpeg)
-
-O Remote Camera permite que outras pessoas controlem a sua câmera afim de facilitar a interação apresentador-expectador no cenário de reuniões online.
+O projeto permite que outras pessoas controlem a sua câmera afim de facilitar a interação apresentador-expectador no cenário de reuniões online.
 
 O apresentador pode fornecer acesso total a câmera ou utilizar um sistema de votação com base em pontos chave para a câmera
 
 ![site](./imgs/img2.jpeg)
 
-# Remote Camera - Controle a sua câmera a distância!
-
 > Este programa faz parte do meu projeto de TCC de técnico em eletrônica, por isso foi pensado para ser utilizado em conjunto com a parte física. Sem ela isso é apenas um programa de vídeo chamadas.
-> 
+>
+> ![projeto](./imgs/img1.jpeg)
 > Link para acessar a versão de navegador: https://remotecamera-6f583.web.app/
 
 A programação do projeto foi feita para duas plataformas diferentes: para o Arduino, escrito primariamente na linguagem C, e para plataformas web, que permite qualquer dispositivo com um navegador de internet usar. Essas duas plataformas trabalham em conjunto para garantir o funcionamento do projeto, permitir que várias pessoas assistam à transmissão da câmera e controlem sua posição e angulo de visão.
